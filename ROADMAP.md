@@ -7,7 +7,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 | 0 | Fondazione prodotto e design direction | documentazione, decisioni, confini e specifica visiva/motion approvati | completato |
 | 1 | Bootstrap Flutter | app compilabile, lint e struttura feature-first | completato |
 | 2 | Design system e navigazione | tema, componenti base e shell accessibile | completato |
-| 3 | Dominio e database locale | entità, migrazioni e repository contenuti/profilo | da fare |
+| 3 | Dominio, database locale e localizzazione dei contenuti | entità localizzabili, migrazioni e repository contenuti/profilo offline | da fare |
 | 4 | Onboarding e profilo | preferenze locali modificabili | da fare |
 | 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | da fare |
 | 6 | Home e idee a regole | proposte personalizzate spiegabili | da fare |
@@ -25,3 +25,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 ## Step 2 — Design system e navigazione
 
 **Step 2 — Design system e navigazione.** Completato con palette semantiche chiara/scura, tipografia, spaziature, raggi, elevazioni, layout e motion token centralizzati; shell GoRouter responsive con NavigationBar/NavigationRail, cinque route nominate e placeholder accessibili. La localizzazione usa ARB e `gen_l10n`, rileva la lingua del dispositivo e include inglese, italiano, spagnolo, francese, tedesco e portoghese brasiliano. Non sono stati implementati contenuti, persistenza, autenticazione o logica di business.
+
+## Step 3 — Dominio, database locale e localizzazione dei contenuti
+
+**Step 3 — Dominio, database locale e localizzazione dei contenuti.** Implementato: entità concettuali e traduzioni separate, database Drift/SQLite v1, mapper, repository offline per contenuti e profilo e test di vincoli/migrazione. Implementa la policy di fallback `locale completo → lingua base compatibile → inglese → indisponibile`, pacchetti per il solo locale selezionato, indici di ricerca localizzati e invalidazione delle traduzioni obsolete. Non implementa onboarding, UI di scelta lingua, catalogo, seed editoriali definitivi, pipeline di traduzione, sync, autenticazione o monetizzazione: tali esperienze restano negli step successivi.
