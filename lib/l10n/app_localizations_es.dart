@@ -64,4 +64,102 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get navigationLabel => 'Navegación principal';
+
+  @override
+  String get onboardingTitle => 'Configura tu perfil fotográfico';
+
+  @override
+  String get onboardingDescription =>
+      'Elige preferencias que puedes cambiar cuando quieras.';
+
+  @override
+  String get onboardingContinue => 'Guardar preferencias';
+
+  @override
+  String get profileTitle => 'Tu perfil';
+
+  @override
+  String get profileDescription =>
+      'Estas preferencias influirán en futuras sugerencias.';
+
+  @override
+  String get profileSave => 'Guardar cambios';
+
+  @override
+  String get profileSkillLevel => 'Nivel de experiencia';
+
+  @override
+  String get skillBeginner => 'Principiante';
+
+  @override
+  String get skillIntermediate => 'Intermedio';
+
+  @override
+  String get skillAdvanced => 'Avanzado';
+
+  @override
+  String get profileTopics => 'Intereses fotográficos';
+
+  @override
+  String get topicPortrait => 'Retrato';
+
+  @override
+  String get topicLandscape => 'Paisaje';
+
+  @override
+  String get topicStreet => 'Street';
+
+  @override
+  String get topicMacro => 'Macro';
+
+  @override
+  String get topicNight => 'Fotografía nocturna';
+
+  @override
+  String get topicSmartphone => 'Smartphone';
+
+  @override
+  String get profileLearningGoals => 'Objetivos de aprendizaje';
+
+  @override
+  String get goalComposition => 'Composición';
+
+  @override
+  String get goalLight => 'Luz';
+
+  @override
+  String get goalTechnique => 'Técnica de cámara';
+
+  @override
+  String get goalEditing => 'Edición';
+
+  @override
+  String get profileLanguage => 'Idioma de la aplicación';
+
+  @override
+  String get languageDevice => 'Usar el idioma del dispositivo';
+
+  @override
+  String get languageManual => 'Elegir un idioma';
+
+  @override
+  String get languageSelectionLabel => 'Idioma';
+
+  @override
+  String get languageEnglish => 'Inglés';
+
+  @override
+  String get languageItalian => 'Italiano';
+
+  @override
+  String get languageSpanish => 'Español';
+
+  @override
+  String get languageFrench => 'Francés';
+
+  @override
+  String get languageGerman => 'Alemán';
+
+  @override
+  String get languageBrazilianPortuguese => 'Portugués brasileño';
 }

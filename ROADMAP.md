@@ -7,8 +7,8 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 | 0 | Fondazione prodotto e design direction | documentazione, decisioni, confini e specifica visiva/motion approvati | completato |
 | 1 | Bootstrap Flutter | app compilabile, lint e struttura feature-first | completato |
 | 2 | Design system e navigazione | tema, componenti base e shell accessibile | completato |
-| 3 | Dominio, database locale e localizzazione dei contenuti | entità localizzabili, migrazioni e repository contenuti/profilo offline | da fare |
-| 4 | Onboarding e profilo | preferenze locali modificabili | da fare |
+| 3 | Dominio, database locale e localizzazione dei contenuti | entità localizzabili, migrazioni e repository contenuti/profilo offline | completato |
+| 4 | Onboarding e profilo | preferenze locali modificabili | completato |
 | 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | da fare |
 | 6 | Home e idee a regole | proposte personalizzate spiegabili | da fare |
 | 7 | Archivio personale | salvataggi, cartelle, note e stati | da fare |
@@ -29,3 +29,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 ## Step 3 — Dominio, database locale e localizzazione dei contenuti
 
 **Step 3 — Dominio, database locale e localizzazione dei contenuti.** Implementato: entità concettuali e traduzioni separate, database Drift/SQLite v1, mapper, repository offline per contenuti e profilo e test di vincoli/migrazione. Implementa la policy di fallback `locale completo → lingua base compatibile → inglese → indisponibile`, pacchetti per il solo locale selezionato, indici di ricerca localizzati e invalidazione delle traduzioni obsolete. Non implementa onboarding, UI di scelta lingua, catalogo, seed editoriali definitivi, pipeline di traduzione, sync, autenticazione o monetizzazione: tali esperienze restano negli step successivi.
+
+## Step 4 — Onboarding e profilo
+
+**Step 4 — Onboarding e profilo.** Implementato: il primo avvio richiede le preferenze locali per livello, interessi fotografici, obiettivi di apprendimento e lingua; il profilo permette di modificarle in seguito. La lingua può seguire il dispositivo oppure essere impostata manualmente fra le lingue di lancio, indicate con nomi localizzati. Drift passa allo schema v2 con una migrazione esplicita che conserva le precedenti preferenze di lingua. Non implementa ancora catalogo, proposte personalizzate, archivio, account o sincronizzazione.

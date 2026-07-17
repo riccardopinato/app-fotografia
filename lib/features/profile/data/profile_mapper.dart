@@ -5,7 +5,15 @@ import '../../catalog/domain/catalog_models.dart';
 UserProfile profileFromRow(db.UserProfile row) => UserProfile(
   id: row.id,
   skillLevel: SkillLevel.values.byName(row.skillLevel),
-  preferredLocale: LocaleCode(row.preferredLocale),
+  languageMode: LanguageMode.values.byName(row.languageMode),
+  selectedLocale: row.selectedLocale == null
+      ? null
+      : LocaleCode(row.selectedLocale!),
+  preferredTopics: row.preferredTopics,
+  cameraBodies: row.cameraBodies,
+  lenses: row.lenses,
+  smartphones: row.smartphones,
+  learningGoals: row.learningGoals,
   themePreference: ThemePreference.values.byName(row.themePreference),
   createdAt: DateTime.fromMillisecondsSinceEpoch(
     row.createdAtUtcMs,

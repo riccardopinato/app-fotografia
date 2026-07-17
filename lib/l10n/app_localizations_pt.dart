@@ -64,6 +64,104 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get navigationLabel => 'Navegação principal';
+
+  @override
+  String get onboardingTitle => 'Configure o seu perfil de fotografia';
+
+  @override
+  String get onboardingDescription =>
+      'Escolha preferências que pode alterar a qualquer momento.';
+
+  @override
+  String get onboardingContinue => 'Guardar preferências';
+
+  @override
+  String get profileTitle => 'O seu perfil';
+
+  @override
+  String get profileDescription =>
+      'Estas preferências orientarão sugestões futuras.';
+
+  @override
+  String get profileSave => 'Guardar alterações';
+
+  @override
+  String get profileSkillLevel => 'Nível de experiência';
+
+  @override
+  String get skillBeginner => 'Iniciante';
+
+  @override
+  String get skillIntermediate => 'Intermédio';
+
+  @override
+  String get skillAdvanced => 'Avançado';
+
+  @override
+  String get profileTopics => 'Interesses fotográficos';
+
+  @override
+  String get topicPortrait => 'Retrato';
+
+  @override
+  String get topicLandscape => 'Paisagem';
+
+  @override
+  String get topicStreet => 'Street';
+
+  @override
+  String get topicMacro => 'Macro';
+
+  @override
+  String get topicNight => 'Fotografia noturna';
+
+  @override
+  String get topicSmartphone => 'Smartphone';
+
+  @override
+  String get profileLearningGoals => 'Objetivos de aprendizagem';
+
+  @override
+  String get goalComposition => 'Composição';
+
+  @override
+  String get goalLight => 'Luz';
+
+  @override
+  String get goalTechnique => 'Técnica de câmara';
+
+  @override
+  String get goalEditing => 'Edição';
+
+  @override
+  String get profileLanguage => 'Idioma da aplicação';
+
+  @override
+  String get languageDevice => 'Usar o idioma do dispositivo';
+
+  @override
+  String get languageManual => 'Escolher um idioma';
+
+  @override
+  String get languageSelectionLabel => 'Idioma';
+
+  @override
+  String get languageEnglish => 'Inglês';
+
+  @override
+  String get languageItalian => 'Italiano';
+
+  @override
+  String get languageSpanish => 'Espanhol';
+
+  @override
+  String get languageFrench => 'Francês';
+
+  @override
+  String get languageGerman => 'Alemão';
+
+  @override
+  String get languageBrazilianPortuguese => 'Português brasileiro';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -126,4 +224,102 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get navigationLabel => 'Navegação principal';
+
+  @override
+  String get onboardingTitle => 'Configure seu perfil de fotografia';
+
+  @override
+  String get onboardingDescription =>
+      'Escolha preferências que você pode mudar a qualquer momento.';
+
+  @override
+  String get onboardingContinue => 'Salvar preferências';
+
+  @override
+  String get profileTitle => 'Seu perfil';
+
+  @override
+  String get profileDescription =>
+      'Estas preferências orientarão sugestões futuras.';
+
+  @override
+  String get profileSave => 'Salvar alterações';
+
+  @override
+  String get profileSkillLevel => 'Nível de experiência';
+
+  @override
+  String get skillBeginner => 'Iniciante';
+
+  @override
+  String get skillIntermediate => 'Intermediário';
+
+  @override
+  String get skillAdvanced => 'Avançado';
+
+  @override
+  String get profileTopics => 'Interesses fotográficos';
+
+  @override
+  String get topicPortrait => 'Retrato';
+
+  @override
+  String get topicLandscape => 'Paisagem';
+
+  @override
+  String get topicStreet => 'Street';
+
+  @override
+  String get topicMacro => 'Macro';
+
+  @override
+  String get topicNight => 'Fotografia noturna';
+
+  @override
+  String get topicSmartphone => 'Smartphone';
+
+  @override
+  String get profileLearningGoals => 'Objetivos de aprendizagem';
+
+  @override
+  String get goalComposition => 'Composição';
+
+  @override
+  String get goalLight => 'Luz';
+
+  @override
+  String get goalTechnique => 'Técnica de câmera';
+
+  @override
+  String get goalEditing => 'Edição';
+
+  @override
+  String get profileLanguage => 'Idioma do aplicativo';
+
+  @override
+  String get languageDevice => 'Usar o idioma do dispositivo';
+
+  @override
+  String get languageManual => 'Escolher um idioma';
+
+  @override
+  String get languageSelectionLabel => 'Idioma';
+
+  @override
+  String get languageEnglish => 'Inglês';
+
+  @override
+  String get languageItalian => 'Italiano';
+
+  @override
+  String get languageSpanish => 'Espanhol';
+
+  @override
+  String get languageFrench => 'Francês';
+
+  @override
+  String get languageGerman => 'Alemão';
+
+  @override
+  String get languageBrazilianPortuguese => 'Português brasileiro';
 }

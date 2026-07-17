@@ -4,23 +4,38 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:framelab/app/frame_lab_app.dart';
 import 'package:framelab/app/router/app_router.dart';
 import 'package:framelab/app/router/app_routes.dart';
+import 'package:framelab/features/profile/domain/profile_repository.dart';
+import 'package:framelab/features/profile/domain/user_profile.dart';
 import 'package:framelab/l10n/app_localizations.dart';
 
 void main() {
   setUp(() => appRouter.go(AppDestination.home.path));
 
   testWidgets('starts with the localized Home placeholder', (tester) async {
-    await tester.pumpWidget(const FrameLabApp());
+    await tester.pumpWidget(
+      FrameLabApp(profileRepository: _ProfileRepository()),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('Home'), findsAtLeastNWidgets(1));
     expect(find.text('Your photography space is taking shape'), findsOneWidget);
   });
 
+  testWidgets('shows onboarding before a local profile exists', (tester) async {
+    await tester.pumpWidget(
+      FrameLabApp(profileRepository: _EmptyProfileRepository()),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Set up your photography profile'), findsOneWidget);
+  });
+
   testWidgets('shows and navigates between all five destinations', (
     tester,
   ) async {
-    await tester.pumpWidget(const FrameLabApp());
+    await tester.pumpWidget(
+      FrameLabApp(profileRepository: _ProfileRepository()),
+    );
     await tester.pumpAndSettle();
 
     expect(find.byType(NavigationDestination), findsNWidgets(5));
@@ -39,7 +54,7 @@ void main() {
 
     await tester.tap(find.text('Profile'));
     await tester.pumpAndSettle();
-    expect(find.text('Your profile is coming soon'), findsOneWidget);
+    expect(find.text('Your profile'), findsOneWidget);
   });
 
   testWidgets('uses the dark theme when the system requests it', (
@@ -51,7 +66,9 @@ void main() {
       tester.view.platformDispatcher.clearPlatformBrightnessTestValue,
     );
 
-    await tester.pumpWidget(const FrameLabApp());
+    await tester.pumpWidget(
+      FrameLabApp(profileRepository: _ProfileRepository()),
+    );
     await tester.pumpAndSettle();
 
     expect(
@@ -66,7 +83,9 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
-    await tester.pumpWidget(const FrameLabApp());
+    await tester.pumpWidget(
+      FrameLabApp(profileRepository: _ProfileRepository()),
+    );
     await tester.pumpAndSettle();
 
     expect(find.byType(NavigationRail), findsOneWidget);
@@ -86,7 +105,10 @@ void main() {
         data: MediaQueryData.fromView(
           tester.view,
         ).copyWith(textScaler: const TextScaler.linear(2)),
-        child: const FrameLabApp(locale: Locale('it')),
+        child: FrameLabApp(
+          locale: const Locale('it'),
+          profileRepository: _ProfileRepository(),
+        ),
       ),
     );
     await tester.pumpAndSettle();
@@ -108,4 +130,30 @@ void main() {
       ]),
     );
   });
+}
+
+class _ProfileRepository implements ProfileRepository {
+  final UserProfile _profile = UserProfile(
+    id: 'profile',
+    skillLevel: SkillLevel.beginner,
+    languageMode: LanguageMode.device,
+    themePreference: ThemePreference.system,
+    createdAt: DateTime.utc(2025),
+    updatedAt: DateTime.utc(2025),
+  );
+  @override
+  Future<UserProfile?> get() async => _profile;
+  @override
+  Future<void> save(UserProfile profile) async {}
+  @override
+  Stream<UserProfile?> watch() => Stream.value(_profile);
+}
+
+class _EmptyProfileRepository implements ProfileRepository {
+  @override
+  Future<UserProfile?> get() async => null;
+  @override
+  Future<void> save(UserProfile profile) async {}
+  @override
+  Stream<UserProfile?> watch() => Stream.value(null);
 }

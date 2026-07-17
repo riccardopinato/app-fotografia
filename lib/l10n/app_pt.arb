@@ -16,5 +16,6 @@
   "libraryPlaceholderDescription": "Inspirações e notas salvas aparecerão aqui.",
   "profilePlaceholderTitle": "Seu perfil em breve",
   "profilePlaceholderDescription": "Suas preferências e jornada fotográfica aparecerão aqui.",
-  "navigationLabel": "Navegação principal"
+  "navigationLabel": "Navegação principal",
+  "onboardingTitle": "Configure o seu perfil de fotografia", "onboardingDescription": "Escolha preferências que pode alterar a qualquer momento.", "onboardingContinue": "Guardar preferências", "profileTitle": "O seu perfil", "profileDescription": "Estas preferências orientarão sugestões futuras.", "profileSave": "Guardar alterações", "profileSkillLevel": "Nível de experiência", "skillBeginner": "Iniciante", "skillIntermediate": "Intermédio", "skillAdvanced": "Avançado", "profileTopics": "Interesses fotográficos", "topicPortrait": "Retrato", "topicLandscape": "Paisagem", "topicStreet": "Street", "topicMacro": "Macro", "topicNight": "Fotografia noturna", "topicSmartphone": "Smartphone", "profileLearningGoals": "Objetivos de aprendizagem", "goalComposition": "Composição", "goalLight": "Luz", "goalTechnique": "Técnica de câmara", "goalEditing": "Edição", "profileLanguage": "Idioma da aplicação", "languageDevice": "Usar o idioma do dispositivo", "languageManual": "Escolher um idioma", "languageSelectionLabel": "Idioma", "languageEnglish": "Inglês", "languageItalian": "Italiano", "languageSpanish": "Espanhol", "languageFrench": "Francês", "languageGerman": "Alemão", "languageBrazilianPortuguese": "Português brasileiro"
 }

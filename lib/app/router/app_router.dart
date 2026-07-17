@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 import '../../features/home/presentation/destination_placeholder_page.dart';
+import '../../features/profile/presentation/profile_page.dart';
 import 'app_routes.dart';
 import 'frame_lab_shell.dart';
 
@@ -20,7 +21,9 @@ final appRouter = GoRouter(
                 path: destination.path,
                 name: destination.routeName,
                 builder: (context, state) =>
-                    DestinationPlaceholderPage(destination: destination),
+                    destination == AppDestination.profile
+                    ? const ProfilePage()
+                    : DestinationPlaceholderPage(destination: destination),
               ),
             ],
           ),

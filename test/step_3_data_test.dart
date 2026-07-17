@@ -79,10 +79,10 @@ Future<void> source(
 void main() {
   group('Step 3 local database', () {
     test(
-      'creates schema v1 with foreign keys enabled and can reopen data',
+      'creates schema v2 with foreign keys enabled and can reopen data',
       () async {
         final db = memoryDb();
-        expect(db.schemaVersion, 1);
+        expect(db.schemaVersion, 2);
         final fk = await db.customSelect('PRAGMA foreign_keys').getSingle();
         expect(fk.data['foreign_keys'], 1);
         final indexes = await db
@@ -323,7 +323,8 @@ void main() {
           UserProfile(
             id: 'profile',
             skillLevel: SkillLevel.beginner,
-            preferredLocale: const LocaleCode('it'),
+            languageMode: LanguageMode.manual,
+            selectedLocale: const LocaleCode('it'),
             themePreference: ThemePreference.system,
             createdAt: DateTime.fromMillisecondsSinceEpoch(nowMs, isUtc: true),
             updatedAt: DateTime.fromMillisecondsSinceEpoch(nowMs, isUtc: true),
@@ -333,7 +334,8 @@ void main() {
           UserProfile(
             id: 'profile',
             skillLevel: SkillLevel.advanced,
-            preferredLocale: const LocaleCode('en'),
+            languageMode: LanguageMode.manual,
+            selectedLocale: const LocaleCode('en'),
             themePreference: ThemePreference.dark,
             createdAt: DateTime.fromMillisecondsSinceEpoch(nowMs, isUtc: true),
             updatedAt: DateTime.fromMillisecondsSinceEpoch(
@@ -345,6 +347,8 @@ void main() {
         final profile = await repo.get();
         expect(profile!.id, 'profile');
         expect(profile.skillLevel, SkillLevel.advanced);
+        expect(profile.languageMode, LanguageMode.manual);
+        expect(profile.selectedLocale!.value, 'en');
         expect(profile.updatedAt.isUtc, isTrue);
         await db.close();
       },
