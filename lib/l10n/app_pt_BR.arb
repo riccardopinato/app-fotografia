@@ -1,0 +1,20 @@
+{
+  "@@locale": "pt_BR",
+  "appTitle": "FrameLab",
+  "navHome": "Início",
+  "navExplore": "Explorar",
+  "navIdeas": "Ideias",
+  "navLibrary": "Biblioteca",
+  "navProfile": "Perfil",
+  "homePlaceholderTitle": "Seu espaço fotográfico está tomando forma",
+  "homePlaceholderDescription": "A experiência inicial chegará em uma atualização futura.",
+  "explorePlaceholderTitle": "Explorar em breve",
+  "explorePlaceholderDescription": "Conteúdo fotográfico para descobrir aparecerá aqui.",
+  "ideasPlaceholderTitle": "Ideias em breve",
+  "ideasPlaceholderDescription": "Sugestões fotográficas personalizadas aparecerão aqui.",
+  "libraryPlaceholderTitle": "Sua biblioteca em breve",
+  "libraryPlaceholderDescription": "Inspirações e notas salvas aparecerão aqui.",
+  "profilePlaceholderTitle": "Seu perfil em breve",
+  "profilePlaceholderDescription": "Suas preferências e jornada fotográfica aparecerão aqui.",
+  "navigationLabel": "Navegação principal"
+}
