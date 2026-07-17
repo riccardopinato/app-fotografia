@@ -18,4 +18,6 @@ App scaffold, barra di navigazione, card contenuto, chip filtro/tag, stato vuoto
 
 ## Accessibilità e localizzazione
 
-Supportare screen reader, ordine di focus logico, testo scalabile senza clipping e rispetto di `reduce motion`. Non affidare stato o significato al solo colore. Italiano è la lingua iniziale; stringhe e formati non devono essere hard-coded nei widget per consentire la futura localizzazione.
+Supportare screen reader, ordine di focus logico, testo scalabile senza clipping e rispetto di `reduce motion`. Non affidare stato o significato al solo colore. La localizzazione è obbligatoria dalla prima UI: testi visibili, etichette semantiche, errori e stati vengono da ARB tramite `gen_l10n`, con chiavi semantiche stabili; i widget non contengono stringhe localizzabili hard-coded né concatenano frammenti di frase.
+
+I componenti supportano plurali, parametri e genere quando necessario, formati regionali di data/ora, numeri, valute e unità. Devono adattarsi a stringhe tedesche più lunghe, caratteri accentati e alfabeti non latini, testo ingrandito e RTL: nessuna larghezza fissa per pulsanti o label, e padding/allineamento rispettano la direzione del testo. Le lingue sono indicate con il loro nome localizzato, mai con bandiere. Immagini con testo sono vietate salvo asset localizzati esplicitamente gestiti.

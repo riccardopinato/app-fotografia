@@ -14,7 +14,7 @@ Aiutare un fotografo a capire **cosa** provare, **come** impostare lo scatto e *
 
 ## Proposta di valore
 
-Contenuti editoriali revisionati, organizzati per tipo e genere fotografico, personalizzati in base a livello e attrezzatura, disponibili anche offline. La qualità editoriale viene prima della generazione automatica.
+Contenuti editoriali revisionati, organizzati per tipo e genere fotografico, personalizzati in base a livello e attrezzatura, disponibili anche offline e nella lingua scelta dall'utente. La qualità editoriale e della traduzione viene prima della generazione automatica.
 
 ## Flussi principali dell'MVP
 
@@ -32,6 +32,8 @@ Contenuti editoriali revisionati, organizzati per tipo e genere fotografico, per
 - ricerca, filtri, dettaglio e salvataggi locali;
 - archivio con note e stato;
 - design system, accessibilità e persistenza offline;
+- interfaccia localizzata con inglese come fallback globale e lancio in inglese, italiano, spagnolo, francese, tedesco e portoghese brasiliano;
+- contenuti editoriali localizzabili e scaricabili per lingua, senza scaricare tutte le traduzioni sul dispositivo;
 - base dati editoriale seed, soggetta a revisione.
 
 ## Fuori dall'MVP
@@ -53,3 +55,9 @@ Contenuti editoriali revisionati, organizzati per tipo e genere fotografico, per
 ## Vincoli editoriali
 
 Ogni contenuto ha fonte e licenza tracciabili. Testi estratti da opere protette non possono essere pubblicati automaticamente: il flusso editoriale è `importato → elaborato → da revisionare → approvato → pubblicato`.
+
+## Internazionalizzazione
+
+La localizzazione è un requisito di prodotto fin dalla prima implementazione, non un'aggiunta successiva. L'utente può seguire la lingua del dispositivo, scegliere manualmente una lingua o ripristinare la selezione automatica; le lingue sono rappresentate da nomi localizzati, mai da bandiere. Inglese (`en`) è il fallback globale. Le lingue di lancio sono `en`, `it`, `es`, `fr`, `de` e `pt-BR`; giapponese, coreano, cinese semplificato, arabo e hindi sono previste per estensioni successive.
+
+Tutti i testi visibili — inclusi navigazione, onboarding, profilo, archivio, filtri, errori, stati vuoti, offline, notifiche, accessibilità, impostazioni, testi legali e le future superfici di autenticazione, pubblicità e monetizzazione — devono poter essere tradotti. Il contenuto editoriale conserva lingua e versione originali ed è pubblicato in una lingua solo dopo revisione della relativa traduzione; una traduzione automatica non è una verifica editoriale.
