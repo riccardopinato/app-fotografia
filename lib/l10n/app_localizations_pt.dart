@@ -162,6 +162,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get languageBrazilianPortuguese => 'Português brasileiro';
+
+  @override
+  String get profileSaveError =>
+      'Não foi possível guardar as suas preferências. Tente novamente.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -322,4 +326,8 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get languageBrazilianPortuguese => 'Português brasileiro';
+
+  @override
+  String get profileSaveError =>
+      'Não foi possível salvar suas preferências. Tente novamente.';
 }

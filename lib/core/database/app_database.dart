@@ -125,19 +125,19 @@ class UserProfiles extends Table {
   TextColumn get languageMode => text().withDefault(const Constant('device'))();
   TextColumn get selectedLocale => text().nullable()();
   TextColumn get preferredTopics => text()
-      .map(const StringListConverter())
+      .map(const ProfileStringListConverter())
       .withDefault(const Constant('[]'))();
   TextColumn get cameraBodies => text()
-      .map(const StringListConverter())
+      .map(const ProfileStringListConverter())
       .withDefault(const Constant('[]'))();
   TextColumn get lenses => text()
-      .map(const StringListConverter())
+      .map(const ProfileStringListConverter())
       .withDefault(const Constant('[]'))();
   TextColumn get smartphones => text()
-      .map(const StringListConverter())
+      .map(const ProfileStringListConverter())
       .withDefault(const Constant('[]'))();
   TextColumn get learningGoals => text()
-      .map(const StringListConverter())
+      .map(const ProfileStringListConverter())
       .withDefault(const Constant('[]'))();
   TextColumn get themePreference => text()();
   IntColumn get createdAtUtcMs => integer()();
@@ -146,17 +146,41 @@ class UserProfiles extends Table {
   Set<Column> get primaryKey => {id};
 }
 
-class StringListConverter extends TypeConverter<List<String>, String> {
-  const StringListConverter();
+class ProfileStringListConverter extends TypeConverter<List<String>, String> {
+  const ProfileStringListConverter();
 
   @override
-  List<String> fromSql(String fromDb) => List<String>.unmodifiable(
-    (jsonDecode(fromDb) as List<dynamic>).cast<String>(),
-  );
+  List<String> fromSql(String fromDb) {
+    try {
+      final decoded = jsonDecode(fromDb);
+      final values = switch (decoded) {
+        {'version': 1, 'values': final List<dynamic> values} => values,
+        // Accept the early v2 array representation so existing local data
+        // remains readable when this converter format evolves.
+        final List<dynamic> values => values,
+        _ => const <dynamic>[],
+      };
+      return List.unmodifiable(_normalise(values.whereType<String>()));
+    } on FormatException {
+      return const [];
+    }
+  }
 
   @override
-  String toSql(List<String> value) => jsonEncode(value);
+  String toSql(List<String> value) =>
+      jsonEncode({'version': 1, 'values': _normalise(value)});
 }
+
+List<String> normaliseProfileValues(Iterable<String> values) =>
+    List.unmodifiable(_normalise(values));
+
+List<String> _normalise(Iterable<String> values) =>
+    values
+        .map((value) => value.trim().toLowerCase())
+        .where((value) => RegExp(r'^[a-z0-9-]+$').hasMatch(value))
+        .toSet()
+        .toList()
+      ..sort();
 
 @DriftDatabase(
   tables: [

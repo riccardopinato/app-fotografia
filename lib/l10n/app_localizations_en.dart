@@ -161,4 +161,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageBrazilianPortuguese => 'Brazilian Portuguese';
+
+  @override
+  String get profileSaveError =>
+      'Your preferences could not be saved. Try again.';
 }

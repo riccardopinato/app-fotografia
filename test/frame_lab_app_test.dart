@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:framelab/app/frame_lab_app.dart';
 import 'package:framelab/app/router/app_router.dart';
 import 'package:framelab/app/router/app_routes.dart';
+import 'package:framelab/features/catalog/domain/catalog_models.dart';
 import 'package:framelab/features/profile/domain/profile_repository.dart';
 import 'package:framelab/features/profile/domain/user_profile.dart';
+import 'package:framelab/features/profile/presentation/profile_editor.dart';
 import 'package:framelab/l10n/app_localizations.dart';
 
 void main() {
@@ -28,6 +32,67 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Set up your photography profile'), findsOneWidget);
+  });
+
+  testWidgets(
+    'waits for the profile stream before deciding to show onboarding',
+    (tester) async {
+      final repository = _ControlledProfileRepository();
+      addTearDown(repository.dispose);
+      await tester.pumpWidget(FrameLabApp(profileRepository: repository));
+      await tester.pump();
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.text('Set up your photography profile'), findsNothing);
+
+      repository.emit(null);
+      await tester.pumpAndSettle();
+      expect(find.text('Set up your photography profile'), findsOneWidget);
+    },
+  );
+
+  testWidgets('uses a saved manual locale and returns to the device locale', (
+    tester,
+  ) async {
+    final repository = _ControlledProfileRepository();
+    addTearDown(repository.dispose);
+    await tester.pumpWidget(FrameLabApp(profileRepository: repository));
+    repository.emit(_profile(languageMode: LanguageMode.manual, locale: 'it'));
+    await tester.pumpAndSettle();
+    expect(find.text('Esplora'), findsOneWidget);
+
+    repository.emit(_profile(languageMode: LanguageMode.device));
+    await tester.pumpAndSettle();
+    expect(find.text('Explore'), findsOneWidget);
+  });
+
+  testWidgets('keeps the editor usable and reports a failed atomic save', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: ProfileEditor(
+            profile: _profile(),
+            onSave: (_) async => throw StateError('database unavailable'),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    final save = find.ancestor(
+      of: find.text('Save changes'),
+      matching: find.byType(FilledButton),
+    );
+    await tester.drag(find.byType(ListView), const Offset(0, -600));
+    await tester.pumpAndSettle();
+    await tester.tap(save);
+    await tester.pumpAndSettle();
+    expect(
+      find.text('Your preferences could not be saved. Try again.'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('shows and navigates between all five destinations', (
@@ -156,4 +221,33 @@ class _EmptyProfileRepository implements ProfileRepository {
   Future<void> save(UserProfile profile) async {}
   @override
   Stream<UserProfile?> watch() => Stream.value(null);
+}
+
+UserProfile _profile({
+  LanguageMode languageMode = LanguageMode.device,
+  String? locale,
+}) => UserProfile(
+  id: 'profile',
+  skillLevel: SkillLevel.beginner,
+  languageMode: languageMode,
+  selectedLocale: locale == null ? null : LocaleCode(locale),
+  themePreference: ThemePreference.system,
+  createdAt: DateTime.utc(2025),
+  updatedAt: DateTime.utc(2025),
+);
+
+class _ControlledProfileRepository implements ProfileRepository {
+  final _controller = StreamController<UserProfile?>.broadcast();
+
+  void emit(UserProfile? profile) => _controller.add(profile);
+  Future<void> dispose() => _controller.close();
+
+  @override
+  Future<UserProfile?> get() async => null;
+
+  @override
+  Future<void> save(UserProfile profile) async => emit(profile);
+
+  @override
+  Stream<UserProfile?> watch() => _controller.stream;
 }

@@ -161,4 +161,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get languageBrazilianPortuguese => 'Brasilianisches Portugiesisch';
+
+  @override
+  String get profileSaveError =>
+      'Deine Einstellungen konnten nicht gespeichert werden.';
 }

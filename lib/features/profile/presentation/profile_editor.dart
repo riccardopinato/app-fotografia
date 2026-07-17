@@ -9,7 +9,7 @@ class ProfileEditor extends StatefulWidget {
   const ProfileEditor({required this.profile, required this.onSave, super.key});
 
   final UserProfile? profile;
-  final ValueChanged<UserProfile> onSave;
+  final Future<void> Function(UserProfile profile) onSave;
 
   @override
   State<ProfileEditor> createState() => _ProfileEditorState();
@@ -21,6 +21,7 @@ class _ProfileEditorState extends State<ProfileEditor> {
   LocaleCode? _selectedLocale;
   late Set<String> _topics;
   late Set<String> _goals;
+  var _isSaving = false;
 
   @override
   void initState() {
@@ -59,7 +60,7 @@ class _ProfileEditorState extends State<ProfileEditor> {
         _section(l10n.profileLanguage, _languageChoices(l10n)),
         const SizedBox(height: FrameLabSpacing.medium),
         FilledButton(
-          onPressed: _save,
+          onPressed: _isSaving ? null : _save,
           child: Text(
             widget.profile == null ? l10n.onboardingContinue : l10n.profileSave,
           ),
@@ -173,26 +174,35 @@ class _ProfileEditorState extends State<ProfileEditor> {
     'pt-BR': l10n.languageBrazilianPortuguese,
   };
 
-  void _save() {
+  Future<void> _save() async {
     final existing = widget.profile;
     final now = DateTime.now().toUtc();
-    widget.onSave(
-      UserProfile(
-        id: existing?.id ?? 'local-profile',
-        skillLevel: _skillLevel,
-        languageMode: _languageMode,
-        selectedLocale: _languageMode == LanguageMode.manual
-            ? _selectedLocale
-            : null,
-        preferredTopics: _topics.toList()..sort(),
-        learningGoals: _goals.toList()..sort(),
-        cameraBodies: existing?.cameraBodies ?? const [],
-        lenses: existing?.lenses ?? const [],
-        smartphones: existing?.smartphones ?? const [],
-        themePreference: existing?.themePreference ?? ThemePreference.system,
-        createdAt: existing?.createdAt ?? now,
-        updatedAt: now,
-      ),
+    final profile = UserProfile(
+      id: existing?.id ?? 'local-profile',
+      skillLevel: _skillLevel,
+      languageMode: _languageMode,
+      selectedLocale: _languageMode == LanguageMode.manual
+          ? _selectedLocale
+          : null,
+      preferredTopics: _topics.toList()..sort(),
+      learningGoals: _goals.toList()..sort(),
+      cameraBodies: existing?.cameraBodies ?? const [],
+      lenses: existing?.lenses ?? const [],
+      smartphones: existing?.smartphones ?? const [],
+      themePreference: existing?.themePreference ?? ThemePreference.system,
+      createdAt: existing?.createdAt ?? now,
+      updatedAt: now,
     );
+    setState(() => _isSaving = true);
+    try {
+      await widget.onSave(profile);
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context)!.profileSaveError)),
+      );
+    } finally {
+      if (mounted) setState(() => _isSaving = false);
+    }
   }
 }

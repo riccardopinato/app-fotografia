@@ -14,6 +14,28 @@ import 'package:framelab/features/profile/domain/user_profile.dart';
 
 const nowMs = 1704067200000;
 AppDatabase memoryDb() => AppDatabase(NativeDatabase.memory());
+AppDatabase v1ProfileDb() => AppDatabase(
+  NativeDatabase.memory(
+    setup: (database) {
+      database.execute('''
+        CREATE TABLE user_profiles (
+          id TEXT NOT NULL PRIMARY KEY,
+          skill_level TEXT NOT NULL,
+          preferred_locale TEXT NOT NULL,
+          theme_preference TEXT NOT NULL,
+          created_at_utc_ms INTEGER NOT NULL,
+          updated_at_utc_ms INTEGER NOT NULL
+        )
+      ''');
+      database.execute('''
+        INSERT INTO user_profiles VALUES (
+          'legacy-profile', 'intermediate', 'pt-BR', 'dark', $nowMs, ${nowMs + 42}
+        )
+      ''');
+      database.execute('PRAGMA user_version = 1');
+    },
+  ),
+);
 ContentItemsCompanion item({
   String id = 'item-1',
   EditorialStatus status = EditorialStatus.published,
@@ -118,6 +140,48 @@ void main() {
         await db.close();
       },
     );
+    test(
+      'upgrades a real v1 profile without changing its identity or data',
+      () async {
+        final db = v1ProfileDb();
+        final profiles = await db.select(db.userProfiles).get();
+        expect(profiles, hasLength(1));
+        final profile = profiles.single;
+        expect(profile.id, 'legacy-profile');
+        expect(profile.skillLevel, SkillLevel.intermediate.name);
+        expect(profile.selectedLocale, 'pt-BR');
+        expect(profile.languageMode, LanguageMode.manual.name);
+        expect(profile.createdAtUtcMs, nowMs);
+        expect(profile.updatedAtUtcMs, nowMs + 42);
+        expect(
+          (await db.customSelect('PRAGMA foreign_keys').getSingle())
+              .data['foreign_keys'],
+          1,
+        );
+        await db.close();
+      },
+    );
+    test('profile list converter is versioned, deterministic, and safe', () {
+      const converter = ProfileStringListConverter();
+      expect(
+        converter.toSql([
+          ' Landscape ',
+          'portrait',
+          'portrait',
+          'invalid value',
+        ]),
+        '{"version":1,"values":["landscape","portrait"]}',
+      );
+      expect(
+        converter.fromSql(
+          '{"version":1,"values":["portrait"," Portrait ",4,"invalid value"]}',
+        ),
+        ['portrait'],
+      );
+      expect(converter.fromSql('["street", "Street"]'), ['street']);
+      expect(converter.fromSql('not json'), isEmpty);
+      expect(converter.fromSql('{"version":2,"values":["street"]}'), isEmpty);
+    });
     test(
       'rejects orphan translations and duplicate content locale/tag relations',
       () async {
@@ -325,6 +389,9 @@ void main() {
             skillLevel: SkillLevel.beginner,
             languageMode: LanguageMode.manual,
             selectedLocale: const LocaleCode('it'),
+            preferredTopics: const ['Portrait', 'portrait', 'invalid value'],
+            cameraBodies: const ['Full-Frame', 'full-frame'],
+            learningGoals: const ['Light', 'light'],
             themePreference: ThemePreference.system,
             createdAt: DateTime.fromMillisecondsSinceEpoch(nowMs, isUtc: true),
             updatedAt: DateTime.fromMillisecondsSinceEpoch(nowMs, isUtc: true),
@@ -336,6 +403,9 @@ void main() {
             skillLevel: SkillLevel.advanced,
             languageMode: LanguageMode.manual,
             selectedLocale: const LocaleCode('en'),
+            preferredTopics: const ['landscape', 'Landscape'],
+            cameraBodies: const ['full-frame'],
+            learningGoals: const ['composition', 'Composition'],
             themePreference: ThemePreference.dark,
             createdAt: DateTime.fromMillisecondsSinceEpoch(nowMs, isUtc: true),
             updatedAt: DateTime.fromMillisecondsSinceEpoch(
@@ -349,6 +419,9 @@ void main() {
         expect(profile.skillLevel, SkillLevel.advanced);
         expect(profile.languageMode, LanguageMode.manual);
         expect(profile.selectedLocale!.value, 'en');
+        expect(profile.preferredTopics, ['landscape']);
+        expect(profile.cameraBodies, ['full-frame']);
+        expect(profile.learningGoals, ['composition']);
         expect(profile.updatedAt.isUtc, isTrue);
         await db.close();
       },

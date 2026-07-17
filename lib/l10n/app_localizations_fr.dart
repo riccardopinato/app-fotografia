@@ -161,4 +161,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get languageBrazilianPortuguese => 'Portugais brésilien';
+
+  @override
+  String get profileSaveError =>
+      'Vos préférences n\'ont pas pu être enregistrées. Réessayez.';
 }

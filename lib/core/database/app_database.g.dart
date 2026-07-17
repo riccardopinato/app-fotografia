@@ -3460,15 +3460,15 @@ class $UserProfilesTable extends UserProfiles
   }
 
   static TypeConverter<List<String>, String> $converterpreferredTopics =
-      const StringListConverter();
+      const ProfileStringListConverter();
   static TypeConverter<List<String>, String> $convertercameraBodies =
-      const StringListConverter();
+      const ProfileStringListConverter();
   static TypeConverter<List<String>, String> $converterlenses =
-      const StringListConverter();
+      const ProfileStringListConverter();
   static TypeConverter<List<String>, String> $convertersmartphones =
-      const StringListConverter();
+      const ProfileStringListConverter();
   static TypeConverter<List<String>, String> $converterlearningGoals =
-      const StringListConverter();
+      const ProfileStringListConverter();
 }
 
 class UserProfile extends DataClass implements Insertable<UserProfile> {

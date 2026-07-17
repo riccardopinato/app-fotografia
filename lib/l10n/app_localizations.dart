@@ -400,6 +400,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Brazilian Portuguese'**
   String get languageBrazilianPortuguese;
+
+  /// No description provided for @profileSaveError.
+  ///
+  /// In en, this message translates to:
+  /// **'Your preferences could not be saved. Try again.'**
+  String get profileSaveError;
 }
 
 class _AppLocalizationsDelegate

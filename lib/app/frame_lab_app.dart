@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -24,6 +26,7 @@ class FrameLabApp extends StatefulWidget {
 class _FrameLabAppState extends State<FrameLabApp> {
   late final AppDatabase? _database;
   late final ProfileRepository _repository;
+  late final Stream<UserProfile?> _profileStream;
 
   @override
   void initState() {
@@ -31,18 +34,19 @@ class _FrameLabAppState extends State<FrameLabApp> {
     _database = widget.profileRepository == null ? AppDatabase() : null;
     _repository =
         widget.profileRepository ?? DriftProfileRepository(_database!);
+    _profileStream = _repository.watch();
   }
 
   @override
   void dispose() {
-    _database?.close();
+    unawaited(_database?.close());
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<UserProfile?>(
-      stream: _repository.watch(),
+      stream: _profileStream,
       builder: (context, snapshot) => MaterialApp.router(
         title: 'FrameLab',
         debugShowCheckedModeBanner: false,
@@ -72,7 +76,10 @@ class _FrameLabAppState extends State<FrameLabApp> {
 
   Locale? _selectedLocale(UserProfile? profile) {
     if (widget.locale != null) return widget.locale;
-    if (profile?.languageMode != LanguageMode.manual) return null;
+    if (profile?.languageMode != LanguageMode.manual ||
+        profile?.selectedLocale == null) {
+      return null;
+    }
     final code = profile!.selectedLocale!.value.split('-');
     return Locale(code.first, code.length > 1 ? code.last : null);
   }

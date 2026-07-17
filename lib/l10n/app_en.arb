@@ -48,5 +48,6 @@
   "languageSpanish": "Spanish",
   "languageFrench": "French",
   "languageGerman": "German",
-  "languageBrazilianPortuguese": "Brazilian Portuguese"
+  "languageBrazilianPortuguese": "Brazilian Portuguese",
+  "profileSaveError": "Your preferences could not be saved. Try again."
 }

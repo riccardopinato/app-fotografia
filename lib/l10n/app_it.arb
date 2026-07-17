@@ -25,5 +25,5 @@
   "profileTopics": "Interessi fotografici", "topicPortrait": "Ritratto", "topicLandscape": "Paesaggio", "topicStreet": "Street", "topicMacro": "Macro", "topicNight": "Fotografia notturna", "topicSmartphone": "Smartphone",
   "profileLearningGoals": "Obiettivi di apprendimento", "goalComposition": "Composizione", "goalLight": "Luce", "goalTechnique": "Tecnica fotografica", "goalEditing": "Editing",
   "profileLanguage": "Lingua dell'app", "languageDevice": "Usa la lingua del dispositivo", "languageManual": "Scegli una lingua", "languageSelectionLabel": "Lingua",
-  "languageEnglish": "Inglese", "languageItalian": "Italiano", "languageSpanish": "Spagnolo", "languageFrench": "Francese", "languageGerman": "Tedesco", "languageBrazilianPortuguese": "Portoghese brasiliano"
+  "languageEnglish": "Inglese", "languageItalian": "Italiano", "languageSpanish": "Spagnolo", "languageFrench": "Francese", "languageGerman": "Tedesco", "languageBrazilianPortuguese": "Portoghese brasiliano", "profileSaveError": "Non è stato possibile salvare le preferenze. Riprova."
 }
