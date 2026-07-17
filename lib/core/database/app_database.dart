@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 part 'app_database.g.dart';
@@ -118,13 +120,67 @@ class ContentItemTags extends Table {
 class UserProfiles extends Table {
   TextColumn get id => text()();
   TextColumn get skillLevel => text()();
+  // Retained for the v1 migration. New code uses languageMode/selectedLocale.
   TextColumn get preferredLocale => text()();
+  TextColumn get languageMode => text().withDefault(const Constant('device'))();
+  TextColumn get selectedLocale => text().nullable()();
+  TextColumn get preferredTopics => text()
+      .map(const ProfileStringListConverter())
+      .withDefault(const Constant('[]'))();
+  TextColumn get cameraBodies => text()
+      .map(const ProfileStringListConverter())
+      .withDefault(const Constant('[]'))();
+  TextColumn get lenses => text()
+      .map(const ProfileStringListConverter())
+      .withDefault(const Constant('[]'))();
+  TextColumn get smartphones => text()
+      .map(const ProfileStringListConverter())
+      .withDefault(const Constant('[]'))();
+  TextColumn get learningGoals => text()
+      .map(const ProfileStringListConverter())
+      .withDefault(const Constant('[]'))();
   TextColumn get themePreference => text()();
   IntColumn get createdAtUtcMs => integer()();
   IntColumn get updatedAtUtcMs => integer()();
   @override
   Set<Column> get primaryKey => {id};
 }
+
+class ProfileStringListConverter extends TypeConverter<List<String>, String> {
+  const ProfileStringListConverter();
+
+  @override
+  List<String> fromSql(String fromDb) {
+    try {
+      final decoded = jsonDecode(fromDb);
+      final values = switch (decoded) {
+        {'version': 1, 'values': final List<dynamic> values} => values,
+        // Accept the early v2 array representation so existing local data
+        // remains readable when this converter format evolves.
+        final List<dynamic> values => values,
+        _ => const <dynamic>[],
+      };
+      return List.unmodifiable(_normalise(values.whereType<String>()));
+    } on FormatException {
+      return const [];
+    }
+  }
+
+  @override
+  String toSql(List<String> value) =>
+      jsonEncode({'version': 1, 'values': _normalise(value)});
+}
+
+List<String> normaliseProfileValues(Iterable<String> values) =>
+    List.unmodifiable(_normalise(values));
+
+List<String> _normalise(Iterable<String> values) =>
+    values
+        .map((value) => value.trim().toLowerCase())
+        .where((value) => RegExp(r'^[a-z0-9-]+$').hasMatch(value))
+        .toSet()
+        .toList()
+      ..sort();
 
 @DriftDatabase(
   tables: [
@@ -142,7 +198,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor])
     : super(executor ?? driftDatabase(name: 'framelab_local'));
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (m) async {
@@ -152,9 +208,20 @@ class AppDatabase extends _$AppDatabase {
       }
     },
     onUpgrade: (m, from, to) async {
-      throw UnsupportedError(
-        'No historical migrations exist before schema version 1. Add explicit steps when version 2 is introduced.',
-      );
+      if (from < 2) {
+        await m.addColumn(userProfiles, userProfiles.languageMode);
+        await m.addColumn(userProfiles, userProfiles.selectedLocale);
+        await m.addColumn(userProfiles, userProfiles.preferredTopics);
+        await m.addColumn(userProfiles, userProfiles.cameraBodies);
+        await m.addColumn(userProfiles, userProfiles.lenses);
+        await m.addColumn(userProfiles, userProfiles.smartphones);
+        await m.addColumn(userProfiles, userProfiles.learningGoals);
+        await customStatement('''
+          UPDATE user_profiles
+          SET language_mode = 'manual', selected_locale = preferred_locale
+          WHERE preferred_locale IS NOT NULL AND preferred_locale != ''
+        ''');
+      }
     },
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');

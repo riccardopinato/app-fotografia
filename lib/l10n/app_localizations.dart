@@ -208,6 +208,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Main navigation'**
   String get navigationLabel;
+
+  /// No description provided for @onboardingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up your photography profile'**
+  String get onboardingTitle;
+
+  /// No description provided for @onboardingDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose preferences you can change any time.'**
+  String get onboardingDescription;
+
+  /// No description provided for @onboardingContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Save preferences'**
+  String get onboardingContinue;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your profile'**
+  String get profileTitle;
+
+  /// No description provided for @profileDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'These preferences shape future suggestions.'**
+  String get profileDescription;
+
+  /// No description provided for @profileSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get profileSave;
+
+  /// No description provided for @profileSkillLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Experience level'**
+  String get profileSkillLevel;
+
+  /// No description provided for @skillBeginner.
+  ///
+  /// In en, this message translates to:
+  /// **'Beginner'**
+  String get skillBeginner;
+
+  /// No description provided for @skillIntermediate.
+  ///
+  /// In en, this message translates to:
+  /// **'Intermediate'**
+  String get skillIntermediate;
+
+  /// No description provided for @skillAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get skillAdvanced;
+
+  /// No description provided for @profileTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'Photography interests'**
+  String get profileTopics;
+
+  /// No description provided for @topicPortrait.
+  ///
+  /// In en, this message translates to:
+  /// **'Portrait'**
+  String get topicPortrait;
+
+  /// No description provided for @topicLandscape.
+  ///
+  /// In en, this message translates to:
+  /// **'Landscape'**
+  String get topicLandscape;
+
+  /// No description provided for @topicStreet.
+  ///
+  /// In en, this message translates to:
+  /// **'Street'**
+  String get topicStreet;
+
+  /// No description provided for @topicMacro.
+  ///
+  /// In en, this message translates to:
+  /// **'Macro'**
+  String get topicMacro;
+
+  /// No description provided for @topicNight.
+  ///
+  /// In en, this message translates to:
+  /// **'Night photography'**
+  String get topicNight;
+
+  /// No description provided for @topicSmartphone.
+  ///
+  /// In en, this message translates to:
+  /// **'Smartphone'**
+  String get topicSmartphone;
+
+  /// No description provided for @profileLearningGoals.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning goals'**
+  String get profileLearningGoals;
+
+  /// No description provided for @goalComposition.
+  ///
+  /// In en, this message translates to:
+  /// **'Composition'**
+  String get goalComposition;
+
+  /// No description provided for @goalLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get goalLight;
+
+  /// No description provided for @goalTechnique.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera technique'**
+  String get goalTechnique;
+
+  /// No description provided for @goalEditing.
+  ///
+  /// In en, this message translates to:
+  /// **'Editing'**
+  String get goalEditing;
+
+  /// No description provided for @profileLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'App language'**
+  String get profileLanguage;
+
+  /// No description provided for @languageDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Use device language'**
+  String get languageDevice;
+
+  /// No description provided for @languageManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a language'**
+  String get languageManual;
+
+  /// No description provided for @languageSelectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageSelectionLabel;
+
+  /// No description provided for @languageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
+
+  /// No description provided for @languageItalian.
+  ///
+  /// In en, this message translates to:
+  /// **'Italian'**
+  String get languageItalian;
+
+  /// No description provided for @languageSpanish.
+  ///
+  /// In en, this message translates to:
+  /// **'Spanish'**
+  String get languageSpanish;
+
+  /// No description provided for @languageFrench.
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get languageFrench;
+
+  /// No description provided for @languageGerman.
+  ///
+  /// In en, this message translates to:
+  /// **'German'**
+  String get languageGerman;
+
+  /// No description provided for @languageBrazilianPortuguese.
+  ///
+  /// In en, this message translates to:
+  /// **'Brazilian Portuguese'**
+  String get languageBrazilianPortuguese;
+
+  /// No description provided for @profileSaveError.
+  ///
+  /// In en, this message translates to:
+  /// **'Your preferences could not be saved. Try again.'**
+  String get profileSaveError;
 }
 
 class _AppLocalizationsDelegate

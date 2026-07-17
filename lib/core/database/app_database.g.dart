@@ -3171,6 +3171,79 @@ class $UserProfilesTable extends UserProfiles
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _languageModeMeta = const VerificationMeta(
+    'languageMode',
+  );
+  @override
+  late final GeneratedColumn<String> languageMode = GeneratedColumn<String>(
+    'language_mode',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('device'),
+  );
+  static const VerificationMeta _selectedLocaleMeta = const VerificationMeta(
+    'selectedLocale',
+  );
+  @override
+  late final GeneratedColumn<String> selectedLocale = GeneratedColumn<String>(
+    'selected_locale',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String>
+  preferredTopics = GeneratedColumn<String>(
+    'preferred_topics',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  ).withConverter<List<String>>($UserProfilesTable.$converterpreferredTopics);
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String>
+  cameraBodies = GeneratedColumn<String>(
+    'camera_bodies',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  ).withConverter<List<String>>($UserProfilesTable.$convertercameraBodies);
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String> lenses =
+      GeneratedColumn<String>(
+        'lenses',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      ).withConverter<List<String>>($UserProfilesTable.$converterlenses);
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String>
+  smartphones = GeneratedColumn<String>(
+    'smartphones',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  ).withConverter<List<String>>($UserProfilesTable.$convertersmartphones);
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String>
+  learningGoals = GeneratedColumn<String>(
+    'learning_goals',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  ).withConverter<List<String>>($UserProfilesTable.$converterlearningGoals);
   static const VerificationMeta _themePreferenceMeta = const VerificationMeta(
     'themePreference',
   );
@@ -3209,6 +3282,13 @@ class $UserProfilesTable extends UserProfiles
     id,
     skillLevel,
     preferredLocale,
+    languageMode,
+    selectedLocale,
+    preferredTopics,
+    cameraBodies,
+    lenses,
+    smartphones,
+    learningGoals,
     themePreference,
     createdAtUtcMs,
     updatedAtUtcMs,
@@ -3248,6 +3328,24 @@ class $UserProfilesTable extends UserProfiles
       );
     } else if (isInserting) {
       context.missing(_preferredLocaleMeta);
+    }
+    if (data.containsKey('language_mode')) {
+      context.handle(
+        _languageModeMeta,
+        languageMode.isAcceptableOrUnknown(
+          data['language_mode']!,
+          _languageModeMeta,
+        ),
+      );
+    }
+    if (data.containsKey('selected_locale')) {
+      context.handle(
+        _selectedLocaleMeta,
+        selectedLocale.isAcceptableOrUnknown(
+          data['selected_locale']!,
+          _selectedLocaleMeta,
+        ),
+      );
     }
     if (data.containsKey('theme_preference')) {
       context.handle(
@@ -3303,6 +3401,44 @@ class $UserProfilesTable extends UserProfiles
         DriftSqlType.string,
         data['${effectivePrefix}preferred_locale'],
       )!,
+      languageMode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}language_mode'],
+      )!,
+      selectedLocale: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}selected_locale'],
+      ),
+      preferredTopics: $UserProfilesTable.$converterpreferredTopics.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}preferred_topics'],
+        )!,
+      ),
+      cameraBodies: $UserProfilesTable.$convertercameraBodies.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}camera_bodies'],
+        )!,
+      ),
+      lenses: $UserProfilesTable.$converterlenses.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}lenses'],
+        )!,
+      ),
+      smartphones: $UserProfilesTable.$convertersmartphones.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}smartphones'],
+        )!,
+      ),
+      learningGoals: $UserProfilesTable.$converterlearningGoals.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}learning_goals'],
+        )!,
+      ),
       themePreference: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}theme_preference'],
@@ -3322,12 +3458,30 @@ class $UserProfilesTable extends UserProfiles
   $UserProfilesTable createAlias(String alias) {
     return $UserProfilesTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<List<String>, String> $converterpreferredTopics =
+      const ProfileStringListConverter();
+  static TypeConverter<List<String>, String> $convertercameraBodies =
+      const ProfileStringListConverter();
+  static TypeConverter<List<String>, String> $converterlenses =
+      const ProfileStringListConverter();
+  static TypeConverter<List<String>, String> $convertersmartphones =
+      const ProfileStringListConverter();
+  static TypeConverter<List<String>, String> $converterlearningGoals =
+      const ProfileStringListConverter();
 }
 
 class UserProfile extends DataClass implements Insertable<UserProfile> {
   final String id;
   final String skillLevel;
   final String preferredLocale;
+  final String languageMode;
+  final String? selectedLocale;
+  final List<String> preferredTopics;
+  final List<String> cameraBodies;
+  final List<String> lenses;
+  final List<String> smartphones;
+  final List<String> learningGoals;
   final String themePreference;
   final int createdAtUtcMs;
   final int updatedAtUtcMs;
@@ -3335,6 +3489,13 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
     required this.id,
     required this.skillLevel,
     required this.preferredLocale,
+    required this.languageMode,
+    this.selectedLocale,
+    required this.preferredTopics,
+    required this.cameraBodies,
+    required this.lenses,
+    required this.smartphones,
+    required this.learningGoals,
     required this.themePreference,
     required this.createdAtUtcMs,
     required this.updatedAtUtcMs,
@@ -3345,6 +3506,35 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
     map['id'] = Variable<String>(id);
     map['skill_level'] = Variable<String>(skillLevel);
     map['preferred_locale'] = Variable<String>(preferredLocale);
+    map['language_mode'] = Variable<String>(languageMode);
+    if (!nullToAbsent || selectedLocale != null) {
+      map['selected_locale'] = Variable<String>(selectedLocale);
+    }
+    {
+      map['preferred_topics'] = Variable<String>(
+        $UserProfilesTable.$converterpreferredTopics.toSql(preferredTopics),
+      );
+    }
+    {
+      map['camera_bodies'] = Variable<String>(
+        $UserProfilesTable.$convertercameraBodies.toSql(cameraBodies),
+      );
+    }
+    {
+      map['lenses'] = Variable<String>(
+        $UserProfilesTable.$converterlenses.toSql(lenses),
+      );
+    }
+    {
+      map['smartphones'] = Variable<String>(
+        $UserProfilesTable.$convertersmartphones.toSql(smartphones),
+      );
+    }
+    {
+      map['learning_goals'] = Variable<String>(
+        $UserProfilesTable.$converterlearningGoals.toSql(learningGoals),
+      );
+    }
     map['theme_preference'] = Variable<String>(themePreference);
     map['created_at_utc_ms'] = Variable<int>(createdAtUtcMs);
     map['updated_at_utc_ms'] = Variable<int>(updatedAtUtcMs);
@@ -3356,6 +3546,15 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       id: Value(id),
       skillLevel: Value(skillLevel),
       preferredLocale: Value(preferredLocale),
+      languageMode: Value(languageMode),
+      selectedLocale: selectedLocale == null && nullToAbsent
+          ? const Value.absent()
+          : Value(selectedLocale),
+      preferredTopics: Value(preferredTopics),
+      cameraBodies: Value(cameraBodies),
+      lenses: Value(lenses),
+      smartphones: Value(smartphones),
+      learningGoals: Value(learningGoals),
       themePreference: Value(themePreference),
       createdAtUtcMs: Value(createdAtUtcMs),
       updatedAtUtcMs: Value(updatedAtUtcMs),
@@ -3371,6 +3570,15 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       id: serializer.fromJson<String>(json['id']),
       skillLevel: serializer.fromJson<String>(json['skillLevel']),
       preferredLocale: serializer.fromJson<String>(json['preferredLocale']),
+      languageMode: serializer.fromJson<String>(json['languageMode']),
+      selectedLocale: serializer.fromJson<String?>(json['selectedLocale']),
+      preferredTopics: serializer.fromJson<List<String>>(
+        json['preferredTopics'],
+      ),
+      cameraBodies: serializer.fromJson<List<String>>(json['cameraBodies']),
+      lenses: serializer.fromJson<List<String>>(json['lenses']),
+      smartphones: serializer.fromJson<List<String>>(json['smartphones']),
+      learningGoals: serializer.fromJson<List<String>>(json['learningGoals']),
       themePreference: serializer.fromJson<String>(json['themePreference']),
       createdAtUtcMs: serializer.fromJson<int>(json['createdAtUtcMs']),
       updatedAtUtcMs: serializer.fromJson<int>(json['updatedAtUtcMs']),
@@ -3383,6 +3591,13 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       'id': serializer.toJson<String>(id),
       'skillLevel': serializer.toJson<String>(skillLevel),
       'preferredLocale': serializer.toJson<String>(preferredLocale),
+      'languageMode': serializer.toJson<String>(languageMode),
+      'selectedLocale': serializer.toJson<String?>(selectedLocale),
+      'preferredTopics': serializer.toJson<List<String>>(preferredTopics),
+      'cameraBodies': serializer.toJson<List<String>>(cameraBodies),
+      'lenses': serializer.toJson<List<String>>(lenses),
+      'smartphones': serializer.toJson<List<String>>(smartphones),
+      'learningGoals': serializer.toJson<List<String>>(learningGoals),
       'themePreference': serializer.toJson<String>(themePreference),
       'createdAtUtcMs': serializer.toJson<int>(createdAtUtcMs),
       'updatedAtUtcMs': serializer.toJson<int>(updatedAtUtcMs),
@@ -3393,6 +3608,13 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
     String? id,
     String? skillLevel,
     String? preferredLocale,
+    String? languageMode,
+    Value<String?> selectedLocale = const Value.absent(),
+    List<String>? preferredTopics,
+    List<String>? cameraBodies,
+    List<String>? lenses,
+    List<String>? smartphones,
+    List<String>? learningGoals,
     String? themePreference,
     int? createdAtUtcMs,
     int? updatedAtUtcMs,
@@ -3400,6 +3622,15 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
     id: id ?? this.id,
     skillLevel: skillLevel ?? this.skillLevel,
     preferredLocale: preferredLocale ?? this.preferredLocale,
+    languageMode: languageMode ?? this.languageMode,
+    selectedLocale: selectedLocale.present
+        ? selectedLocale.value
+        : this.selectedLocale,
+    preferredTopics: preferredTopics ?? this.preferredTopics,
+    cameraBodies: cameraBodies ?? this.cameraBodies,
+    lenses: lenses ?? this.lenses,
+    smartphones: smartphones ?? this.smartphones,
+    learningGoals: learningGoals ?? this.learningGoals,
     themePreference: themePreference ?? this.themePreference,
     createdAtUtcMs: createdAtUtcMs ?? this.createdAtUtcMs,
     updatedAtUtcMs: updatedAtUtcMs ?? this.updatedAtUtcMs,
@@ -3413,6 +3644,25 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       preferredLocale: data.preferredLocale.present
           ? data.preferredLocale.value
           : this.preferredLocale,
+      languageMode: data.languageMode.present
+          ? data.languageMode.value
+          : this.languageMode,
+      selectedLocale: data.selectedLocale.present
+          ? data.selectedLocale.value
+          : this.selectedLocale,
+      preferredTopics: data.preferredTopics.present
+          ? data.preferredTopics.value
+          : this.preferredTopics,
+      cameraBodies: data.cameraBodies.present
+          ? data.cameraBodies.value
+          : this.cameraBodies,
+      lenses: data.lenses.present ? data.lenses.value : this.lenses,
+      smartphones: data.smartphones.present
+          ? data.smartphones.value
+          : this.smartphones,
+      learningGoals: data.learningGoals.present
+          ? data.learningGoals.value
+          : this.learningGoals,
       themePreference: data.themePreference.present
           ? data.themePreference.value
           : this.themePreference,
@@ -3431,6 +3681,13 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
           ..write('id: $id, ')
           ..write('skillLevel: $skillLevel, ')
           ..write('preferredLocale: $preferredLocale, ')
+          ..write('languageMode: $languageMode, ')
+          ..write('selectedLocale: $selectedLocale, ')
+          ..write('preferredTopics: $preferredTopics, ')
+          ..write('cameraBodies: $cameraBodies, ')
+          ..write('lenses: $lenses, ')
+          ..write('smartphones: $smartphones, ')
+          ..write('learningGoals: $learningGoals, ')
           ..write('themePreference: $themePreference, ')
           ..write('createdAtUtcMs: $createdAtUtcMs, ')
           ..write('updatedAtUtcMs: $updatedAtUtcMs')
@@ -3443,6 +3700,13 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
     id,
     skillLevel,
     preferredLocale,
+    languageMode,
+    selectedLocale,
+    preferredTopics,
+    cameraBodies,
+    lenses,
+    smartphones,
+    learningGoals,
     themePreference,
     createdAtUtcMs,
     updatedAtUtcMs,
@@ -3454,6 +3718,13 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
           other.id == this.id &&
           other.skillLevel == this.skillLevel &&
           other.preferredLocale == this.preferredLocale &&
+          other.languageMode == this.languageMode &&
+          other.selectedLocale == this.selectedLocale &&
+          other.preferredTopics == this.preferredTopics &&
+          other.cameraBodies == this.cameraBodies &&
+          other.lenses == this.lenses &&
+          other.smartphones == this.smartphones &&
+          other.learningGoals == this.learningGoals &&
           other.themePreference == this.themePreference &&
           other.createdAtUtcMs == this.createdAtUtcMs &&
           other.updatedAtUtcMs == this.updatedAtUtcMs);
@@ -3463,6 +3734,13 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
   final Value<String> id;
   final Value<String> skillLevel;
   final Value<String> preferredLocale;
+  final Value<String> languageMode;
+  final Value<String?> selectedLocale;
+  final Value<List<String>> preferredTopics;
+  final Value<List<String>> cameraBodies;
+  final Value<List<String>> lenses;
+  final Value<List<String>> smartphones;
+  final Value<List<String>> learningGoals;
   final Value<String> themePreference;
   final Value<int> createdAtUtcMs;
   final Value<int> updatedAtUtcMs;
@@ -3471,6 +3749,13 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     this.id = const Value.absent(),
     this.skillLevel = const Value.absent(),
     this.preferredLocale = const Value.absent(),
+    this.languageMode = const Value.absent(),
+    this.selectedLocale = const Value.absent(),
+    this.preferredTopics = const Value.absent(),
+    this.cameraBodies = const Value.absent(),
+    this.lenses = const Value.absent(),
+    this.smartphones = const Value.absent(),
+    this.learningGoals = const Value.absent(),
     this.themePreference = const Value.absent(),
     this.createdAtUtcMs = const Value.absent(),
     this.updatedAtUtcMs = const Value.absent(),
@@ -3480,6 +3765,13 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     required String id,
     required String skillLevel,
     required String preferredLocale,
+    this.languageMode = const Value.absent(),
+    this.selectedLocale = const Value.absent(),
+    this.preferredTopics = const Value.absent(),
+    this.cameraBodies = const Value.absent(),
+    this.lenses = const Value.absent(),
+    this.smartphones = const Value.absent(),
+    this.learningGoals = const Value.absent(),
     required String themePreference,
     required int createdAtUtcMs,
     required int updatedAtUtcMs,
@@ -3494,6 +3786,13 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     Expression<String>? id,
     Expression<String>? skillLevel,
     Expression<String>? preferredLocale,
+    Expression<String>? languageMode,
+    Expression<String>? selectedLocale,
+    Expression<String>? preferredTopics,
+    Expression<String>? cameraBodies,
+    Expression<String>? lenses,
+    Expression<String>? smartphones,
+    Expression<String>? learningGoals,
     Expression<String>? themePreference,
     Expression<int>? createdAtUtcMs,
     Expression<int>? updatedAtUtcMs,
@@ -3503,6 +3802,13 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
       if (id != null) 'id': id,
       if (skillLevel != null) 'skill_level': skillLevel,
       if (preferredLocale != null) 'preferred_locale': preferredLocale,
+      if (languageMode != null) 'language_mode': languageMode,
+      if (selectedLocale != null) 'selected_locale': selectedLocale,
+      if (preferredTopics != null) 'preferred_topics': preferredTopics,
+      if (cameraBodies != null) 'camera_bodies': cameraBodies,
+      if (lenses != null) 'lenses': lenses,
+      if (smartphones != null) 'smartphones': smartphones,
+      if (learningGoals != null) 'learning_goals': learningGoals,
       if (themePreference != null) 'theme_preference': themePreference,
       if (createdAtUtcMs != null) 'created_at_utc_ms': createdAtUtcMs,
       if (updatedAtUtcMs != null) 'updated_at_utc_ms': updatedAtUtcMs,
@@ -3514,6 +3820,13 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     Value<String>? id,
     Value<String>? skillLevel,
     Value<String>? preferredLocale,
+    Value<String>? languageMode,
+    Value<String?>? selectedLocale,
+    Value<List<String>>? preferredTopics,
+    Value<List<String>>? cameraBodies,
+    Value<List<String>>? lenses,
+    Value<List<String>>? smartphones,
+    Value<List<String>>? learningGoals,
     Value<String>? themePreference,
     Value<int>? createdAtUtcMs,
     Value<int>? updatedAtUtcMs,
@@ -3523,6 +3836,13 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
       id: id ?? this.id,
       skillLevel: skillLevel ?? this.skillLevel,
       preferredLocale: preferredLocale ?? this.preferredLocale,
+      languageMode: languageMode ?? this.languageMode,
+      selectedLocale: selectedLocale ?? this.selectedLocale,
+      preferredTopics: preferredTopics ?? this.preferredTopics,
+      cameraBodies: cameraBodies ?? this.cameraBodies,
+      lenses: lenses ?? this.lenses,
+      smartphones: smartphones ?? this.smartphones,
+      learningGoals: learningGoals ?? this.learningGoals,
       themePreference: themePreference ?? this.themePreference,
       createdAtUtcMs: createdAtUtcMs ?? this.createdAtUtcMs,
       updatedAtUtcMs: updatedAtUtcMs ?? this.updatedAtUtcMs,
@@ -3541,6 +3861,39 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     }
     if (preferredLocale.present) {
       map['preferred_locale'] = Variable<String>(preferredLocale.value);
+    }
+    if (languageMode.present) {
+      map['language_mode'] = Variable<String>(languageMode.value);
+    }
+    if (selectedLocale.present) {
+      map['selected_locale'] = Variable<String>(selectedLocale.value);
+    }
+    if (preferredTopics.present) {
+      map['preferred_topics'] = Variable<String>(
+        $UserProfilesTable.$converterpreferredTopics.toSql(
+          preferredTopics.value,
+        ),
+      );
+    }
+    if (cameraBodies.present) {
+      map['camera_bodies'] = Variable<String>(
+        $UserProfilesTable.$convertercameraBodies.toSql(cameraBodies.value),
+      );
+    }
+    if (lenses.present) {
+      map['lenses'] = Variable<String>(
+        $UserProfilesTable.$converterlenses.toSql(lenses.value),
+      );
+    }
+    if (smartphones.present) {
+      map['smartphones'] = Variable<String>(
+        $UserProfilesTable.$convertersmartphones.toSql(smartphones.value),
+      );
+    }
+    if (learningGoals.present) {
+      map['learning_goals'] = Variable<String>(
+        $UserProfilesTable.$converterlearningGoals.toSql(learningGoals.value),
+      );
     }
     if (themePreference.present) {
       map['theme_preference'] = Variable<String>(themePreference.value);
@@ -3563,6 +3916,13 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
           ..write('id: $id, ')
           ..write('skillLevel: $skillLevel, ')
           ..write('preferredLocale: $preferredLocale, ')
+          ..write('languageMode: $languageMode, ')
+          ..write('selectedLocale: $selectedLocale, ')
+          ..write('preferredTopics: $preferredTopics, ')
+          ..write('cameraBodies: $cameraBodies, ')
+          ..write('lenses: $lenses, ')
+          ..write('smartphones: $smartphones, ')
+          ..write('learningGoals: $learningGoals, ')
           ..write('themePreference: $themePreference, ')
           ..write('createdAtUtcMs: $createdAtUtcMs, ')
           ..write('updatedAtUtcMs: $updatedAtUtcMs, ')
@@ -5269,6 +5629,13 @@ typedef $$UserProfilesTableCreateCompanionBuilder =
       required String id,
       required String skillLevel,
       required String preferredLocale,
+      Value<String> languageMode,
+      Value<String?> selectedLocale,
+      Value<List<String>> preferredTopics,
+      Value<List<String>> cameraBodies,
+      Value<List<String>> lenses,
+      Value<List<String>> smartphones,
+      Value<List<String>> learningGoals,
       required String themePreference,
       required int createdAtUtcMs,
       required int updatedAtUtcMs,
@@ -5279,6 +5646,13 @@ typedef $$UserProfilesTableUpdateCompanionBuilder =
       Value<String> id,
       Value<String> skillLevel,
       Value<String> preferredLocale,
+      Value<String> languageMode,
+      Value<String?> selectedLocale,
+      Value<List<String>> preferredTopics,
+      Value<List<String>> cameraBodies,
+      Value<List<String>> lenses,
+      Value<List<String>> smartphones,
+      Value<List<String>> learningGoals,
       Value<String> themePreference,
       Value<int> createdAtUtcMs,
       Value<int> updatedAtUtcMs,
@@ -5307,6 +5681,46 @@ class $$UserProfilesTableFilterComposer
   ColumnFilters<String> get preferredLocale => $composableBuilder(
     column: $table.preferredLocale,
     builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get languageMode => $composableBuilder(
+    column: $table.languageMode,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get selectedLocale => $composableBuilder(
+    column: $table.selectedLocale,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get preferredTopics => $composableBuilder(
+    column: $table.preferredTopics,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get cameraBodies => $composableBuilder(
+    column: $table.cameraBodies,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get lenses => $composableBuilder(
+    column: $table.lenses,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get smartphones => $composableBuilder(
+    column: $table.smartphones,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get learningGoals => $composableBuilder(
+    column: $table.learningGoals,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
   ColumnFilters<String> get themePreference => $composableBuilder(
@@ -5349,6 +5763,41 @@ class $$UserProfilesTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get languageMode => $composableBuilder(
+    column: $table.languageMode,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get selectedLocale => $composableBuilder(
+    column: $table.selectedLocale,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get preferredTopics => $composableBuilder(
+    column: $table.preferredTopics,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get cameraBodies => $composableBuilder(
+    column: $table.cameraBodies,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get lenses => $composableBuilder(
+    column: $table.lenses,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get smartphones => $composableBuilder(
+    column: $table.smartphones,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get learningGoals => $composableBuilder(
+    column: $table.learningGoals,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get themePreference => $composableBuilder(
     column: $table.themePreference,
     builder: (column) => ColumnOrderings(column),
@@ -5386,6 +5835,43 @@ class $$UserProfilesTableAnnotationComposer
     column: $table.preferredLocale,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get languageMode => $composableBuilder(
+    column: $table.languageMode,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get selectedLocale => $composableBuilder(
+    column: $table.selectedLocale,
+    builder: (column) => column,
+  );
+
+  GeneratedColumnWithTypeConverter<List<String>, String> get preferredTopics =>
+      $composableBuilder(
+        column: $table.preferredTopics,
+        builder: (column) => column,
+      );
+
+  GeneratedColumnWithTypeConverter<List<String>, String> get cameraBodies =>
+      $composableBuilder(
+        column: $table.cameraBodies,
+        builder: (column) => column,
+      );
+
+  GeneratedColumnWithTypeConverter<List<String>, String> get lenses =>
+      $composableBuilder(column: $table.lenses, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<List<String>, String> get smartphones =>
+      $composableBuilder(
+        column: $table.smartphones,
+        builder: (column) => column,
+      );
+
+  GeneratedColumnWithTypeConverter<List<String>, String> get learningGoals =>
+      $composableBuilder(
+        column: $table.learningGoals,
+        builder: (column) => column,
+      );
 
   GeneratedColumn<String> get themePreference => $composableBuilder(
     column: $table.themePreference,
@@ -5437,6 +5923,13 @@ class $$UserProfilesTableTableManager
                 Value<String> id = const Value.absent(),
                 Value<String> skillLevel = const Value.absent(),
                 Value<String> preferredLocale = const Value.absent(),
+                Value<String> languageMode = const Value.absent(),
+                Value<String?> selectedLocale = const Value.absent(),
+                Value<List<String>> preferredTopics = const Value.absent(),
+                Value<List<String>> cameraBodies = const Value.absent(),
+                Value<List<String>> lenses = const Value.absent(),
+                Value<List<String>> smartphones = const Value.absent(),
+                Value<List<String>> learningGoals = const Value.absent(),
                 Value<String> themePreference = const Value.absent(),
                 Value<int> createdAtUtcMs = const Value.absent(),
                 Value<int> updatedAtUtcMs = const Value.absent(),
@@ -5445,6 +5938,13 @@ class $$UserProfilesTableTableManager
                 id: id,
                 skillLevel: skillLevel,
                 preferredLocale: preferredLocale,
+                languageMode: languageMode,
+                selectedLocale: selectedLocale,
+                preferredTopics: preferredTopics,
+                cameraBodies: cameraBodies,
+                lenses: lenses,
+                smartphones: smartphones,
+                learningGoals: learningGoals,
                 themePreference: themePreference,
                 createdAtUtcMs: createdAtUtcMs,
                 updatedAtUtcMs: updatedAtUtcMs,
@@ -5455,6 +5955,13 @@ class $$UserProfilesTableTableManager
                 required String id,
                 required String skillLevel,
                 required String preferredLocale,
+                Value<String> languageMode = const Value.absent(),
+                Value<String?> selectedLocale = const Value.absent(),
+                Value<List<String>> preferredTopics = const Value.absent(),
+                Value<List<String>> cameraBodies = const Value.absent(),
+                Value<List<String>> lenses = const Value.absent(),
+                Value<List<String>> smartphones = const Value.absent(),
+                Value<List<String>> learningGoals = const Value.absent(),
                 required String themePreference,
                 required int createdAtUtcMs,
                 required int updatedAtUtcMs,
@@ -5463,6 +5970,13 @@ class $$UserProfilesTableTableManager
                 id: id,
                 skillLevel: skillLevel,
                 preferredLocale: preferredLocale,
+                languageMode: languageMode,
+                selectedLocale: selectedLocale,
+                preferredTopics: preferredTopics,
+                cameraBodies: cameraBodies,
+                lenses: lenses,
+                smartphones: smartphones,
+                learningGoals: learningGoals,
                 themePreference: themePreference,
                 createdAtUtcMs: createdAtUtcMs,
                 updatedAtUtcMs: updatedAtUtcMs,
