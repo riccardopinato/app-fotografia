@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "appTitle": "FrameLab",
+  "navHome": "Home",
+  "navExplore": "Explore",
+  "navIdeas": "Ideas",
+  "navLibrary": "Library",
+  "navProfile": "Profile",
+  "homePlaceholderTitle": "Your photography space is taking shape",
+  "homePlaceholderDescription": "The Home experience will arrive in a future update.",
+  "explorePlaceholderTitle": "Explore is coming soon",
+  "explorePlaceholderDescription": "Discoverable photography content will appear here.",
+  "ideasPlaceholderTitle": "Ideas are coming soon",
+  "ideasPlaceholderDescription": "Personalized photo prompts will appear here.",
+  "libraryPlaceholderTitle": "Your library is coming soon",
+  "libraryPlaceholderDescription": "Saved inspiration and notes will appear here.",
+  "profilePlaceholderTitle": "Your profile is coming soon",
+  "profilePlaceholderDescription": "Your preferences and photography journey will appear here.",
+  "navigationLabel": "Main navigation"
+}

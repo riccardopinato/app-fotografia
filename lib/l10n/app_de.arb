@@ -1,0 +1,20 @@
+{
+  "@@locale": "de",
+  "appTitle": "FrameLab",
+  "navHome": "Startseite",
+  "navExplore": "Entdecken",
+  "navIdeas": "Ideen",
+  "navLibrary": "Archiv",
+  "navProfile": "Profil",
+  "homePlaceholderTitle": "Dein Fotobereich nimmt Gestalt an",
+  "homePlaceholderDescription": "Das Startseitenerlebnis kommt in einem zukünftigen Update.",
+  "explorePlaceholderTitle": "Entdecken kommt bald",
+  "explorePlaceholderDescription": "Hier erscheinen fotografische Inhalte zum Entdecken.",
+  "ideasPlaceholderTitle": "Ideen kommen bald",
+  "ideasPlaceholderDescription": "Hier erscheinen persönliche Fotoimpulse.",
+  "libraryPlaceholderTitle": "Dein Archiv kommt bald",
+  "libraryPlaceholderDescription": "Hier erscheinen gespeicherte Inspirationen und Notizen.",
+  "profilePlaceholderTitle": "Dein Profil kommt bald",
+  "profilePlaceholderDescription": "Hier erscheinen deine Präferenzen und dein Fotoweg.",
+  "navigationLabel": "Hauptnavigation"
+}
