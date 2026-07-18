@@ -21,46 +21,40 @@ Future<Map<String, List<ContentTranslation>>> _translationsByContent(
 }
 
 void main() {
-  group('Step 5B1 localized catalog seed set', () {
-    test(
-      'installs seven locales on the first five seed contents only',
-      () async {
-        final db = _db();
-        await CatalogSeedInstaller(db).install();
+  group('Step 5B localized catalog seed set', () {
+    test('installs seven locales on all ten seed contents', () async {
+      final db = _db();
+      await CatalogSeedInstaller(db).install();
 
-        final grouped = await _translationsByContent(db);
-        expect(await db.select(db.contentItems).get(), hasLength(10));
-        for (final id in localizedCatalogSeedContentIds) {
-          final translations = grouped[id] ?? const <ContentTranslation>[];
+      final grouped = await _translationsByContent(db);
+      expect(await db.select(db.contentItems).get(), hasLength(10));
+      for (final id in localizedCatalogSeedContentIds) {
+        final translations = grouped[id] ?? const <ContentTranslation>[];
+        expect(
+          translations.map((row) => row.locale).toSet(),
+          catalogSeedLocales.toSet(),
+        );
+        expect(translations, hasLength(catalogSeedLocales.length));
+        for (final translation in translations) {
+          expect(translation.title.trim(), isNotEmpty);
+          expect(translation.summary.trim(), isNotEmpty);
+          expect(translation.body.trim(), isNotEmpty);
           expect(
-            translations.map((row) => row.locale).toSet(),
-            catalogSeedLocales.toSet(),
+            translation.translationStatus,
+            TranslationStatus.published.name,
           );
-          expect(translations, hasLength(catalogSeedLocales.length));
-          for (final translation in translations) {
-            expect(translation.title.trim(), isNotEmpty);
-            expect(translation.summary.trim(), isNotEmpty);
-            expect(translation.body.trim(), isNotEmpty);
-            expect(
-              translation.translationStatus,
-              TranslationStatus.published.name,
-            );
-            expect(
-              translation.translationMethod,
-              translation.locale == 'en'
-                  ? TranslationMethod.original.name
-                  : TranslationMethod.machine.name,
-            );
-            expect(translation.createdAtUtcMs, greaterThan(0));
-            expect(translation.updatedAtUtcMs, greaterThan(0));
-          }
+          expect(
+            translation.translationMethod,
+            translation.locale == 'en'
+                ? TranslationMethod.original.name
+                : TranslationMethod.machine.name,
+          );
+          expect(translation.createdAtUtcMs, greaterThan(0));
+          expect(translation.updatedAtUtcMs, greaterThan(0));
         }
-        for (final id in catalogSeedContentIds.skip(5)) {
-          expect(grouped[id]!.map((row) => row.locale), ['en']);
-        }
-        await db.close();
-      },
-    );
+      }
+      await db.close();
+    });
 
     test(
       'keeps one translation per content-locale and remains idempotent',
@@ -72,7 +66,7 @@ void main() {
 
         expect(await db.select(db.contentItems).get(), hasLength(10));
         expect(await db.select(db.contentSources).get(), hasLength(1));
-        expect(await db.select(db.contentTranslations).get(), hasLength(40));
+        expect(await db.select(db.contentTranslations).get(), hasLength(70));
         expect(await db.select(db.contentItemSources).get(), hasLength(10));
         expect(await db.select(db.contentItemTags).get(), hasLength(10));
 
@@ -148,6 +142,12 @@ void main() {
           'Verschlusszeit': 'seed-exposure-triangle-basics',
           'fotómetro': 'seed-exposure-triangle-basics',
           'assunto': 'seed-leading-lines-composition',
+          'sfondo': 'seed-background-separation',
+          'histograma': 'seed-histogram-check',
+          'tiers': 'seed-rule-of-thirds-practice',
+          'Mitzieher': 'seed-motion-shutter-speed',
+          'objetiva': 'seed-lens-cleaning-checklist',
+          'bombinha': 'seed-lens-cleaning-checklist',
         };
 
         for (final entry in cases.entries) {
@@ -182,16 +182,78 @@ void main() {
     );
 
     test(
-      'leaves the last five seed contents without added localizations',
+      'indexes localized tag labels and keeps publishability rules',
+      () async {
+        final db = _db();
+        await CatalogSeedInstaller(db).install();
+        final repo = DriftCatalogRepository(db);
+
+        expect(
+          (await repo.getPage(
+            locale: const LocaleCode('it'),
+            query: 'manutenzione',
+          )).items.map((item) => item.item.id),
+          contains('seed-lens-cleaning-checklist'),
+        );
+        final restrictedSource =
+            await (db.select(db.contentSources)..where(
+                  (table) => table.id.equals('source-framelab-editorial-seed'),
+                ))
+                .getSingle();
+        await (db.update(
+          db.contentSources,
+        )..where((table) => table.id.equals(restrictedSource.id))).write(
+          const ContentSourcesCompanion(rightsStatus: Value('restricted')),
+        );
+        expect(
+          await repo.getPublished(locale: const LocaleCode('en')),
+          isEmpty,
+        );
+        await db.close();
+      },
+    );
+
+    test(
+      'keeps the first five stable and localizes the remaining five',
       () async {
         final db = _db();
         await CatalogSeedInstaller(db).install();
         final grouped = await _translationsByContent(db);
-        for (final id in catalogSeedContentIds.skip(5)) {
-          expect(grouped[id]!.map((row) => row.locale).toList(), ['en']);
+        for (final id in catalogSeedContentIds) {
           expect(
-            grouped[id]!.single.translationMethod,
+            grouped[id]!.map((row) => row.locale).toSet(),
+            catalogSeedLocales.toSet(),
+          );
+        }
+        final firstFiveEnglishTitles = {
+          for (final id in catalogSeedContentIds.take(5))
+            id: grouped[id]!.singleWhere((row) => row.locale == 'en').title,
+        };
+        expect(firstFiveEnglishTitles, {
+          'seed-exposure-triangle-basics': 'Exposure triangle basics',
+          'seed-golden-hour-portraits': 'Use golden hour for gentle portraits',
+          'seed-leading-lines-composition': 'Guide the eye with leading lines',
+          'seed-low-light-stability': 'Keep low-light shots stable',
+          'seed-white-balance-color': 'Set white balance for believable colour',
+        });
+        for (final id in catalogSeedContentIds.skip(5)) {
+          final translations = grouped[id]!;
+          expect(translations, hasLength(catalogSeedLocales.length));
+          expect(
+            translations
+                .where((row) => row.locale == 'en')
+                .single
+                .translationMethod,
             TranslationMethod.original.name,
+          );
+          expect(
+            translations
+                .where((row) => row.locale != 'en')
+                .every(
+                  (row) =>
+                      row.translationMethod == TranslationMethod.machine.name,
+                ),
+            isTrue,
           );
         }
         await db.close();

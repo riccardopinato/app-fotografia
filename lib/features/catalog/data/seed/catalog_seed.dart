@@ -16,13 +16,7 @@ const catalogSeedContentIds = <String>[
   'seed-motion-shutter-speed',
   'seed-lens-cleaning-checklist',
 ];
-const localizedCatalogSeedContentIds = <String>[
-  'seed-exposure-triangle-basics',
-  'seed-golden-hour-portraits',
-  'seed-leading-lines-composition',
-  'seed-low-light-stability',
-  'seed-white-balance-color',
-];
+const localizedCatalogSeedContentIds = catalogSeedContentIds;
 const catalogSeedLocales = <String>[
   'en',
   'it',
@@ -239,11 +233,51 @@ const _tagLabels = <String, Map<String, String>>{
     'pt': 'Cor',
     'pt-BR': 'Cor',
   },
-  'focus': {'en': 'Focus'},
-  'metering': {'en': 'Metering'},
-  'practice': {'en': 'Practice'},
-  'motion': {'en': 'Motion'},
-  'maintenance': {'en': 'Maintenance'},
+  'focus': {
+    'en': 'Focus',
+    'it': 'Messa a fuoco',
+    'es': 'Enfoque',
+    'fr': 'Mise au point',
+    'de': 'Fokus',
+    'pt': 'Focagem',
+    'pt-BR': 'Foco',
+  },
+  'metering': {
+    'en': 'Metering',
+    'it': 'Misurazione',
+    'es': 'Medición',
+    'fr': 'Mesure',
+    'de': 'Belichtungsmessung',
+    'pt': 'Medição',
+    'pt-BR': 'Medição',
+  },
+  'practice': {
+    'en': 'Practice',
+    'it': 'Pratica',
+    'es': 'Práctica',
+    'fr': 'Pratique',
+    'de': 'Übung',
+    'pt': 'Prática',
+    'pt-BR': 'Prática',
+  },
+  'motion': {
+    'en': 'Motion',
+    'it': 'Movimento',
+    'es': 'Movimiento',
+    'fr': 'Mouvement',
+    'de': 'Bewegung',
+    'pt': 'Movimento',
+    'pt-BR': 'Movimento',
+  },
+  'maintenance': {
+    'en': 'Maintenance',
+    'it': 'Manutenzione',
+    'es': 'Mantenimiento',
+    'fr': 'Entretien',
+    'de': 'Pflege',
+    'pt': 'Manutenção',
+    'pt-BR': 'Manutenção',
+  },
 };
 
 const _catalogSeeds = <_SeedContent>[
@@ -592,6 +626,54 @@ const _catalogSeeds = <_SeedContent>[
         body:
             'Before changing lenses, look for ways to separate the subject. Ask the person to step away from the background, focus carefully on the nearest eye, and avoid bright distractions behind the head. A wider aperture can help, but distance and clean edges often matter more than the lowest f-number.',
       ),
+      _SeedTranslation(
+        locale: 'it',
+        title: 'Separa il soggetto dallo sfondo',
+        summary:
+            'Usa distanza, messa a fuoco e contrasto per rendere il soggetto più leggibile.',
+        body:
+            'Prima di cambiare obiettivo, cerca modi per separare il soggetto. Chiedi alla persona di allontanarsi dallo sfondo, metti a fuoco con cura l’occhio più vicino ed evita distrazioni luminose dietro la testa. Un diaframma più aperto può aiutare, ma distanza e bordi puliti spesso contano più del numero f più basso.',
+      ),
+      _SeedTranslation(
+        locale: 'es',
+        title: 'Separa el sujeto del fondo',
+        summary:
+            'Usa distancia, enfoque y contraste para que el sujeto se lea mejor.',
+        body:
+            'Antes de cambiar de objetivo, busca formas de separar el sujeto. Pide a la persona que se aleje del fondo, enfoca con cuidado el ojo más cercano y evita distracciones brillantes detrás de la cabeza. Una apertura mayor puede ayudar, pero la distancia y los bordes limpios suelen importar más que el número f más bajo.',
+      ),
+      _SeedTranslation(
+        locale: 'fr',
+        title: 'Sépare le sujet de l’arrière-plan',
+        summary:
+            'Utilise distance, mise au point et contraste pour rendre le sujet plus lisible.',
+        body:
+            'Avant de changer d’objectif, cherche des moyens de séparer le sujet. Demande à la personne de s’éloigner de l’arrière-plan, fais soigneusement la mise au point sur l’œil le plus proche et évite les distractions lumineuses derrière la tête. Une ouverture plus grande peut aider, mais la distance et des contours propres comptent souvent davantage que le plus petit nombre f.',
+      ),
+      _SeedTranslation(
+        locale: 'de',
+        title: 'Trenne das Motiv vom Hintergrund',
+        summary:
+            'Nutze Abstand, Fokus und Kontrast, damit das Motiv leichter lesbar wird.',
+        body:
+            'Bevor du das Objektiv wechselst, suche nach Möglichkeiten, das Motiv zu trennen. Bitte die Person, Abstand zum Hintergrund zu nehmen, fokussiere sorgfältig auf das nächstgelegene Auge und vermeide helle Ablenkungen hinter dem Kopf. Eine größere Blende kann helfen, doch Abstand und klare Kanten sind oft wichtiger als die kleinste f-Zahl.',
+      ),
+      _SeedTranslation(
+        locale: 'pt',
+        title: 'Separa o motivo do fundo',
+        summary:
+            'Usa distância, focagem e contraste para tornar o motivo mais fácil de ler.',
+        body:
+            'Antes de mudares de objetiva, procura formas de separar o motivo. Pede à pessoa que se afaste do fundo, foca com cuidado o olho mais próximo e evita distrações luminosas atrás da cabeça. Uma abertura maior pode ajudar, mas a distância e contornos limpos muitas vezes importam mais do que o menor número f.',
+      ),
+      _SeedTranslation(
+        locale: 'pt-BR',
+        title: 'Separe o assunto do fundo',
+        summary:
+            'Use distância, foco e contraste para deixar o assunto mais fácil de ler.',
+        body:
+            'Antes de trocar de lente, procure formas de separar o assunto. Peça para a pessoa se afastar do fundo, foque com cuidado no olho mais próximo e evite distrações brilhantes atrás da cabeça. Uma abertura maior pode ajudar, mas distância e bordas limpas muitas vezes importam mais do que o menor número f.',
+      ),
     ],
   ),
   _SeedContent(
@@ -609,6 +691,54 @@ const _catalogSeeds = <_SeedContent>[
             'Use the histogram to confirm whether important highlights or shadows are clipped.',
         body:
             'The preview can lie in bright sun or at night, but the histogram gives a better warning. After a difficult frame, check whether the graph is pressed hard against the left or right edge. Some clipping is acceptable in tiny reflections or deep shadows, but protect faces, skies and product details when they matter to the story.',
+      ),
+      _SeedTranslation(
+        locale: 'it',
+        title: 'Controlla l’istogramma dopo una luce difficile',
+        summary:
+            'Usa l’istogramma per verificare se alte luci o ombre importanti sono tagliate.',
+        body:
+            'L’anteprima può ingannare sotto il sole forte o di notte, ma l’istogramma offre un avviso più affidabile. Dopo uno scatto difficile, controlla se il grafico è schiacciato contro il bordo sinistro o destro. Un po’ di clipping è accettabile in piccoli riflessi o ombre profonde, ma proteggi volti, cieli e dettagli di prodotto quando sono importanti per la storia.',
+      ),
+      _SeedTranslation(
+        locale: 'es',
+        title: 'Revisa el histograma tras una luz difícil',
+        summary:
+            'Usa el histograma para confirmar si luces o sombras importantes están recortadas.',
+        body:
+            'La previsualización puede engañar con sol fuerte o de noche, pero el histograma da una advertencia mejor. Después de una toma difícil, comprueba si el gráfico está pegado al borde izquierdo o derecho. Algo de recorte es aceptable en reflejos pequeños o sombras profundas, pero protege rostros, cielos y detalles de producto cuando importan a la historia.',
+      ),
+      _SeedTranslation(
+        locale: 'fr',
+        title: 'Vérifie l’histogramme après une lumière difficile',
+        summary:
+            'Utilise l’histogramme pour confirmer si des hautes lumières ou ombres importantes sont écrêtées.',
+        body:
+            'L’aperçu peut mentir en plein soleil ou la nuit, mais l’histogramme donne un meilleur avertissement. Après une image difficile, vérifie si le graphique est collé au bord gauche ou droit. Un peu d’écrêtage est acceptable dans de petits reflets ou des ombres profondes, mais protège les visages, les ciels et les détails de produit lorsqu’ils comptent pour le récit.',
+      ),
+      _SeedTranslation(
+        locale: 'de',
+        title: 'Prüfe nach schwierigem Licht das Histogramm',
+        summary:
+            'Nutze das Histogramm, um abgeschnittene wichtige Lichter oder Schatten zu erkennen.',
+        body:
+            'Die Vorschau kann in greller Sonne oder bei Nacht täuschen, doch das Histogramm warnt zuverlässiger. Prüfe nach einer schwierigen Aufnahme, ob die Kurve hart am linken oder rechten Rand liegt. Etwas Clipping ist in kleinen Reflexen oder tiefen Schatten akzeptabel, aber schütze Gesichter, Himmel und Produktdetails, wenn sie für die Geschichte wichtig sind.',
+      ),
+      _SeedTranslation(
+        locale: 'pt',
+        title: 'Verifica o histograma após luz difícil',
+        summary:
+            'Usa o histograma para confirmar se altas luzes ou sombras importantes ficaram cortadas.',
+        body:
+            'A pré-visualização pode enganar sob sol forte ou à noite, mas o histograma dá um aviso melhor. Depois de uma fotografia difícil, verifica se o gráfico está encostado ao limite esquerdo ou direito. Algum corte é aceitável em pequenos reflexos ou sombras profundas, mas protege rostos, céus e detalhes de produto quando forem importantes para a história.',
+      ),
+      _SeedTranslation(
+        locale: 'pt-BR',
+        title: 'Confira o histograma depois de luz difícil',
+        summary:
+            'Use o histograma para confirmar se realces ou sombras importantes foram cortados.',
+        body:
+            'A prévia pode enganar sob sol forte ou à noite, mas o histograma dá um alerta melhor. Depois de uma foto difícil, confira se o gráfico está colado na borda esquerda ou direita. Um pouco de corte é aceitável em pequenos reflexos ou sombras profundas, mas proteja rostos, céus e detalhes de produto quando eles forem importantes para a história.',
       ),
     ],
   ),
@@ -628,6 +758,54 @@ const _catalogSeeds = <_SeedContent>[
         body:
             'Turn on the grid and make three versions: subject centred, subject on a third, and subject near the edge. Compare how the background, empty space and direction of movement change. The rule of thirds is a useful prompt, not a law. Keep the version that gives the subject the clearest visual reason to be there.',
       ),
+      _SeedTranslation(
+        locale: 'it',
+        title: 'Esercitati con la regola dei terzi senza seguirla alla cieca',
+        summary:
+            'Metti il soggetto decentrato, poi decidi se l’inquadratura migliora davvero.',
+        body:
+            'Attiva la griglia e realizza tre versioni: soggetto al centro, soggetto su un terzo e soggetto vicino al bordo. Confronta come cambiano sfondo, spazio vuoto e direzione del movimento. La regola dei terzi è uno stimolo utile, non una legge. Tieni la versione che dà al soggetto la ragione visiva più chiara per trovarsi lì.',
+      ),
+      _SeedTranslation(
+        locale: 'es',
+        title: 'Practica la regla de los tercios sin obedecerla a ciegas',
+        summary:
+            'Coloca el sujeto descentrado y decide si el encuadre realmente mejora.',
+        body:
+            'Activa la cuadrícula y haz tres versiones: sujeto centrado, sujeto en un tercio y sujeto cerca del borde. Compara cómo cambian el fondo, el espacio vacío y la dirección del movimiento. La regla de los tercios es una guía útil, no una ley. Conserva la versión que dé al sujeto la razón visual más clara para estar ahí.',
+      ),
+      _SeedTranslation(
+        locale: 'fr',
+        title: 'Pratique la règle des tiers sans lui obéir aveuglément',
+        summary:
+            'Place le sujet hors centre, puis décide si le cadrage s’améliore vraiment.',
+        body:
+            'Active la grille et fais trois versions : sujet centré, sujet sur un tiers et sujet près du bord. Compare comment l’arrière-plan, l’espace vide et la direction du mouvement changent. La règle des tiers est une incitation utile, pas une loi. Garde la version qui donne au sujet la raison visuelle la plus claire d’être là.',
+      ),
+      _SeedTranslation(
+        locale: 'de',
+        title: 'Übe die Drittelregel, ohne ihr blind zu folgen',
+        summary:
+            'Platziere das Motiv außerhalb der Mitte und entscheide dann, ob das Bild wirklich besser wird.',
+        body:
+            'Schalte das Raster ein und mache drei Versionen: Motiv in der Mitte, Motiv auf einem Drittel und Motiv nahe am Rand. Vergleiche, wie sich Hintergrund, Leerraum und Bewegungsrichtung verändern. Die Drittelregel ist ein hilfreicher Impuls, kein Gesetz. Behalte die Version, die dem Motiv den klarsten visuellen Grund gibt, dort zu sein.',
+      ),
+      _SeedTranslation(
+        locale: 'pt',
+        title: 'Pratica a regra dos terços sem a obedecer cegamente',
+        summary:
+            'Coloca o motivo fora do centro e decide se o enquadramento melhora mesmo.',
+        body:
+            'Ativa a grelha e faz três versões: motivo centrado, motivo num terço e motivo perto da margem. Compara como mudam o fundo, o espaço vazio e a direção do movimento. A regra dos terços é um estímulo útil, não uma lei. Mantém a versão que dá ao motivo a razão visual mais clara para estar ali.',
+      ),
+      _SeedTranslation(
+        locale: 'pt-BR',
+        title: 'Pratique a regra dos terços sem obedecer cegamente',
+        summary:
+            'Coloque o assunto fora do centro e decida se o enquadramento realmente melhora.',
+        body:
+            'Ative a grade e faça três versões: assunto centralizado, assunto em um terço e assunto perto da borda. Compare como mudam o fundo, o espaço vazio e a direção do movimento. A regra dos terços é um estímulo útil, não uma lei. Fique com a versão que dá ao assunto a razão visual mais clara para estar ali.',
+      ),
     ],
   ),
   _SeedContent(
@@ -646,6 +824,60 @@ const _catalogSeeds = <_SeedContent>[
         body:
             'Shutter speed is a creative decision. Fast speeds freeze gestures, splashes and jumps. Slower speeds can show flow in water, traffic or dancers, but they also reveal camera shake. If you pan with a moving subject, keep your feet stable, rotate from the waist and follow through after pressing the shutter.',
       ),
+      _SeedTranslation(
+        locale: 'it',
+        title:
+            'Scegli il tempo di scatto per il movimento, non solo per la luminosità',
+        summary:
+            'Decidi se il movimento deve congelarsi, sfocare o mostrare un panning controllato.',
+        body:
+            'Il tempo di scatto è una scelta creativa. Tempi rapidi congelano gesti, schizzi e salti. Tempi più lenti possono mostrare il flusso di acqua, traffico o danzatori, ma rivelano anche il micromosso della fotocamera. Se fai panning con un soggetto in movimento, tieni i piedi stabili, ruota dal busto e continua il movimento dopo aver premuto il pulsante di scatto.',
+      ),
+      _SeedTranslation(
+        locale: 'es',
+        title:
+            'Elige la velocidad de obturación por el movimiento, no solo por la luz',
+        summary:
+            'Decide si el movimiento debe congelarse, difuminarse o mostrar un barrido controlado.',
+        body:
+            'La velocidad de obturación es una decisión creativa. Las velocidades rápidas congelan gestos, salpicaduras y saltos. Las velocidades más lentas pueden mostrar el flujo del agua, el tráfico o bailarines, pero también revelan trepidación de la cámara. Si haces un barrido con un sujeto en movimiento, mantén los pies estables, gira desde la cintura y continúa el movimiento después de pulsar el disparador.',
+      ),
+      _SeedTranslation(
+        locale: 'fr',
+        title:
+            'Choisis la vitesse d’obturation pour le mouvement, pas seulement la luminosité',
+        summary:
+            'Décide si le mouvement doit être figé, flou ou montré par un filé contrôlé.',
+        body:
+            'La vitesse d’obturation est une décision créative. Les vitesses rapides figent gestes, éclaboussures et sauts. Des vitesses plus lentes peuvent montrer le flux de l’eau, du trafic ou des danseurs, mais elles révèlent aussi le bougé de l’appareil. Si tu fais un filé avec un sujet en mouvement, garde les pieds stables, tourne depuis la taille et poursuis le mouvement après avoir pressé le déclencheur.',
+      ),
+      _SeedTranslation(
+        locale: 'de',
+        title:
+            'Wähle die Verschlusszeit für Bewegung, nicht nur für Helligkeit',
+        summary:
+            'Entscheide, ob Bewegung einfrieren, verwischen oder als kontrollierter Mitzieher erscheinen soll.',
+        body:
+            'Die Verschlusszeit ist eine kreative Entscheidung. Kurze Zeiten frieren Gesten, Spritzer und Sprünge ein. Längere Zeiten können Fluss in Wasser, Verkehr oder Tänzern zeigen, offenbaren aber auch Kamerawackler. Wenn du ein bewegtes Motiv mitziehst, halte die Füße stabil, drehe aus der Taille und führe die Bewegung nach dem Auslösen weiter.',
+      ),
+      _SeedTranslation(
+        locale: 'pt',
+        title:
+            'Escolhe a velocidade do obturador pelo movimento, não apenas pela luz',
+        summary:
+            'Decide se o movimento deve congelar, arrastar ou mostrar um panning controlado.',
+        body:
+            'A velocidade do obturador é uma decisão criativa. Velocidades rápidas congelam gestos, salpicos e saltos. Velocidades mais lentas podem mostrar fluxo na água, no trânsito ou em bailarinos, mas também revelam trepidação da câmara. Se fizeres panning com um motivo em movimento, mantém os pés estáveis, roda a partir da cintura e continua o movimento depois de premir o obturador.',
+      ),
+      _SeedTranslation(
+        locale: 'pt-BR',
+        title:
+            'Escolha a velocidade do obturador pelo movimento, não só pela luz',
+        summary:
+            'Decida se o movimento deve congelar, borrar ou mostrar um panning controlado.',
+        body:
+            'A velocidade do obturador é uma decisão criativa. Velocidades rápidas congelam gestos, respingos e saltos. Velocidades mais lentas podem mostrar fluxo na água, no trânsito ou em dançarinos, mas também revelam tremido da câmera. Se fizer panning com um assunto em movimento, mantenha os pés estáveis, gire pela cintura e continue o movimento depois de apertar o obturador.',
+      ),
     ],
   ),
   _SeedContent(
@@ -663,6 +895,54 @@ const _catalogSeeds = <_SeedContent>[
             'Remove dust gently and avoid grinding particles into the glass.',
         body:
             'Use a blower first, then a clean microfibre cloth or lens tissue if marks remain. Do not breathe heavily onto the glass or use household cleaners. Work from the centre outward with light pressure. If a filter or front element has grit on it, remove the grit before wiping so you do not scratch the coating.',
+      ),
+      _SeedTranslation(
+        locale: 'it',
+        title: 'Pulisci l’obiettivo in sicurezza prima delle foto importanti',
+        summary:
+            'Rimuovi la polvere con delicatezza ed evita di trascinare particelle sul vetro.',
+        body:
+            'Usa prima una pompetta, poi un panno in microfibra pulito o una cartina per lenti se restano segni. Non alitare pesantemente sul vetro e non usare detergenti domestici. Procedi dal centro verso l’esterno con pressione leggera. Se un filtro o la lente frontale ha granelli, rimuovili prima di passare il panno per non graffiare il trattamento.',
+      ),
+      _SeedTranslation(
+        locale: 'es',
+        title: 'Limpia el objetivo con seguridad antes de fotos importantes',
+        summary:
+            'Retira el polvo con suavidad y evita arrastrar partículas sobre el cristal.',
+        body:
+            'Usa primero una pera de aire y después un paño de microfibra limpio o papel para lentes si quedan marcas. No eches mucho aliento sobre el cristal ni uses limpiadores domésticos. Trabaja desde el centro hacia fuera con poca presión. Si un filtro o el elemento frontal tiene arenilla, retírala antes de frotar para no rayar el recubrimiento.',
+      ),
+      _SeedTranslation(
+        locale: 'fr',
+        title: 'Nettoie l’objectif en sécurité avant les photos importantes',
+        summary:
+            'Retire la poussière doucement et évite de frotter des particules sur le verre.',
+        body:
+            'Utilise d’abord une poire soufflante, puis un chiffon microfibre propre ou un papier optique s’il reste des traces. Ne souffle pas fortement sur le verre et n’utilise pas de nettoyants ménagers. Travaille du centre vers l’extérieur avec une pression légère. Si un filtre ou la lentille frontale contient des grains, enlève-les avant d’essuyer pour ne pas rayer le traitement.',
+      ),
+      _SeedTranslation(
+        locale: 'de',
+        title: 'Reinige das Objektiv vor wichtigen Fotos sicher',
+        summary:
+            'Entferne Staub vorsichtig und reibe keine Partikel über das Glas.',
+        body:
+            'Nutze zuerst einen Blasebalg und danach ein sauberes Mikrofasertuch oder Linsenpapier, falls Flecken bleiben. Hauche das Glas nicht stark an und verwende keine Haushaltsreiniger. Arbeite mit leichtem Druck von der Mitte nach außen. Wenn ein Filter oder die Frontlinse Körnchen trägt, entferne sie vor dem Wischen, damit du die Vergütung nicht zerkratzt.',
+      ),
+      _SeedTranslation(
+        locale: 'pt',
+        title: 'Limpa a objetiva em segurança antes de fotografias importantes',
+        summary:
+            'Remove o pó com cuidado e evita arrastar partículas sobre o vidro.',
+        body:
+            'Usa primeiro uma pera de ar e depois um pano de microfibra limpo ou papel para lentes se ainda houver marcas. Não sopres intensamente para o vidro nem uses produtos domésticos. Trabalha do centro para fora com pressão leve. Se um filtro ou o elemento frontal tiver grãos, remove-os antes de limpar para não riscares o revestimento.',
+      ),
+      _SeedTranslation(
+        locale: 'pt-BR',
+        title: 'Limpe a lente com segurança antes de fotos importantes',
+        summary:
+            'Remova a poeira com cuidado e evite arrastar partículas sobre o vidro.',
+        body:
+            'Use primeiro uma bombinha de ar e depois um pano de microfibra limpo ou papel para lentes se ainda houver marcas. Não sopre forte no vidro nem use produtos domésticos. Trabalhe do centro para fora com pouca pressão. Se um filtro ou o elemento frontal tiver grãos, remova-os antes de limpar para não riscar o revestimento.',
       ),
     ],
   ),
