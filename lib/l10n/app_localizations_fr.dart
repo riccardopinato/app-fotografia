@@ -63,4 +63,106 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get navigationLabel => 'Navigation principale';
+
+  @override
+  String get onboardingTitle => 'Configurez votre profil photo';
+
+  @override
+  String get onboardingDescription =>
+      'Choisissez des préférences modifiables à tout moment.';
+
+  @override
+  String get onboardingContinue => 'Enregistrer les préférences';
+
+  @override
+  String get profileTitle => 'Votre profil';
+
+  @override
+  String get profileDescription =>
+      'Ces préférences guideront les futures suggestions.';
+
+  @override
+  String get profileSave => 'Enregistrer les modifications';
+
+  @override
+  String get profileSkillLevel => 'Niveau d\'expérience';
+
+  @override
+  String get skillBeginner => 'Débutant';
+
+  @override
+  String get skillIntermediate => 'Intermédiaire';
+
+  @override
+  String get skillAdvanced => 'Avancé';
+
+  @override
+  String get profileTopics => 'Centres d\'intérêt photo';
+
+  @override
+  String get topicPortrait => 'Portrait';
+
+  @override
+  String get topicLandscape => 'Paysage';
+
+  @override
+  String get topicStreet => 'Street';
+
+  @override
+  String get topicMacro => 'Macro';
+
+  @override
+  String get topicNight => 'Photographie de nuit';
+
+  @override
+  String get topicSmartphone => 'Smartphone';
+
+  @override
+  String get profileLearningGoals => 'Objectifs d\'apprentissage';
+
+  @override
+  String get goalComposition => 'Composition';
+
+  @override
+  String get goalLight => 'Lumière';
+
+  @override
+  String get goalTechnique => 'Technique d\'appareil';
+
+  @override
+  String get goalEditing => 'Retouche';
+
+  @override
+  String get profileLanguage => 'Langue de l\'application';
+
+  @override
+  String get languageDevice => 'Utiliser la langue de l\'appareil';
+
+  @override
+  String get languageManual => 'Choisir une langue';
+
+  @override
+  String get languageSelectionLabel => 'Langue';
+
+  @override
+  String get languageEnglish => 'Anglais';
+
+  @override
+  String get languageItalian => 'Italien';
+
+  @override
+  String get languageSpanish => 'Espagnol';
+
+  @override
+  String get languageFrench => 'Français';
+
+  @override
+  String get languageGerman => 'Allemand';
+
+  @override
+  String get languageBrazilianPortuguese => 'Portugais brésilien';
+
+  @override
+  String get profileSaveError =>
+      'Vos préférences n\'ont pas pu être enregistrées. Réessayez.';
 }

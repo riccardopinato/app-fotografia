@@ -65,6 +65,57 @@ class DriftCatalogRepository implements CatalogRepository {
         .firstOrNull,
   );
 
+  @override
+  Future<CatalogResultPage> getPage({
+    required LocaleCode locale,
+    CatalogQuery query = const CatalogQuery(),
+  }) async {
+    final all = await getPublished(locale: locale, filter: query.filter);
+    final needle = _searchKey(query.search);
+    final matching = needle.isEmpty
+        ? all
+        : all.where((content) {
+            final text = [
+              content.translation.title,
+              content.translation.summary,
+              content.translation.body,
+              ...content.tags.map((tag) => tag.code),
+            ].map(_searchKey).join(' ');
+            return text.contains(needle);
+          }).toList();
+    if (query.sort == CatalogSort.relevance && needle.isNotEmpty) {
+      matching.sort((a, b) {
+        final scoreA = _score(a, needle);
+        final scoreB = _score(b, needle);
+        return scoreA != scoreB
+            ? scoreB.compareTo(scoreA)
+            : a.item.id.compareTo(b.item.id);
+      });
+    }
+    final start = query.offset.clamp(0, matching.length);
+    final end = (start + query.limit + 1).clamp(start, matching.length);
+    final slice = matching.sublist(start, end);
+    return CatalogResultPage(
+      items: slice.take(query.limit).toList(),
+      hasMore: slice.length > query.limit,
+    );
+  }
+
+  String _searchKey(String value) => value
+      .toLowerCase()
+      .replaceAll(RegExp('[àáâäãå]'), 'a')
+      .replaceAll(RegExp('[èéêë]'), 'e')
+      .replaceAll(RegExp('[ìíîï]'), 'i')
+      .replaceAll(RegExp('[òóôöõ]'), 'o')
+      .replaceAll(RegExp('[ùúûü]'), 'u')
+      .replaceAll('ç', 'c');
+
+  int _score(LocalizedContent content, String needle) {
+    if (_searchKey(content.translation.title).contains(needle)) return 3;
+    if (_searchKey(content.translation.summary).contains(needle)) return 2;
+    return 1;
+  }
+
   JoinedSelectStatement _publishedQuery(
     LocaleCode locale,
     CatalogFilter filter,

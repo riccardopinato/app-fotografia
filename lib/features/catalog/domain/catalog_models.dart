@@ -183,4 +183,27 @@ class CatalogFilter {
   final String? tagCode;
 }
 
+enum CatalogSort { editorial, relevance }
+
+class CatalogQuery {
+  const CatalogQuery({
+    this.search = '',
+    this.filter = const CatalogFilter(),
+    this.sort = CatalogSort.editorial,
+    this.offset = 0,
+    this.limit = 20,
+  });
+  final String search;
+  final CatalogFilter filter;
+  final CatalogSort sort;
+  final int offset;
+  final int limit;
+}
+
+class CatalogResultPage {
+  const CatalogResultPage({required this.items, required this.hasMore});
+  final List<LocalizedContent> items;
+  final bool hasMore;
+}
+
 String newUuid() => const Uuid().v4();

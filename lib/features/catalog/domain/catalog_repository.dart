@@ -13,4 +13,8 @@ abstract interface class CatalogRepository {
     String id, {
     required LocaleCode locale,
   });
+  Future<CatalogResultPage> getPage({
+    required LocaleCode locale,
+    CatalogQuery query = const CatalogQuery(),
+  });
 }

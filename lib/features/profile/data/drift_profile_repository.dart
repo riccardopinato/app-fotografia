@@ -1,3 +1,5 @@
+import 'package:drift/drift.dart' show Value;
+
 import '../../../core/database/app_database.dart' as db;
 import '../domain/profile_repository.dart';
 import '../domain/user_profile.dart';
@@ -26,7 +28,18 @@ class DriftProfileRepository implements ProfileRepository {
         db.UserProfilesCompanion.insert(
           id: profile.id,
           skillLevel: profile.skillLevel.name,
-          preferredLocale: profile.preferredLocale.value,
+          preferredLocale: profile.selectedLocale?.value ?? 'en',
+          languageMode: Value(profile.languageMode.name),
+          selectedLocale: Value(profile.selectedLocale?.value),
+          preferredTopics: Value(
+            db.normaliseProfileValues(profile.preferredTopics),
+          ),
+          cameraBodies: Value(db.normaliseProfileValues(profile.cameraBodies)),
+          lenses: Value(db.normaliseProfileValues(profile.lenses)),
+          smartphones: Value(db.normaliseProfileValues(profile.smartphones)),
+          learningGoals: Value(
+            db.normaliseProfileValues(profile.learningGoals),
+          ),
           themePreference: profile.themePreference.name,
           createdAtUtcMs: profile.createdAt.toUtc().millisecondsSinceEpoch,
           updatedAtUtcMs: profile.updatedAt.toUtc().millisecondsSinceEpoch,
