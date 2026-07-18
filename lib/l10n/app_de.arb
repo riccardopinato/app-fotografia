@@ -171,5 +171,41 @@
   "catalogTagMetering": "Metering",
   "catalogTagPractice": "Practice",
   "catalogTagMotion": "Motion",
-  "catalogTagMaintenance": "Maintenance"
+  "catalogTagMaintenance": "Maintenance",
+  "catalogDetailTitle": "Inhaltsdetails",
+  "catalogDetailBack": "Zurück zum Katalog",
+  "catalogDetailLoading": "Inhalt wird geladen",
+  "catalogDetailUnavailableTitle": "Inhalt nicht verfügbar",
+  "catalogDetailUnavailableDescription": "Dieser Inhalt ist offline nicht verfügbar oder nicht veröffentlichbar.",
+  "catalogDetailErrorTitle": "Details konnten nicht geladen werden",
+  "catalogDetailErrorDescription": "Versuche erneut, diesen Inhalt aus dem Offline-Katalog zu öffnen.",
+  "catalogDetailOffline": "Offline verfügbar",
+  "catalogDetailSources": "Quellen",
+  "catalogDetailAttribution": "Namensnennung: {value}",
+  "@catalogDetailAttribution": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailLicense": "Lizenz: {value}",
+  "@catalogDetailLicense": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailRights": "Rechte: {value}",
+  "@catalogDetailRights": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailRightsPublishable": "veröffentlichbar",
+  "catalogDetailRightsRestricted": "eingeschränkt",
+  "catalogDetailRightsUnknown": "unbekannt"
 }

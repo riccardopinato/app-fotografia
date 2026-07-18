@@ -384,4 +384,57 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get catalogTagMaintenance => 'Manutenzione';
+
+  @override
+  String get catalogDetailTitle => 'Dettaglio contenuto';
+
+  @override
+  String get catalogDetailBack => 'Torna al catalogo';
+
+  @override
+  String get catalogDetailLoading => 'Caricamento contenuto';
+
+  @override
+  String get catalogDetailUnavailableTitle => 'Contenuto non disponibile';
+
+  @override
+  String get catalogDetailUnavailableDescription =>
+      'Questo contenuto non è disponibile offline o non è pubblicabile.';
+
+  @override
+  String get catalogDetailErrorTitle => 'Impossibile caricare il dettaglio';
+
+  @override
+  String get catalogDetailErrorDescription =>
+      'Riprova a leggere questo contenuto dal catalogo offline.';
+
+  @override
+  String get catalogDetailOffline => 'Disponibile offline';
+
+  @override
+  String get catalogDetailSources => 'Fonti';
+
+  @override
+  String catalogDetailAttribution(String value) {
+    return 'Attribuzione: $value';
+  }
+
+  @override
+  String catalogDetailLicense(String value) {
+    return 'Licenza: $value';
+  }
+
+  @override
+  String catalogDetailRights(String value) {
+    return 'Diritti: $value';
+  }
+
+  @override
+  String get catalogDetailRightsPublishable => 'pubblicabile';
+
+  @override
+  String get catalogDetailRightsRestricted => 'limitato';
+
+  @override
+  String get catalogDetailRightsUnknown => 'sconosciuto';
 }

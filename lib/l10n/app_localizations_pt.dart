@@ -383,6 +383,59 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get catalogTagMaintenance => 'Maintenance';
+
+  @override
+  String get catalogDetailTitle => 'Detalhe do conteúdo';
+
+  @override
+  String get catalogDetailBack => 'Voltar ao catálogo';
+
+  @override
+  String get catalogDetailLoading => 'A carregar conteúdo';
+
+  @override
+  String get catalogDetailUnavailableTitle => 'Conteúdo indisponível';
+
+  @override
+  String get catalogDetailUnavailableDescription =>
+      'Este conteúdo não está disponível offline ou não é publicável.';
+
+  @override
+  String get catalogDetailErrorTitle => 'Não foi possível carregar o detalhe';
+
+  @override
+  String get catalogDetailErrorDescription =>
+      'Tenta ler novamente este conteúdo a partir do catálogo offline.';
+
+  @override
+  String get catalogDetailOffline => 'Disponível offline';
+
+  @override
+  String get catalogDetailSources => 'Fontes';
+
+  @override
+  String catalogDetailAttribution(String value) {
+    return 'Atribuição: $value';
+  }
+
+  @override
+  String catalogDetailLicense(String value) {
+    return 'Licença: $value';
+  }
+
+  @override
+  String catalogDetailRights(String value) {
+    return 'Direitos: $value';
+  }
+
+  @override
+  String get catalogDetailRightsPublishable => 'publicável';
+
+  @override
+  String get catalogDetailRightsRestricted => 'restrito';
+
+  @override
+  String get catalogDetailRightsUnknown => 'desconhecido';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -764,4 +817,57 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get catalogTagMaintenance => 'Maintenance';
+
+  @override
+  String get catalogDetailTitle => 'Detalhe do conteúdo';
+
+  @override
+  String get catalogDetailBack => 'Voltar ao catálogo';
+
+  @override
+  String get catalogDetailLoading => 'Carregando conteúdo';
+
+  @override
+  String get catalogDetailUnavailableTitle => 'Conteúdo indisponível';
+
+  @override
+  String get catalogDetailUnavailableDescription =>
+      'Este conteúdo não está disponível offline ou não pode ser publicado.';
+
+  @override
+  String get catalogDetailErrorTitle => 'Não foi possível carregar o detalhe';
+
+  @override
+  String get catalogDetailErrorDescription =>
+      'Tente abrir este conteúdo novamente pelo catálogo offline.';
+
+  @override
+  String get catalogDetailOffline => 'Disponível offline';
+
+  @override
+  String get catalogDetailSources => 'Fontes';
+
+  @override
+  String catalogDetailAttribution(String value) {
+    return 'Atribuição: $value';
+  }
+
+  @override
+  String catalogDetailLicense(String value) {
+    return 'Licença: $value';
+  }
+
+  @override
+  String catalogDetailRights(String value) {
+    return 'Direitos: $value';
+  }
+
+  @override
+  String get catalogDetailRightsPublishable => 'publicável';
+
+  @override
+  String get catalogDetailRightsRestricted => 'restrito';
+
+  @override
+  String get catalogDetailRightsUnknown => 'desconhecido';
 }

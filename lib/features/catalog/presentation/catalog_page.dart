@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/design/frame_lab_tokens.dart';
+import '../../../app/router/app_routes.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/catalog_models.dart';
 import 'catalog_controller.dart';
@@ -318,7 +320,10 @@ class _CatalogCard extends StatelessWidget {
       child: Card(
         clipBehavior: Clip.antiAlias,
         child: InkWell(
-          onTap: () {},
+          onTap: () => context.pushNamed(
+            AppRoutes.exploreContentName,
+            pathParameters: {'contentId': content.item.id},
+          ),
           child: Padding(
             padding: const EdgeInsets.all(FrameLabSpacing.medium),
             child: SingleChildScrollView(

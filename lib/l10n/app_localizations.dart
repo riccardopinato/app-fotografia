@@ -802,6 +802,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Maintenance'**
   String get catalogTagMaintenance;
+
+  /// No description provided for @catalogDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Content detail'**
+  String get catalogDetailTitle;
+
+  /// No description provided for @catalogDetailBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to catalog'**
+  String get catalogDetailBack;
+
+  /// No description provided for @catalogDetailLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading content'**
+  String get catalogDetailLoading;
+
+  /// No description provided for @catalogDetailUnavailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Content unavailable'**
+  String get catalogDetailUnavailableTitle;
+
+  /// No description provided for @catalogDetailUnavailableDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This content is not available offline or is not publishable.'**
+  String get catalogDetailUnavailableDescription;
+
+  /// No description provided for @catalogDetailErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Detail unavailable'**
+  String get catalogDetailErrorTitle;
+
+  /// No description provided for @catalogDetailErrorDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Try reading this content again from the offline catalog.'**
+  String get catalogDetailErrorDescription;
+
+  /// No description provided for @catalogDetailOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Available offline'**
+  String get catalogDetailOffline;
+
+  /// No description provided for @catalogDetailSources.
+  ///
+  /// In en, this message translates to:
+  /// **'Sources'**
+  String get catalogDetailSources;
+
+  /// No description provided for @catalogDetailAttribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Attribution: {value}'**
+  String catalogDetailAttribution(String value);
+
+  /// No description provided for @catalogDetailLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'License: {value}'**
+  String catalogDetailLicense(String value);
+
+  /// No description provided for @catalogDetailRights.
+  ///
+  /// In en, this message translates to:
+  /// **'Rights: {value}'**
+  String catalogDetailRights(String value);
+
+  /// No description provided for @catalogDetailRightsPublishable.
+  ///
+  /// In en, this message translates to:
+  /// **'publishable'**
+  String get catalogDetailRightsPublishable;
+
+  /// No description provided for @catalogDetailRightsRestricted.
+  ///
+  /// In en, this message translates to:
+  /// **'restricted'**
+  String get catalogDetailRightsRestricted;
+
+  /// No description provided for @catalogDetailRightsUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'unknown'**
+  String get catalogDetailRightsUnknown;
 }
 
 class _AppLocalizationsDelegate

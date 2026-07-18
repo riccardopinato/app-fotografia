@@ -171,5 +171,41 @@
   "catalogTagMetering": "Metering",
   "catalogTagPractice": "Practice",
   "catalogTagMotion": "Motion",
-  "catalogTagMaintenance": "Maintenance"
+  "catalogTagMaintenance": "Maintenance",
+  "catalogDetailTitle": "Détail du contenu",
+  "catalogDetailBack": "Retour au catalogue",
+  "catalogDetailLoading": "Chargement du contenu",
+  "catalogDetailUnavailableTitle": "Contenu indisponible",
+  "catalogDetailUnavailableDescription": "Ce contenu n’est pas disponible hors ligne ou ne peut pas être publié.",
+  "catalogDetailErrorTitle": "Impossible de charger le détail",
+  "catalogDetailErrorDescription": "Réessayez de lire ce contenu depuis le catalogue hors ligne.",
+  "catalogDetailOffline": "Disponible hors ligne",
+  "catalogDetailSources": "Sources",
+  "catalogDetailAttribution": "Attribution : {value}",
+  "@catalogDetailAttribution": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailLicense": "Licence : {value}",
+  "@catalogDetailLicense": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailRights": "Droits : {value}",
+  "@catalogDetailRights": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailRightsPublishable": "publiable",
+  "catalogDetailRightsRestricted": "restreint",
+  "catalogDetailRightsUnknown": "inconnu"
 }

@@ -9,7 +9,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 | 2 | Design system e navigazione | tema, componenti base e shell accessibile | completato |
 | 3 | Dominio, database locale e localizzazione dei contenuti | entità localizzabili, migrazioni e repository contenuti/profilo offline | completato |
 | 4 | Onboarding e profilo | preferenze locali modificabili | completato |
-| 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | in corso — completati 5A, 5B e 5C; in attesa di 5D |
+| 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | completato |
 | 6 | Home e idee a regole | proposte personalizzate spiegabili | da fare |
 | 7 | Archivio personale | salvataggi, cartelle, note e stati | da fare |
 | 8 | Hardening MVP | test integrazione, accessibilità e screenshot | da fare |
@@ -40,4 +40,6 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 
 **Step 5B.** Completata la localizzazione editoriale del seed: tutti i 10 contenuti hanno traduzioni complete nelle sette lingue di lancio (inglese, italiano, spagnolo, francese, tedesco, portoghese europeo e portoghese brasiliano).
 
-**Step 5C.** Completata l’interfaccia catalogo Esplora con ricerca locale debounce, filtri combinabili, stati accessibili e paginazione controllata dal repository SQLite. Step 5 complessivo resta in corso: route e schermata di dettaglio restano esplicitamente fuori fino allo Step 5D.
+**Step 5C.** Completata l’interfaccia catalogo Esplora con ricerca locale debounce, filtri combinabili, stati accessibili e paginazione controllata dal repository SQLite.
+
+**Step 5D.** Completata la route GoRouter deep-linkable `/explore/content/:contentId` e la schermata dettaglio offline con caricamento tramite repository pubblicabile, fallback locale coerente, metadati, fonti, licenze, stati localizzati e layout accessibile/responsive. Step 5 è completato; archivio, salvataggi, home a regole, cloud e monetizzazione restano negli step successivi.
