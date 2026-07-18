@@ -17,5 +17,159 @@
   "profilePlaceholderTitle": "Seu perfil em breve",
   "profilePlaceholderDescription": "Suas preferências e jornada fotográfica aparecerão aqui.",
   "navigationLabel": "Navegação principal",
-  "onboardingTitle": "Configure o seu perfil de fotografia", "onboardingDescription": "Escolha preferências que pode alterar a qualquer momento.", "onboardingContinue": "Guardar preferências", "profileTitle": "O seu perfil", "profileDescription": "Estas preferências orientarão sugestões futuras.", "profileSave": "Guardar alterações", "profileSkillLevel": "Nível de experiência", "skillBeginner": "Iniciante", "skillIntermediate": "Intermédio", "skillAdvanced": "Avançado", "profileTopics": "Interesses fotográficos", "topicPortrait": "Retrato", "topicLandscape": "Paisagem", "topicStreet": "Street", "topicMacro": "Macro", "topicNight": "Fotografia noturna", "topicSmartphone": "Smartphone", "profileLearningGoals": "Objetivos de aprendizagem", "goalComposition": "Composição", "goalLight": "Luz", "goalTechnique": "Técnica de câmara", "goalEditing": "Edição", "profileLanguage": "Idioma da aplicação", "languageDevice": "Usar o idioma do dispositivo", "languageManual": "Escolher um idioma", "languageSelectionLabel": "Idioma", "languageEnglish": "Inglês", "languageItalian": "Italiano", "languageSpanish": "Espanhol", "languageFrench": "Francês", "languageGerman": "Alemão", "languageBrazilianPortuguese": "Português brasileiro", "profileSaveError": "Não foi possível guardar as suas preferências. Tente novamente."
+  "onboardingTitle": "Configure o seu perfil de fotografia",
+  "onboardingDescription": "Escolha preferências que pode alterar a qualquer momento.",
+  "onboardingContinue": "Guardar preferências",
+  "profileTitle": "O seu perfil",
+  "profileDescription": "Estas preferências orientarão sugestões futuras.",
+  "profileSave": "Guardar alterações",
+  "profileSkillLevel": "Nível de experiência",
+  "skillBeginner": "Iniciante",
+  "skillIntermediate": "Intermédio",
+  "skillAdvanced": "Avançado",
+  "profileTopics": "Interesses fotográficos",
+  "topicPortrait": "Retrato",
+  "topicLandscape": "Paisagem",
+  "topicStreet": "Street",
+  "topicMacro": "Macro",
+  "topicNight": "Fotografia noturna",
+  "topicSmartphone": "Smartphone",
+  "profileLearningGoals": "Objetivos de aprendizagem",
+  "goalComposition": "Composição",
+  "goalLight": "Luz",
+  "goalTechnique": "Técnica de câmara",
+  "goalEditing": "Edição",
+  "profileLanguage": "Idioma da aplicação",
+  "languageDevice": "Usar o idioma do dispositivo",
+  "languageManual": "Escolher um idioma",
+  "languageSelectionLabel": "Idioma",
+  "languageEnglish": "Inglês",
+  "languageItalian": "Italiano",
+  "languageSpanish": "Espanhol",
+  "languageFrench": "Francês",
+  "languageGerman": "Alemão",
+  "languageBrazilianPortuguese": "Português brasileiro",
+  "profileSaveError": "Não foi possível guardar as suas preferências. Tente novamente.",
+  "catalogTitle": "Explorar catálogo",
+  "catalogOfflineAvailable": "Available offline",
+  "catalogSearchHint": "Pesquisar técnicas, dicas e etiquetas",
+  "catalogSearchSemantics": "Catalog search field",
+  "catalogSearchClear": "Clear search",
+  "catalogFiltersTitle": "Filtros",
+  "catalogFiltersButton": "Filters ({count})",
+  "@catalogFiltersButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "catalogApplyFilters": "Aplicar",
+  "catalogCancel": "Cancelar",
+  "catalogClearFilters": "Limpar filtros",
+  "catalogRemoveFilter": "Remove {label} filter",
+  "@catalogRemoveFilter": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogType": "Type",
+  "catalogCategory": "Category",
+  "catalogDifficulty": "Difficulty",
+  "catalogTag": "Tag",
+  "catalogTypeLabel": "Type: {value}",
+  "@catalogTypeLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogCategoryLabel": "Category: {value}",
+  "@catalogCategoryLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDifficultyLabel": "Difficulty: {value}",
+  "@catalogDifficultyLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogPremiumLabel": "Premium: {value}",
+  "@catalogPremiumLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogTagLabel": "Tag: {value}",
+  "@catalogTagLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogPremium": "Premium",
+  "catalogPremiumOnly": "Premium only",
+  "catalogFreeOnly": "Free only",
+  "catalogLoading": "Loading catalog",
+  "catalogLoadingMore": "Loading more",
+  "catalogLoadMore": "Carregar mais",
+  "catalogRetry": "Tentar novamente",
+  "catalogRefresh": "Refresh",
+  "catalogNextPageError": "The next page could not be loaded.",
+  "catalogEndOfResults": "End of results",
+  "catalogEmptyTitle": "No catalog items yet",
+  "catalogEmptyDescription": "Install the local seed or try again.",
+  "catalogNoSearchResultsTitle": "No search results",
+  "catalogNoSearchResultsDescription": "Try a different term or clear the search.",
+  "catalogNoFilterResultsTitle": "No filtered results",
+  "catalogNoFilterResultsDescription": "Remove one or more filters to broaden the catalog.",
+  "catalogErrorTitle": "Catalog unavailable",
+  "catalogErrorDescription": "The local catalog could not be loaded.",
+  "catalogCardSemantics": "Open {title}",
+  "@catalogCardSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogTypeTip": "Tip",
+  "catalogTypeTechnique": "Technique",
+  "catalogTypeCuriosity": "Curiosity",
+  "catalogTypeIdea": "Idea",
+  "catalogTypeCommonMistake": "Common mistake",
+  "catalogTypeGuide": "Guide",
+  "catalogTypeChecklist": "Checklist",
+  "catalogTypeChallenge": "Challenge",
+  "catalogTypeGlossary": "Glossary",
+  "catalogTypeHistory": "Photo history",
+  "catalogCategoryExposure": "Exposure",
+  "catalogCategoryPortrait": "Portrait",
+  "catalogCategoryComposition": "Composition",
+  "catalogCategoryLowLight": "Low light",
+  "catalogCategoryColor": "Color",
+  "catalogCategoryMotion": "Motion",
+  "catalogCategoryGear": "Gear",
+  "catalogTagExposure": "Exposure",
+  "catalogTagLight": "Light",
+  "catalogTagComposition": "Composition",
+  "catalogTagStability": "Stability",
+  "catalogTagColor": "Color",
+  "catalogTagFocus": "Focus",
+  "catalogTagMetering": "Metering",
+  "catalogTagPractice": "Practice",
+  "catalogTagMotion": "Motion",
+  "catalogTagMaintenance": "Maintenance"
 }

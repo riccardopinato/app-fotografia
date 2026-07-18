@@ -9,7 +9,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 | 2 | Design system e navigazione | tema, componenti base e shell accessibile | completato |
 | 3 | Dominio, database locale e localizzazione dei contenuti | entità localizzabili, migrazioni e repository contenuti/profilo offline | completato |
 | 4 | Onboarding e profilo | preferenze locali modificabili | completato |
-| 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | in corso — completati 5A e 5B; localizzati 10 contenuti su 10 nelle sette lingue di lancio; in attesa di 5C e 5D |
+| 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | in corso — completati 5A, 5B e 5C; in attesa di 5D |
 | 6 | Home e idee a regole | proposte personalizzate spiegabili | da fare |
 | 7 | Archivio personale | salvataggi, cartelle, note e stati | da fare |
 | 8 | Hardening MVP | test integrazione, accessibilità e screenshot | da fare |
@@ -38,4 +38,6 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 
 **Step 5A.** Implementato il fondamento dati: ricerca FTS5 locale, repository set-based paginato e contratto per dettaglio.
 
-**Step 5B.** Completata la localizzazione editoriale del seed: tutti i 10 contenuti hanno traduzioni complete nelle sette lingue di lancio (inglese, italiano, spagnolo, francese, tedesco, portoghese europeo e portoghese brasiliano). Step 5 complessivo resta in corso: UI, caricamento pagine e i restanti confini Step 5C–5D restano esplicitamente fuori da questo change set.
+**Step 5B.** Completata la localizzazione editoriale del seed: tutti i 10 contenuti hanno traduzioni complete nelle sette lingue di lancio (inglese, italiano, spagnolo, francese, tedesco, portoghese europeo e portoghese brasiliano).
+
+**Step 5C.** Completata l’interfaccia catalogo Esplora con ricerca locale debounce, filtri combinabili, stati accessibili e paginazione controllata dal repository SQLite. Step 5 complessivo resta in corso: route e schermata di dettaglio restano esplicitamente fuori fino allo Step 5D.

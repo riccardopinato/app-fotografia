@@ -5,6 +5,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../l10n/app_localizations.dart';
 import '../core/database/app_database.dart' hide UserProfile;
+import '../features/catalog/data/drift_catalog_repository.dart';
+import '../features/catalog/data/seed/catalog_seed.dart';
+import '../features/catalog/domain/catalog_models.dart';
+import '../features/catalog/domain/catalog_repository.dart';
+import '../features/catalog/presentation/catalog_scope.dart';
 import '../features/onboarding/presentation/onboarding_page.dart';
 import '../features/profile/data/drift_profile_repository.dart';
 import '../features/profile/domain/profile_repository.dart';
@@ -26,14 +31,26 @@ class FrameLabApp extends StatefulWidget {
 class _FrameLabAppState extends State<FrameLabApp> {
   late final AppDatabase? _database;
   late final ProfileRepository _repository;
+  late final CatalogRepository _catalogRepository;
   late final Stream<UserProfile?> _profileStream;
 
   @override
   void initState() {
     super.initState();
-    _database = widget.profileRepository == null ? AppDatabase() : null;
-    _repository =
-        widget.profileRepository ?? DriftProfileRepository(_database!);
+    if (widget.profileRepository == null) {
+      final database = AppDatabase();
+      _database = database;
+      _repository = DriftProfileRepository(database);
+      final driftCatalogRepository = DriftCatalogRepository(database);
+      _catalogRepository = _SeededCatalogRepository(
+        driftCatalogRepository,
+        CatalogSeedInstaller(database).install(),
+      );
+    } else {
+      _database = null;
+      _repository = widget.profileRepository!;
+      _catalogRepository = _EmptyCatalogRepository();
+    }
     _profileStream = _repository.watch();
   }
 
@@ -62,13 +79,18 @@ class _FrameLabAppState extends State<FrameLabApp> {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        builder: (context, child) => ProfileScope(
-          repository: _repository,
-          child: snapshot.connectionState == ConnectionState.waiting
-              ? const Scaffold(body: Center(child: CircularProgressIndicator()))
-              : snapshot.data == null
-              ? OnboardingPage(repository: _repository)
-              : child!,
+        builder: (context, child) => CatalogScope(
+          repository: _catalogRepository,
+          child: ProfileScope(
+            repository: _repository,
+            child: snapshot.connectionState == ConnectionState.waiting
+                ? const Scaffold(
+                    body: Center(child: CircularProgressIndicator()),
+                  )
+                : snapshot.data == null
+                ? OnboardingPage(repository: _repository)
+                : child!,
+          ),
         ),
       ),
     );
@@ -82,5 +104,97 @@ class _FrameLabAppState extends State<FrameLabApp> {
     }
     final code = profile!.selectedLocale!.value.split('-');
     return Locale(code.first, code.length > 1 ? code.last : null);
+  }
+}
+
+class _EmptyCatalogRepository implements CatalogRepository {
+  @override
+  Future<CatalogPage> getPage({
+    required LocaleCode locale,
+    String query = '',
+    CatalogFilter filter = const CatalogFilter(),
+    int limit = 20,
+    int offset = 0,
+  }) async => const CatalogPage(items: [], hasMore: false);
+
+  @override
+  Future<List<LocalizedContent>> getPublished({
+    required LocaleCode locale,
+    CatalogFilter filter = const CatalogFilter(),
+  }) async => const [];
+
+  @override
+  Future<LocalizedContent?> getPublishedById(
+    String id, {
+    required LocaleCode locale,
+  }) async => null;
+
+  @override
+  Future<CatalogDetail?> getPublishedDetailById(
+    String id, {
+    required LocaleCode locale,
+  }) async => null;
+
+  @override
+  Stream<List<LocalizedContent>> watchPublished({
+    required LocaleCode locale,
+    CatalogFilter filter = const CatalogFilter(),
+  }) => const Stream.empty();
+}
+
+class _SeededCatalogRepository implements CatalogRepository {
+  _SeededCatalogRepository(this._delegate, this._seedReady);
+
+  final CatalogRepository _delegate;
+  final Future<void> _seedReady;
+
+  Future<T> _afterSeed<T>(Future<T> Function() action) async {
+    await _seedReady;
+    return action();
+  }
+
+  @override
+  Future<CatalogPage> getPage({
+    required LocaleCode locale,
+    String query = '',
+    CatalogFilter filter = const CatalogFilter(),
+    int limit = 20,
+    int offset = 0,
+  }) => _afterSeed(
+    () => _delegate.getPage(
+      locale: locale,
+      query: query,
+      filter: filter,
+      limit: limit,
+      offset: offset,
+    ),
+  );
+
+  @override
+  Future<List<LocalizedContent>> getPublished({
+    required LocaleCode locale,
+    CatalogFilter filter = const CatalogFilter(),
+  }) =>
+      _afterSeed(() => _delegate.getPublished(locale: locale, filter: filter));
+
+  @override
+  Future<LocalizedContent?> getPublishedById(
+    String id, {
+    required LocaleCode locale,
+  }) => _afterSeed(() => _delegate.getPublishedById(id, locale: locale));
+
+  @override
+  Future<CatalogDetail?> getPublishedDetailById(
+    String id, {
+    required LocaleCode locale,
+  }) => _afterSeed(() => _delegate.getPublishedDetailById(id, locale: locale));
+
+  @override
+  Stream<List<LocalizedContent>> watchPublished({
+    required LocaleCode locale,
+    CatalogFilter filter = const CatalogFilter(),
+  }) async* {
+    await _seedReady;
+    yield* _delegate.watchPublished(locale: locale, filter: filter);
   }
 }

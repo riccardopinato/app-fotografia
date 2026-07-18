@@ -107,7 +107,7 @@ void main() {
 
     await tester.tap(find.text('Explore'));
     await tester.pumpAndSettle();
-    expect(find.text('Explore is coming soon'), findsOneWidget);
+    expect(find.text('Explore catalog'), findsOneWidget);
 
     await tester.tap(find.text('Ideas'));
     await tester.pumpAndSettle();

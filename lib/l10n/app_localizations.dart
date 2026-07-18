@@ -406,6 +406,402 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your preferences could not be saved. Try again.'**
   String get profileSaveError;
+
+  /// No description provided for @catalogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore catalog'**
+  String get catalogTitle;
+
+  /// No description provided for @catalogOfflineAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available offline'**
+  String get catalogOfflineAvailable;
+
+  /// No description provided for @catalogSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search techniques, tips and tags'**
+  String get catalogSearchHint;
+
+  /// No description provided for @catalogSearchSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Catalog search field'**
+  String get catalogSearchSemantics;
+
+  /// No description provided for @catalogSearchClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get catalogSearchClear;
+
+  /// No description provided for @catalogFiltersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get catalogFiltersTitle;
+
+  /// No description provided for @catalogFiltersButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters ({count})'**
+  String catalogFiltersButton(int count);
+
+  /// No description provided for @catalogApplyFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get catalogApplyFilters;
+
+  /// No description provided for @catalogCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get catalogCancel;
+
+  /// No description provided for @catalogClearFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear filters'**
+  String get catalogClearFilters;
+
+  /// No description provided for @catalogRemoveFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {label} filter'**
+  String catalogRemoveFilter(String label);
+
+  /// No description provided for @catalogType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get catalogType;
+
+  /// No description provided for @catalogCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get catalogCategory;
+
+  /// No description provided for @catalogDifficulty.
+  ///
+  /// In en, this message translates to:
+  /// **'Difficulty'**
+  String get catalogDifficulty;
+
+  /// No description provided for @catalogTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Tag'**
+  String get catalogTag;
+
+  /// No description provided for @catalogTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Type: {value}'**
+  String catalogTypeLabel(String value);
+
+  /// No description provided for @catalogCategoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category: {value}'**
+  String catalogCategoryLabel(String value);
+
+  /// No description provided for @catalogDifficultyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Difficulty: {value}'**
+  String catalogDifficultyLabel(String value);
+
+  /// No description provided for @catalogPremiumLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium: {value}'**
+  String catalogPremiumLabel(String value);
+
+  /// No description provided for @catalogTagLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tag: {value}'**
+  String catalogTagLabel(String value);
+
+  /// No description provided for @catalogPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium'**
+  String get catalogPremium;
+
+  /// No description provided for @catalogPremiumOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium only'**
+  String get catalogPremiumOnly;
+
+  /// No description provided for @catalogFreeOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Free only'**
+  String get catalogFreeOnly;
+
+  /// No description provided for @catalogLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading catalog'**
+  String get catalogLoading;
+
+  /// No description provided for @catalogLoadingMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading more'**
+  String get catalogLoadingMore;
+
+  /// No description provided for @catalogLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get catalogLoadMore;
+
+  /// No description provided for @catalogRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get catalogRetry;
+
+  /// No description provided for @catalogRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get catalogRefresh;
+
+  /// No description provided for @catalogNextPageError.
+  ///
+  /// In en, this message translates to:
+  /// **'The next page could not be loaded.'**
+  String get catalogNextPageError;
+
+  /// No description provided for @catalogEndOfResults.
+  ///
+  /// In en, this message translates to:
+  /// **'End of results'**
+  String get catalogEndOfResults;
+
+  /// No description provided for @catalogEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No catalog items yet'**
+  String get catalogEmptyTitle;
+
+  /// No description provided for @catalogEmptyDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Install the local seed or try again.'**
+  String get catalogEmptyDescription;
+
+  /// No description provided for @catalogNoSearchResultsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No search results'**
+  String get catalogNoSearchResultsTitle;
+
+  /// No description provided for @catalogNoSearchResultsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a different term or clear the search.'**
+  String get catalogNoSearchResultsDescription;
+
+  /// No description provided for @catalogNoFilterResultsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No filtered results'**
+  String get catalogNoFilterResultsTitle;
+
+  /// No description provided for @catalogNoFilterResultsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove one or more filters to broaden the catalog.'**
+  String get catalogNoFilterResultsDescription;
+
+  /// No description provided for @catalogErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Catalog unavailable'**
+  String get catalogErrorTitle;
+
+  /// No description provided for @catalogErrorDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'The local catalog could not be loaded.'**
+  String get catalogErrorDescription;
+
+  /// No description provided for @catalogCardSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Open {title}'**
+  String catalogCardSemantics(String title);
+
+  /// No description provided for @catalogTypeTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Tip'**
+  String get catalogTypeTip;
+
+  /// No description provided for @catalogTypeTechnique.
+  ///
+  /// In en, this message translates to:
+  /// **'Technique'**
+  String get catalogTypeTechnique;
+
+  /// No description provided for @catalogTypeCuriosity.
+  ///
+  /// In en, this message translates to:
+  /// **'Curiosity'**
+  String get catalogTypeCuriosity;
+
+  /// No description provided for @catalogTypeIdea.
+  ///
+  /// In en, this message translates to:
+  /// **'Idea'**
+  String get catalogTypeIdea;
+
+  /// No description provided for @catalogTypeCommonMistake.
+  ///
+  /// In en, this message translates to:
+  /// **'Common mistake'**
+  String get catalogTypeCommonMistake;
+
+  /// No description provided for @catalogTypeGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Guide'**
+  String get catalogTypeGuide;
+
+  /// No description provided for @catalogTypeChecklist.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklist'**
+  String get catalogTypeChecklist;
+
+  /// No description provided for @catalogTypeChallenge.
+  ///
+  /// In en, this message translates to:
+  /// **'Challenge'**
+  String get catalogTypeChallenge;
+
+  /// No description provided for @catalogTypeGlossary.
+  ///
+  /// In en, this message translates to:
+  /// **'Glossary'**
+  String get catalogTypeGlossary;
+
+  /// No description provided for @catalogTypeHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo history'**
+  String get catalogTypeHistory;
+
+  /// No description provided for @catalogCategoryExposure.
+  ///
+  /// In en, this message translates to:
+  /// **'Exposure'**
+  String get catalogCategoryExposure;
+
+  /// No description provided for @catalogCategoryPortrait.
+  ///
+  /// In en, this message translates to:
+  /// **'Portrait'**
+  String get catalogCategoryPortrait;
+
+  /// No description provided for @catalogCategoryComposition.
+  ///
+  /// In en, this message translates to:
+  /// **'Composition'**
+  String get catalogCategoryComposition;
+
+  /// No description provided for @catalogCategoryLowLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Low light'**
+  String get catalogCategoryLowLight;
+
+  /// No description provided for @catalogCategoryColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get catalogCategoryColor;
+
+  /// No description provided for @catalogCategoryMotion.
+  ///
+  /// In en, this message translates to:
+  /// **'Motion'**
+  String get catalogCategoryMotion;
+
+  /// No description provided for @catalogCategoryGear.
+  ///
+  /// In en, this message translates to:
+  /// **'Gear'**
+  String get catalogCategoryGear;
+
+  /// No description provided for @catalogTagExposure.
+  ///
+  /// In en, this message translates to:
+  /// **'Exposure'**
+  String get catalogTagExposure;
+
+  /// No description provided for @catalogTagLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get catalogTagLight;
+
+  /// No description provided for @catalogTagComposition.
+  ///
+  /// In en, this message translates to:
+  /// **'Composition'**
+  String get catalogTagComposition;
+
+  /// No description provided for @catalogTagStability.
+  ///
+  /// In en, this message translates to:
+  /// **'Stability'**
+  String get catalogTagStability;
+
+  /// No description provided for @catalogTagColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get catalogTagColor;
+
+  /// No description provided for @catalogTagFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus'**
+  String get catalogTagFocus;
+
+  /// No description provided for @catalogTagMetering.
+  ///
+  /// In en, this message translates to:
+  /// **'Metering'**
+  String get catalogTagMetering;
+
+  /// No description provided for @catalogTagPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice'**
+  String get catalogTagPractice;
+
+  /// No description provided for @catalogTagMotion.
+  ///
+  /// In en, this message translates to:
+  /// **'Motion'**
+  String get catalogTagMotion;
+
+  /// No description provided for @catalogTagMaintenance.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintenance'**
+  String get catalogTagMaintenance;
 }
 
 class _AppLocalizationsDelegate
