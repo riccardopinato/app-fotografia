@@ -56,6 +56,9 @@ void main() {
       expect(find.text('Second source'), findsOneWidget);
       expect(find.textContaining('Attribuzione:'), findsWidgets);
       expect(find.textContaining('Licenza:'), findsWidgets);
+      await tester.tap(find.byTooltip('Torna al catalogo'));
+      await tester.pumpAndSettle();
+      expect(find.text('Esplora catalogo'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
   );

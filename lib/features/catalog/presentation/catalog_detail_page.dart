@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/router/app_routes.dart';
 import '../../../core/design/frame_lab_tokens.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/catalog_models.dart';
@@ -59,7 +60,11 @@ class _CatalogDetailPageState extends State<CatalogDetailPage> {
           tooltip: l10n.catalogDetailBack,
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            if (context.canPop()) context.pop();
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(AppDestination.explore.path);
+            }
           },
         ),
         title: Text(l10n.catalogDetailTitle),
