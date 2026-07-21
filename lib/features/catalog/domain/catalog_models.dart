@@ -184,3 +184,25 @@ class CatalogFilter {
 }
 
 String newUuid() => const Uuid().v4();
+
+class CatalogPage {
+  const CatalogPage({required this.items, required this.hasMore});
+  final List<LocalizedContent> items;
+  final bool hasMore;
+}
+
+class LocalizedTag extends Tag {
+  const LocalizedTag({required super.id, required super.code, this.label});
+  final String? label;
+}
+
+class CatalogDetail {
+  const CatalogDetail({
+    required this.content,
+    required this.tags,
+    required this.sources,
+  });
+  final LocalizedContent content;
+  final List<LocalizedTag> tags;
+  final List<ContentSource> sources;
+}
