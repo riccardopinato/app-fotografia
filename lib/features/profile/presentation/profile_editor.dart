@@ -20,6 +20,9 @@ class _ProfileEditorState extends State<ProfileEditor> {
   late LanguageMode _languageMode;
   LocaleCode? _selectedLocale;
   late Set<String> _topics;
+  late Set<String> _cameraBodies;
+  late Set<String> _lenses;
+  late Set<String> _smartphones;
   late Set<String> _goals;
   var _isSaving = false;
 
@@ -31,6 +34,9 @@ class _ProfileEditorState extends State<ProfileEditor> {
     _languageMode = profile?.languageMode ?? LanguageMode.device;
     _selectedLocale = profile?.selectedLocale ?? const LocaleCode('en');
     _topics = {...?profile?.preferredTopics};
+    _cameraBodies = {...?profile?.cameraBodies};
+    _lenses = {...?profile?.lenses};
+    _smartphones = {...?profile?.smartphones};
     _goals = {...?profile?.learningGoals};
   }
 
@@ -53,6 +59,31 @@ class _ProfileEditorState extends State<ProfileEditor> {
         const SizedBox(height: FrameLabSpacing.large),
         _section(l10n.profileSkillLevel, _skillChoices(l10n)),
         _section(l10n.profileTopics, _choiceSet(_topics, _topicsFor(l10n))),
+        _section(
+          l10n.profileEquipment,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _equipmentChoiceGroup(
+                l10n.profileCameraBodies,
+                _cameraBodies,
+                _cameraBodiesFor(l10n),
+              ),
+              const SizedBox(height: FrameLabSpacing.medium),
+              _equipmentChoiceGroup(
+                l10n.profileLenses,
+                _lenses,
+                _lensesFor(l10n),
+              ),
+              const SizedBox(height: FrameLabSpacing.medium),
+              _equipmentChoiceGroup(
+                l10n.profileSmartphones,
+                _smartphones,
+                _smartphonesFor(l10n),
+              ),
+            ],
+          ),
+        ),
         _section(
           l10n.profileLearningGoals,
           _choiceSet(_goals, _goalsFor(l10n)),
@@ -116,6 +147,19 @@ class _ProfileEditorState extends State<ProfileEditor> {
         .toList(),
   );
 
+  Widget _equipmentChoiceGroup(
+    String title,
+    Set<String> selected,
+    Map<String, String> labels,
+  ) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(title, style: Theme.of(context).textTheme.bodyLarge),
+      const SizedBox(height: FrameLabSpacing.small),
+      _choiceSet(selected, labels),
+    ],
+  );
+
   Widget _languageChoices(AppLocalizations l10n) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -165,6 +209,20 @@ class _ProfileEditorState extends State<ProfileEditor> {
     'technique': l10n.goalTechnique,
     'editing': l10n.goalEditing,
   };
+  Map<String, String> _cameraBodiesFor(AppLocalizations l10n) => {
+    'mirrorless': l10n.equipmentMirrorless,
+    'dslr': l10n.equipmentDslr,
+    'film': l10n.equipmentFilm,
+  };
+  Map<String, String> _lensesFor(AppLocalizations l10n) => {
+    'prime': l10n.equipmentPrimeLens,
+    'zoom': l10n.equipmentZoomLens,
+    'telephoto': l10n.equipmentTelephotoLens,
+  };
+  Map<String, String> _smartphonesFor(AppLocalizations l10n) => {
+    'iphone': l10n.equipmentIPhone,
+    'android': l10n.equipmentAndroid,
+  };
   Map<String, String> _localeLabels(AppLocalizations l10n) => {
     'en': l10n.languageEnglish,
     'it': l10n.languageItalian,
@@ -186,9 +244,9 @@ class _ProfileEditorState extends State<ProfileEditor> {
           : null,
       preferredTopics: _topics.toList()..sort(),
       learningGoals: _goals.toList()..sort(),
-      cameraBodies: existing?.cameraBodies ?? const [],
-      lenses: existing?.lenses ?? const [],
-      smartphones: existing?.smartphones ?? const [],
+      cameraBodies: _cameraBodies.toList()..sort(),
+      lenses: _lenses.toList()..sort(),
+      smartphones: _smartphones.toList()..sort(),
       themePreference: existing?.themePreference ?? ThemePreference.system,
       createdAt: existing?.createdAt ?? now,
       updatedAt: now,

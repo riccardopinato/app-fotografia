@@ -95,6 +95,43 @@ void main() {
     );
   });
 
+  testWidgets('saves selected equipment preferences from the editor', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(800, 1800);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    UserProfile? savedProfile;
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: ProfileEditor(
+            profile: null,
+            onSave: (profile) async => savedProfile = profile,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final mirrorless = find.text('Mirrorless camera');
+    final primeLens = find.text('Prime lens');
+    final androidPhone = find.text('Android phone');
+    final savePreferences = find.text('Save preferences');
+    await tester.tap(mirrorless);
+    await tester.tap(primeLens);
+    await tester.tap(androidPhone);
+    await tester.tap(savePreferences);
+    await tester.pumpAndSettle();
+
+    expect(savedProfile?.cameraBodies, ['mirrorless']);
+    expect(savedProfile?.lenses, ['prime']);
+    expect(savedProfile?.smartphones, ['android']);
+  });
+
   testWidgets('shows and navigates between all five destinations', (
     tester,
   ) async {

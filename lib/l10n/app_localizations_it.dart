@@ -119,6 +119,42 @@ class AppLocalizationsIt extends AppLocalizations {
   String get topicSmartphone => 'Smartphone';
 
   @override
+  String get profileEquipment => 'Attrezzatura fotografica';
+
+  @override
+  String get profileCameraBodies => 'Corpi macchina';
+
+  @override
+  String get profileLenses => 'Obiettivi';
+
+  @override
+  String get profileSmartphones => 'Smartphone';
+
+  @override
+  String get equipmentMirrorless => 'Fotocamera mirrorless';
+
+  @override
+  String get equipmentDslr => 'Fotocamera DSLR';
+
+  @override
+  String get equipmentFilm => 'Fotocamera analogica';
+
+  @override
+  String get equipmentPrimeLens => 'Obiettivo a focale fissa';
+
+  @override
+  String get equipmentZoomLens => 'Obiettivo zoom';
+
+  @override
+  String get equipmentTelephotoLens => 'Teleobiettivo';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Telefono Android';
+
+  @override
   String get profileLearningGoals => 'Obiettivi di apprendimento';
 
   @override

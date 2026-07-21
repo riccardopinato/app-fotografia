@@ -118,6 +118,42 @@ class AppLocalizationsEn extends AppLocalizations {
   String get topicSmartphone => 'Smartphone';
 
   @override
+  String get profileEquipment => 'Photography equipment';
+
+  @override
+  String get profileCameraBodies => 'Camera bodies';
+
+  @override
+  String get profileLenses => 'Lenses';
+
+  @override
+  String get profileSmartphones => 'Smartphones';
+
+  @override
+  String get equipmentMirrorless => 'Mirrorless camera';
+
+  @override
+  String get equipmentDslr => 'DSLR camera';
+
+  @override
+  String get equipmentFilm => 'Film camera';
+
+  @override
+  String get equipmentPrimeLens => 'Prime lens';
+
+  @override
+  String get equipmentZoomLens => 'Zoom lens';
+
+  @override
+  String get equipmentTelephotoLens => 'Telephoto lens';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Android phone';
+
+  @override
   String get profileLearningGoals => 'Learning goals';
 
   @override

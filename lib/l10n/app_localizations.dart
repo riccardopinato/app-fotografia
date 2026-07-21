@@ -311,6 +311,78 @@ abstract class AppLocalizations {
   /// **'Smartphone'**
   String get topicSmartphone;
 
+  /// No description provided for @profileEquipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Photography equipment'**
+  String get profileEquipment;
+
+  /// No description provided for @profileCameraBodies.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera bodies'**
+  String get profileCameraBodies;
+
+  /// No description provided for @profileLenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Lenses'**
+  String get profileLenses;
+
+  /// No description provided for @profileSmartphones.
+  ///
+  /// In en, this message translates to:
+  /// **'Smartphones'**
+  String get profileSmartphones;
+
+  /// No description provided for @equipmentMirrorless.
+  ///
+  /// In en, this message translates to:
+  /// **'Mirrorless camera'**
+  String get equipmentMirrorless;
+
+  /// No description provided for @equipmentDslr.
+  ///
+  /// In en, this message translates to:
+  /// **'DSLR camera'**
+  String get equipmentDslr;
+
+  /// No description provided for @equipmentFilm.
+  ///
+  /// In en, this message translates to:
+  /// **'Film camera'**
+  String get equipmentFilm;
+
+  /// No description provided for @equipmentPrimeLens.
+  ///
+  /// In en, this message translates to:
+  /// **'Prime lens'**
+  String get equipmentPrimeLens;
+
+  /// No description provided for @equipmentZoomLens.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom lens'**
+  String get equipmentZoomLens;
+
+  /// No description provided for @equipmentTelephotoLens.
+  ///
+  /// In en, this message translates to:
+  /// **'Telephoto lens'**
+  String get equipmentTelephotoLens;
+
+  /// No description provided for @equipmentIPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'iPhone'**
+  String get equipmentIPhone;
+
+  /// No description provided for @equipmentAndroid.
+  ///
+  /// In en, this message translates to:
+  /// **'Android phone'**
+  String get equipmentAndroid;
+
   /// No description provided for @profileLearningGoals.
   ///
   /// In en, this message translates to:

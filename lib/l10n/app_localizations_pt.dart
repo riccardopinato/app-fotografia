@@ -119,6 +119,42 @@ class AppLocalizationsPt extends AppLocalizations {
   String get topicSmartphone => 'Smartphone';
 
   @override
+  String get profileEquipment => 'Photography equipment';
+
+  @override
+  String get profileCameraBodies => 'Camera bodies';
+
+  @override
+  String get profileLenses => 'Lenses';
+
+  @override
+  String get profileSmartphones => 'Smartphones';
+
+  @override
+  String get equipmentMirrorless => 'Mirrorless camera';
+
+  @override
+  String get equipmentDslr => 'DSLR camera';
+
+  @override
+  String get equipmentFilm => 'Film camera';
+
+  @override
+  String get equipmentPrimeLens => 'Prime lens';
+
+  @override
+  String get equipmentZoomLens => 'Zoom lens';
+
+  @override
+  String get equipmentTelephotoLens => 'Telephoto lens';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Android phone';
+
+  @override
   String get profileLearningGoals => 'Objetivos de aprendizagem';
 
   @override
@@ -281,6 +317,42 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get topicSmartphone => 'Smartphone';
+
+  @override
+  String get profileEquipment => 'Equipamento fotográfico';
+
+  @override
+  String get profileCameraBodies => 'Corpos de câmera';
+
+  @override
+  String get profileLenses => 'Lentes';
+
+  @override
+  String get profileSmartphones => 'Smartphones';
+
+  @override
+  String get equipmentMirrorless => 'Câmera mirrorless';
+
+  @override
+  String get equipmentDslr => 'Câmera DSLR';
+
+  @override
+  String get equipmentFilm => 'Câmera analógica';
+
+  @override
+  String get equipmentPrimeLens => 'Lente fixa';
+
+  @override
+  String get equipmentZoomLens => 'Lente zoom';
+
+  @override
+  String get equipmentTelephotoLens => 'Teleobjetiva';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Telefone Android';
 
   @override
   String get profileLearningGoals => 'Objetivos de aprendizagem';
