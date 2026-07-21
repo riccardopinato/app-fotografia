@@ -27,6 +27,69 @@ AppDatabase v1ProfileDb() => AppDatabase(
           updated_at_utc_ms INTEGER NOT NULL
         )
       ''');
+      database.execute('''CREATE TABLE content_items (
+        id TEXT NOT NULL PRIMARY KEY,
+        type TEXT NOT NULL,
+        primary_category TEXT NOT NULL,
+        difficulty TEXT NOT NULL,
+        premium INTEGER NOT NULL CHECK (premium IN (0, 1)),
+        canonical_locale TEXT NOT NULL,
+        editorial_status TEXT NOT NULL,
+        version INTEGER NOT NULL,
+        created_at_utc_ms INTEGER NOT NULL,
+        updated_at_utc_ms INTEGER NOT NULL,
+        published_at_utc_ms INTEGER
+      )''');
+      database.execute('''CREATE TABLE content_translations (
+        id TEXT NOT NULL PRIMARY KEY,
+        content_id TEXT NOT NULL REFERENCES content_items(id) ON DELETE CASCADE,
+        locale TEXT NOT NULL CHECK (length(locale) > 0),
+        title TEXT NOT NULL,
+        summary TEXT NOT NULL,
+        body TEXT NOT NULL,
+        translation_status TEXT NOT NULL,
+        translation_method TEXT NOT NULL,
+        source_version INTEGER NOT NULL,
+        reviewed_at_utc_ms INTEGER,
+        created_at_utc_ms INTEGER NOT NULL,
+        updated_at_utc_ms INTEGER NOT NULL,
+        UNIQUE(content_id, locale)
+      )''');
+      database.execute('''CREATE TABLE content_sources (
+        id TEXT NOT NULL PRIMARY KEY,
+        title TEXT NOT NULL,
+        author TEXT,
+        publisher TEXT,
+        publication_year INTEGER,
+        source_uri TEXT,
+        original_locale TEXT NOT NULL,
+        license_type TEXT NOT NULL,
+        license_reference TEXT,
+        attribution_text TEXT,
+        rights_status TEXT NOT NULL,
+        created_at_utc_ms INTEGER NOT NULL,
+        updated_at_utc_ms INTEGER NOT NULL
+      )''');
+      database.execute('''CREATE TABLE content_item_sources (
+        content_id TEXT NOT NULL REFERENCES content_items(id) ON DELETE CASCADE,
+        source_id TEXT NOT NULL REFERENCES content_sources(id) ON DELETE RESTRICT,
+        PRIMARY KEY(content_id, source_id)
+      )''');
+      database.execute('''CREATE TABLE tags (
+        id TEXT NOT NULL PRIMARY KEY,
+        code TEXT NOT NULL UNIQUE
+      )''');
+      database.execute('''CREATE TABLE tag_translations (
+        tag_id TEXT NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
+        locale TEXT NOT NULL,
+        label TEXT NOT NULL,
+        PRIMARY KEY(tag_id, locale)
+      )''');
+      database.execute('''CREATE TABLE content_item_tags (
+        content_id TEXT NOT NULL REFERENCES content_items(id) ON DELETE CASCADE,
+        tag_id TEXT NOT NULL REFERENCES tags(id) ON DELETE RESTRICT,
+        PRIMARY KEY(content_id, tag_id)
+      )''');
       database.execute('''
         INSERT INTO user_profiles VALUES (
           'legacy-profile', 'intermediate', 'pt-BR', 'dark', $nowMs, ${nowMs + 42}
@@ -101,10 +164,10 @@ Future<void> source(
 void main() {
   group('Step 3 local database', () {
     test(
-      'creates schema v2 with foreign keys enabled and can reopen data',
+      'creates current schema with foreign keys enabled and can reopen data',
       () async {
         final db = memoryDb();
-        expect(db.schemaVersion, 2);
+        expect(db.schemaVersion, 3);
         final fk = await db.customSelect('PRAGMA foreign_keys').getSingle();
         expect(fk.data['foreign_keys'], 1);
         final indexes = await db
