@@ -167,7 +167,7 @@ void main() {
       'creates current schema with foreign keys enabled and can reopen data',
       () async {
         final db = memoryDb();
-        expect(db.schemaVersion, 3);
+        expect(db.schemaVersion, 4);
         final fk = await db.customSelect('PRAGMA foreign_keys').getSingle();
         expect(fk.data['foreign_keys'], 1);
         final indexes = await db
