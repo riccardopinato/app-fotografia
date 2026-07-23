@@ -119,6 +119,42 @@ class AppLocalizationsPt extends AppLocalizations {
   String get topicSmartphone => 'Smartphone';
 
   @override
+  String get profileEquipment => 'Equipamento fotográfico';
+
+  @override
+  String get profileCameraBodies => 'Corpos de câmara';
+
+  @override
+  String get profileLenses => 'Objetivas';
+
+  @override
+  String get profileSmartphones => 'Smartphones';
+
+  @override
+  String get equipmentMirrorless => 'Câmara mirrorless';
+
+  @override
+  String get equipmentDslr => 'Câmara DSLR';
+
+  @override
+  String get equipmentFilm => 'Câmara analógica';
+
+  @override
+  String get equipmentPrimeLens => 'Objetiva fixa';
+
+  @override
+  String get equipmentZoomLens => 'Objetiva zoom';
+
+  @override
+  String get equipmentTelephotoLens => 'Teleobjetiva';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Telemóvel Android';
+
+  @override
   String get profileLearningGoals => 'Objetivos de aprendizagem';
 
   @override
@@ -166,6 +202,276 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get profileSaveError =>
       'Não foi possível guardar as suas preferências. Tente novamente.';
+
+  @override
+  String get catalogTitle => 'Explorar catálogo';
+
+  @override
+  String get catalogOfflineAvailable => 'Available offline';
+
+  @override
+  String get catalogSearchHint => 'Pesquisar técnicas, dicas e etiquetas';
+
+  @override
+  String get catalogSearchSemantics => 'Catalog search field';
+
+  @override
+  String get catalogSearchClear => 'Clear search';
+
+  @override
+  String get catalogFiltersTitle => 'Filtros';
+
+  @override
+  String catalogFiltersButton(int count) {
+    return 'Filters ($count)';
+  }
+
+  @override
+  String get catalogApplyFilters => 'Aplicar';
+
+  @override
+  String get catalogCancel => 'Cancelar';
+
+  @override
+  String get catalogClearFilters => 'Limpar filtros';
+
+  @override
+  String catalogRemoveFilter(String label) {
+    return 'Remove $label filter';
+  }
+
+  @override
+  String get catalogType => 'Type';
+
+  @override
+  String get catalogCategory => 'Category';
+
+  @override
+  String get catalogDifficulty => 'Difficulty';
+
+  @override
+  String get catalogTag => 'Tag';
+
+  @override
+  String catalogTypeLabel(String value) {
+    return 'Type: $value';
+  }
+
+  @override
+  String catalogCategoryLabel(String value) {
+    return 'Category: $value';
+  }
+
+  @override
+  String catalogDifficultyLabel(String value) {
+    return 'Difficulty: $value';
+  }
+
+  @override
+  String catalogPremiumLabel(String value) {
+    return 'Premium: $value';
+  }
+
+  @override
+  String catalogTagLabel(String value) {
+    return 'Tag: $value';
+  }
+
+  @override
+  String get catalogPremium => 'Premium';
+
+  @override
+  String get catalogPremiumOnly => 'Premium only';
+
+  @override
+  String get catalogFreeOnly => 'Free only';
+
+  @override
+  String get catalogLoading => 'Loading catalog';
+
+  @override
+  String get catalogLoadingMore => 'Loading more';
+
+  @override
+  String get catalogLoadMore => 'Carregar mais';
+
+  @override
+  String get catalogRetry => 'Tentar novamente';
+
+  @override
+  String get catalogRefresh => 'Refresh';
+
+  @override
+  String get catalogNextPageError => 'The next page could not be loaded.';
+
+  @override
+  String get catalogEndOfResults => 'End of results';
+
+  @override
+  String get catalogEmptyTitle => 'No catalog items yet';
+
+  @override
+  String get catalogEmptyDescription => 'Install the local seed or try again.';
+
+  @override
+  String get catalogNoSearchResultsTitle => 'No search results';
+
+  @override
+  String get catalogNoSearchResultsDescription =>
+      'Try a different term or clear the search.';
+
+  @override
+  String get catalogNoFilterResultsTitle => 'No filtered results';
+
+  @override
+  String get catalogNoFilterResultsDescription =>
+      'Remove one or more filters to broaden the catalog.';
+
+  @override
+  String get catalogErrorTitle => 'Catalog unavailable';
+
+  @override
+  String get catalogErrorDescription =>
+      'The local catalog could not be loaded.';
+
+  @override
+  String catalogCardSemantics(String title) {
+    return 'Open $title';
+  }
+
+  @override
+  String get catalogTypeTip => 'Tip';
+
+  @override
+  String get catalogTypeTechnique => 'Technique';
+
+  @override
+  String get catalogTypeCuriosity => 'Curiosity';
+
+  @override
+  String get catalogTypeIdea => 'Idea';
+
+  @override
+  String get catalogTypeCommonMistake => 'Common mistake';
+
+  @override
+  String get catalogTypeGuide => 'Guide';
+
+  @override
+  String get catalogTypeChecklist => 'Checklist';
+
+  @override
+  String get catalogTypeChallenge => 'Challenge';
+
+  @override
+  String get catalogTypeGlossary => 'Glossary';
+
+  @override
+  String get catalogTypeHistory => 'Photo history';
+
+  @override
+  String get catalogCategoryExposure => 'Exposure';
+
+  @override
+  String get catalogCategoryPortrait => 'Portrait';
+
+  @override
+  String get catalogCategoryComposition => 'Composition';
+
+  @override
+  String get catalogCategoryLowLight => 'Low light';
+
+  @override
+  String get catalogCategoryColor => 'Color';
+
+  @override
+  String get catalogCategoryMotion => 'Motion';
+
+  @override
+  String get catalogCategoryGear => 'Gear';
+
+  @override
+  String get catalogTagExposure => 'Exposure';
+
+  @override
+  String get catalogTagLight => 'Light';
+
+  @override
+  String get catalogTagComposition => 'Composition';
+
+  @override
+  String get catalogTagStability => 'Stability';
+
+  @override
+  String get catalogTagColor => 'Color';
+
+  @override
+  String get catalogTagFocus => 'Focus';
+
+  @override
+  String get catalogTagMetering => 'Metering';
+
+  @override
+  String get catalogTagPractice => 'Practice';
+
+  @override
+  String get catalogTagMotion => 'Motion';
+
+  @override
+  String get catalogTagMaintenance => 'Maintenance';
+
+  @override
+  String get catalogDetailTitle => 'Detalhe do conteúdo';
+
+  @override
+  String get catalogDetailBack => 'Voltar ao catálogo';
+
+  @override
+  String get catalogDetailLoading => 'A carregar conteúdo';
+
+  @override
+  String get catalogDetailUnavailableTitle => 'Conteúdo indisponível';
+
+  @override
+  String get catalogDetailUnavailableDescription =>
+      'Este conteúdo não está disponível offline ou não é publicável.';
+
+  @override
+  String get catalogDetailErrorTitle => 'Não foi possível carregar o detalhe';
+
+  @override
+  String get catalogDetailErrorDescription =>
+      'Tenta ler novamente este conteúdo a partir do catálogo offline.';
+
+  @override
+  String get catalogDetailOffline => 'Disponível offline';
+
+  @override
+  String get catalogDetailSources => 'Fontes';
+
+  @override
+  String catalogDetailAttribution(String value) {
+    return 'Atribuição: $value';
+  }
+
+  @override
+  String catalogDetailLicense(String value) {
+    return 'Licença: $value';
+  }
+
+  @override
+  String catalogDetailRights(String value) {
+    return 'Direitos: $value';
+  }
+
+  @override
+  String get catalogDetailRightsPublishable => 'publicável';
+
+  @override
+  String get catalogDetailRightsRestricted => 'restrito';
+
+  @override
+  String get catalogDetailRightsUnknown => 'desconhecido';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -283,6 +589,42 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get topicSmartphone => 'Smartphone';
 
   @override
+  String get profileEquipment => 'Equipamento fotográfico';
+
+  @override
+  String get profileCameraBodies => 'Corpos de câmera';
+
+  @override
+  String get profileLenses => 'Lentes';
+
+  @override
+  String get profileSmartphones => 'Smartphones';
+
+  @override
+  String get equipmentMirrorless => 'Câmera mirrorless';
+
+  @override
+  String get equipmentDslr => 'Câmera DSLR';
+
+  @override
+  String get equipmentFilm => 'Câmera analógica';
+
+  @override
+  String get equipmentPrimeLens => 'Lente fixa';
+
+  @override
+  String get equipmentZoomLens => 'Lente zoom';
+
+  @override
+  String get equipmentTelephotoLens => 'Teleobjetiva';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Telefone Android';
+
+  @override
   String get profileLearningGoals => 'Objetivos de aprendizagem';
 
   @override
@@ -330,4 +672,274 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get profileSaveError =>
       'Não foi possível salvar suas preferências. Tente novamente.';
+
+  @override
+  String get catalogTitle => 'Explorar catálogo';
+
+  @override
+  String get catalogOfflineAvailable => 'Available offline';
+
+  @override
+  String get catalogSearchHint => 'Pesquisar técnicas, dicas e tags';
+
+  @override
+  String get catalogSearchSemantics => 'Catalog search field';
+
+  @override
+  String get catalogSearchClear => 'Clear search';
+
+  @override
+  String get catalogFiltersTitle => 'Filtros';
+
+  @override
+  String catalogFiltersButton(int count) {
+    return 'Filters ($count)';
+  }
+
+  @override
+  String get catalogApplyFilters => 'Aplicar';
+
+  @override
+  String get catalogCancel => 'Cancelar';
+
+  @override
+  String get catalogClearFilters => 'Limpar filtros';
+
+  @override
+  String catalogRemoveFilter(String label) {
+    return 'Remove $label filter';
+  }
+
+  @override
+  String get catalogType => 'Type';
+
+  @override
+  String get catalogCategory => 'Category';
+
+  @override
+  String get catalogDifficulty => 'Difficulty';
+
+  @override
+  String get catalogTag => 'Tag';
+
+  @override
+  String catalogTypeLabel(String value) {
+    return 'Type: $value';
+  }
+
+  @override
+  String catalogCategoryLabel(String value) {
+    return 'Category: $value';
+  }
+
+  @override
+  String catalogDifficultyLabel(String value) {
+    return 'Difficulty: $value';
+  }
+
+  @override
+  String catalogPremiumLabel(String value) {
+    return 'Premium: $value';
+  }
+
+  @override
+  String catalogTagLabel(String value) {
+    return 'Tag: $value';
+  }
+
+  @override
+  String get catalogPremium => 'Premium';
+
+  @override
+  String get catalogPremiumOnly => 'Premium only';
+
+  @override
+  String get catalogFreeOnly => 'Free only';
+
+  @override
+  String get catalogLoading => 'Loading catalog';
+
+  @override
+  String get catalogLoadingMore => 'Loading more';
+
+  @override
+  String get catalogLoadMore => 'Carregar mais';
+
+  @override
+  String get catalogRetry => 'Tentar novamente';
+
+  @override
+  String get catalogRefresh => 'Refresh';
+
+  @override
+  String get catalogNextPageError => 'The next page could not be loaded.';
+
+  @override
+  String get catalogEndOfResults => 'End of results';
+
+  @override
+  String get catalogEmptyTitle => 'No catalog items yet';
+
+  @override
+  String get catalogEmptyDescription => 'Install the local seed or try again.';
+
+  @override
+  String get catalogNoSearchResultsTitle => 'No search results';
+
+  @override
+  String get catalogNoSearchResultsDescription =>
+      'Try a different term or clear the search.';
+
+  @override
+  String get catalogNoFilterResultsTitle => 'No filtered results';
+
+  @override
+  String get catalogNoFilterResultsDescription =>
+      'Remove one or more filters to broaden the catalog.';
+
+  @override
+  String get catalogErrorTitle => 'Catalog unavailable';
+
+  @override
+  String get catalogErrorDescription =>
+      'The local catalog could not be loaded.';
+
+  @override
+  String catalogCardSemantics(String title) {
+    return 'Open $title';
+  }
+
+  @override
+  String get catalogTypeTip => 'Tip';
+
+  @override
+  String get catalogTypeTechnique => 'Technique';
+
+  @override
+  String get catalogTypeCuriosity => 'Curiosity';
+
+  @override
+  String get catalogTypeIdea => 'Idea';
+
+  @override
+  String get catalogTypeCommonMistake => 'Common mistake';
+
+  @override
+  String get catalogTypeGuide => 'Guide';
+
+  @override
+  String get catalogTypeChecklist => 'Checklist';
+
+  @override
+  String get catalogTypeChallenge => 'Challenge';
+
+  @override
+  String get catalogTypeGlossary => 'Glossary';
+
+  @override
+  String get catalogTypeHistory => 'Photo history';
+
+  @override
+  String get catalogCategoryExposure => 'Exposure';
+
+  @override
+  String get catalogCategoryPortrait => 'Portrait';
+
+  @override
+  String get catalogCategoryComposition => 'Composition';
+
+  @override
+  String get catalogCategoryLowLight => 'Low light';
+
+  @override
+  String get catalogCategoryColor => 'Color';
+
+  @override
+  String get catalogCategoryMotion => 'Motion';
+
+  @override
+  String get catalogCategoryGear => 'Gear';
+
+  @override
+  String get catalogTagExposure => 'Exposure';
+
+  @override
+  String get catalogTagLight => 'Light';
+
+  @override
+  String get catalogTagComposition => 'Composition';
+
+  @override
+  String get catalogTagStability => 'Stability';
+
+  @override
+  String get catalogTagColor => 'Color';
+
+  @override
+  String get catalogTagFocus => 'Focus';
+
+  @override
+  String get catalogTagMetering => 'Metering';
+
+  @override
+  String get catalogTagPractice => 'Practice';
+
+  @override
+  String get catalogTagMotion => 'Motion';
+
+  @override
+  String get catalogTagMaintenance => 'Maintenance';
+
+  @override
+  String get catalogDetailTitle => 'Detalhe do conteúdo';
+
+  @override
+  String get catalogDetailBack => 'Voltar ao catálogo';
+
+  @override
+  String get catalogDetailLoading => 'Carregando conteúdo';
+
+  @override
+  String get catalogDetailUnavailableTitle => 'Conteúdo indisponível';
+
+  @override
+  String get catalogDetailUnavailableDescription =>
+      'Este conteúdo não está disponível offline ou não pode ser publicado.';
+
+  @override
+  String get catalogDetailErrorTitle => 'Não foi possível carregar o detalhe';
+
+  @override
+  String get catalogDetailErrorDescription =>
+      'Tente abrir este conteúdo novamente pelo catálogo offline.';
+
+  @override
+  String get catalogDetailOffline => 'Disponível offline';
+
+  @override
+  String get catalogDetailSources => 'Fontes';
+
+  @override
+  String catalogDetailAttribution(String value) {
+    return 'Atribuição: $value';
+  }
+
+  @override
+  String catalogDetailLicense(String value) {
+    return 'Licença: $value';
+  }
+
+  @override
+  String catalogDetailRights(String value) {
+    return 'Direitos: $value';
+  }
+
+  @override
+  String get catalogDetailRightsPublishable => 'publicável';
+
+  @override
+  String get catalogDetailRightsRestricted => 'restrito';
+
+  @override
+  String get catalogDetailRightsUnknown => 'desconhecido';
 }

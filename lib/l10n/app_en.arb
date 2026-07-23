@@ -49,5 +49,175 @@
   "languageFrench": "French",
   "languageGerman": "German",
   "languageBrazilianPortuguese": "Brazilian Portuguese",
-  "profileSaveError": "Your preferences could not be saved. Try again."
+  "profileSaveError": "Your preferences could not be saved. Try again.",
+  "catalogTitle": "Explore catalog",
+  "catalogOfflineAvailable": "Available offline",
+  "catalogSearchHint": "Search techniques, tips and tags",
+  "catalogSearchSemantics": "Catalog search field",
+  "catalogSearchClear": "Clear search",
+  "catalogFiltersTitle": "Filters",
+  "catalogFiltersButton": "Filters ({count})",
+  "@catalogFiltersButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "catalogApplyFilters": "Apply",
+  "catalogCancel": "Cancel",
+  "catalogClearFilters": "Clear filters",
+  "catalogRemoveFilter": "Remove {label} filter",
+  "@catalogRemoveFilter": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogType": "Type",
+  "catalogCategory": "Category",
+  "catalogDifficulty": "Difficulty",
+  "catalogTag": "Tag",
+  "catalogTypeLabel": "Type: {value}",
+  "@catalogTypeLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogCategoryLabel": "Category: {value}",
+  "@catalogCategoryLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDifficultyLabel": "Difficulty: {value}",
+  "@catalogDifficultyLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogPremiumLabel": "Premium: {value}",
+  "@catalogPremiumLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogTagLabel": "Tag: {value}",
+  "@catalogTagLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogPremium": "Premium",
+  "catalogPremiumOnly": "Premium only",
+  "catalogFreeOnly": "Free only",
+  "catalogLoading": "Loading catalog",
+  "catalogLoadingMore": "Loading more",
+  "catalogLoadMore": "Load more",
+  "catalogRetry": "Try again",
+  "catalogRefresh": "Refresh",
+  "catalogNextPageError": "The next page could not be loaded.",
+  "catalogEndOfResults": "End of results",
+  "catalogEmptyTitle": "No catalog items yet",
+  "catalogEmptyDescription": "Install the local seed or try again.",
+  "catalogNoSearchResultsTitle": "No search results",
+  "catalogNoSearchResultsDescription": "Try a different term or clear the search.",
+  "catalogNoFilterResultsTitle": "No filtered results",
+  "catalogNoFilterResultsDescription": "Remove one or more filters to broaden the catalog.",
+  "catalogErrorTitle": "Catalog unavailable",
+  "catalogErrorDescription": "The local catalog could not be loaded.",
+  "catalogCardSemantics": "Open {title}",
+  "@catalogCardSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogTypeTip": "Tip",
+  "catalogTypeTechnique": "Technique",
+  "catalogTypeCuriosity": "Curiosity",
+  "catalogTypeIdea": "Idea",
+  "catalogTypeCommonMistake": "Common mistake",
+  "catalogTypeGuide": "Guide",
+  "catalogTypeChecklist": "Checklist",
+  "catalogTypeChallenge": "Challenge",
+  "catalogTypeGlossary": "Glossary",
+  "catalogTypeHistory": "Photo history",
+  "catalogCategoryExposure": "Exposure",
+  "catalogCategoryPortrait": "Portrait",
+  "catalogCategoryComposition": "Composition",
+  "catalogCategoryLowLight": "Low light",
+  "catalogCategoryColor": "Color",
+  "catalogCategoryMotion": "Motion",
+  "catalogCategoryGear": "Gear",
+  "catalogTagExposure": "Exposure",
+  "catalogTagLight": "Light",
+  "catalogTagComposition": "Composition",
+  "catalogTagStability": "Stability",
+  "catalogTagColor": "Color",
+  "catalogTagFocus": "Focus",
+  "catalogTagMetering": "Metering",
+  "catalogTagPractice": "Practice",
+  "catalogTagMotion": "Motion",
+  "catalogTagMaintenance": "Maintenance",
+  "catalogDetailTitle": "Content detail",
+  "catalogDetailBack": "Back to catalog",
+  "catalogDetailLoading": "Loading content",
+  "catalogDetailUnavailableTitle": "Content unavailable",
+  "catalogDetailUnavailableDescription": "This content is not available offline or is not publishable.",
+  "catalogDetailErrorTitle": "Detail unavailable",
+  "catalogDetailErrorDescription": "Try reading this content again from the offline catalog.",
+  "catalogDetailOffline": "Available offline",
+  "catalogDetailSources": "Sources",
+  "catalogDetailAttribution": "Attribution: {value}",
+  "@catalogDetailAttribution": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailLicense": "License: {value}",
+  "@catalogDetailLicense": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailRights": "Rights: {value}",
+  "@catalogDetailRights": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailRightsPublishable": "publishable",
+  "catalogDetailRightsRestricted": "restricted",
+  "catalogDetailRightsUnknown": "unknown",
+  "profileEquipment": "Photography equipment",
+  "profileCameraBodies": "Camera bodies",
+  "profileLenses": "Lenses",
+  "profileSmartphones": "Smartphones",
+  "equipmentMirrorless": "Mirrorless camera",
+  "equipmentDslr": "DSLR camera",
+  "equipmentFilm": "Film camera",
+  "equipmentPrimeLens": "Prime lens",
+  "equipmentZoomLens": "Zoom lens",
+  "equipmentTelephotoLens": "Telephoto lens",
+  "equipmentIPhone": "iPhone",
+  "equipmentAndroid": "Android phone"
 }

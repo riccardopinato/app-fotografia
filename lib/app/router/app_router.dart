@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
 
+import '../../features/catalog/presentation/catalog_detail_page.dart';
+import '../../features/catalog/presentation/catalog_page.dart';
 import '../../features/home/presentation/destination_placeholder_page.dart';
 import '../../features/profile/presentation/profile_page.dart';
 import 'app_routes.dart';
@@ -23,7 +25,20 @@ final appRouter = GoRouter(
                 builder: (context, state) =>
                     destination == AppDestination.profile
                     ? const ProfilePage()
+                    : destination == AppDestination.explore
+                    ? const CatalogPage()
                     : DestinationPlaceholderPage(destination: destination),
+                routes: destination == AppDestination.explore
+                    ? [
+                        GoRoute(
+                          path: 'content/:contentId',
+                          name: AppRoutes.exploreContentName,
+                          builder: (context, state) => CatalogDetailPage(
+                            contentId: state.pathParameters['contentId'],
+                          ),
+                        ),
+                      ]
+                    : const [],
               ),
             ],
           ),

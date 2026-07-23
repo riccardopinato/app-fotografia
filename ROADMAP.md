@@ -9,7 +9,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 | 2 | Design system e navigazione | tema, componenti base e shell accessibile | completato |
 | 3 | Dominio, database locale e localizzazione dei contenuti | entità localizzabili, migrazioni e repository contenuti/profilo offline | completato |
 | 4 | Onboarding e profilo | preferenze locali modificabili | completato |
-| 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | da fare |
+| 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | completato |
 | 6 | Home e idee a regole | proposte personalizzate spiegabili | da fare |
 | 7 | Archivio personale | salvataggi, cartelle, note e stati | da fare |
 | 8 | Hardening MVP | test integrazione, accessibilità e screenshot | da fare |
@@ -33,3 +33,13 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 ## Step 4 — Onboarding e profilo
 
 **Step 4 — Onboarding e profilo.** Implementato: il primo avvio richiede le preferenze locali per livello, interessi fotografici, obiettivi di apprendimento e lingua; il profilo permette di modificarle in seguito. La lingua può seguire il dispositivo oppure essere impostata manualmente fra le lingue di lancio, indicate con nomi localizzati. Drift passa allo schema v2 con una migrazione esplicita che conserva le precedenti preferenze di lingua. Non implementa ancora catalogo, proposte personalizzate, archivio, account o sincronizzazione.
+
+## Step 5A — Fondamenta dati, ricerca SQL e repository paginato
+
+**Step 5A.** Implementato il fondamento dati: ricerca FTS5 locale, repository set-based paginato e contratto per dettaglio.
+
+**Step 5B.** Completata la localizzazione editoriale del seed: tutti i 10 contenuti hanno traduzioni complete nelle sette lingue di lancio (inglese, italiano, spagnolo, francese, tedesco, portoghese europeo e portoghese brasiliano).
+
+**Step 5C.** Completata l’interfaccia catalogo Esplora con ricerca locale debounce, filtri combinabili, stati accessibili e paginazione controllata dal repository SQLite.
+
+**Step 5D.** Completata la route GoRouter deep-linkable `/explore/content/:contentId` e la schermata dettaglio offline con caricamento tramite repository pubblicabile, fallback locale coerente, metadati, fonti, licenze, stati localizzati e layout accessibile/responsive. Step 5 è completato; archivio, salvataggi, home a regole, cloud e monetizzazione restano negli step successivi.

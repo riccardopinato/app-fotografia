@@ -17,5 +17,207 @@
   "profilePlaceholderTitle": "Votre profil arrive bientôt",
   "profilePlaceholderDescription": "Vos préférences et votre parcours photo apparaîtront ici.",
   "navigationLabel": "Navigation principale",
-  "onboardingTitle": "Configurez votre profil photo", "onboardingDescription": "Choisissez des préférences modifiables à tout moment.", "onboardingContinue": "Enregistrer les préférences", "profileTitle": "Votre profil", "profileDescription": "Ces préférences guideront les futures suggestions.", "profileSave": "Enregistrer les modifications", "profileSkillLevel": "Niveau d'expérience", "skillBeginner": "Débutant", "skillIntermediate": "Intermédiaire", "skillAdvanced": "Avancé", "profileTopics": "Centres d'intérêt photo", "topicPortrait": "Portrait", "topicLandscape": "Paysage", "topicStreet": "Street", "topicMacro": "Macro", "topicNight": "Photographie de nuit", "topicSmartphone": "Smartphone", "profileLearningGoals": "Objectifs d'apprentissage", "goalComposition": "Composition", "goalLight": "Lumière", "goalTechnique": "Technique d'appareil", "goalEditing": "Retouche", "profileLanguage": "Langue de l'application", "languageDevice": "Utiliser la langue de l'appareil", "languageManual": "Choisir une langue", "languageSelectionLabel": "Langue", "languageEnglish": "Anglais", "languageItalian": "Italien", "languageSpanish": "Espagnol", "languageFrench": "Français", "languageGerman": "Allemand", "languageBrazilianPortuguese": "Portugais brésilien", "profileSaveError": "Vos préférences n'ont pas pu être enregistrées. Réessayez."
+  "onboardingTitle": "Configurez votre profil photo",
+  "onboardingDescription": "Choisissez des préférences modifiables à tout moment.",
+  "onboardingContinue": "Enregistrer les préférences",
+  "profileTitle": "Votre profil",
+  "profileDescription": "Ces préférences guideront les futures suggestions.",
+  "profileSave": "Enregistrer les modifications",
+  "profileSkillLevel": "Niveau d'expérience",
+  "skillBeginner": "Débutant",
+  "skillIntermediate": "Intermédiaire",
+  "skillAdvanced": "Avancé",
+  "profileTopics": "Centres d'intérêt photo",
+  "topicPortrait": "Portrait",
+  "topicLandscape": "Paysage",
+  "topicStreet": "Street",
+  "topicMacro": "Macro",
+  "topicNight": "Photographie de nuit",
+  "topicSmartphone": "Smartphone",
+  "profileLearningGoals": "Objectifs d'apprentissage",
+  "goalComposition": "Composition",
+  "goalLight": "Lumière",
+  "goalTechnique": "Technique d'appareil",
+  "goalEditing": "Retouche",
+  "profileLanguage": "Langue de l'application",
+  "languageDevice": "Utiliser la langue de l'appareil",
+  "languageManual": "Choisir une langue",
+  "languageSelectionLabel": "Langue",
+  "languageEnglish": "Anglais",
+  "languageItalian": "Italien",
+  "languageSpanish": "Espagnol",
+  "languageFrench": "Français",
+  "languageGerman": "Allemand",
+  "languageBrazilianPortuguese": "Portugais brésilien",
+  "profileSaveError": "Vos préférences n'ont pas pu être enregistrées. Réessayez.",
+  "catalogTitle": "Explorer le catalogue",
+  "catalogOfflineAvailable": "Available offline",
+  "catalogSearchHint": "Rechercher techniques, conseils et tags",
+  "catalogSearchSemantics": "Catalog search field",
+  "catalogSearchClear": "Clear search",
+  "catalogFiltersTitle": "Filtres",
+  "catalogFiltersButton": "Filters ({count})",
+  "@catalogFiltersButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "catalogApplyFilters": "Appliquer",
+  "catalogCancel": "Annuler",
+  "catalogClearFilters": "Effacer les filtres",
+  "catalogRemoveFilter": "Remove {label} filter",
+  "@catalogRemoveFilter": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogType": "Type",
+  "catalogCategory": "Category",
+  "catalogDifficulty": "Difficulty",
+  "catalogTag": "Tag",
+  "catalogTypeLabel": "Type: {value}",
+  "@catalogTypeLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogCategoryLabel": "Category: {value}",
+  "@catalogCategoryLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDifficultyLabel": "Difficulty: {value}",
+  "@catalogDifficultyLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogPremiumLabel": "Premium: {value}",
+  "@catalogPremiumLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogTagLabel": "Tag: {value}",
+  "@catalogTagLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogPremium": "Premium",
+  "catalogPremiumOnly": "Premium only",
+  "catalogFreeOnly": "Free only",
+  "catalogLoading": "Loading catalog",
+  "catalogLoadingMore": "Loading more",
+  "catalogLoadMore": "Charger plus",
+  "catalogRetry": "Réessayer",
+  "catalogRefresh": "Refresh",
+  "catalogNextPageError": "The next page could not be loaded.",
+  "catalogEndOfResults": "End of results",
+  "catalogEmptyTitle": "No catalog items yet",
+  "catalogEmptyDescription": "Install the local seed or try again.",
+  "catalogNoSearchResultsTitle": "No search results",
+  "catalogNoSearchResultsDescription": "Try a different term or clear the search.",
+  "catalogNoFilterResultsTitle": "No filtered results",
+  "catalogNoFilterResultsDescription": "Remove one or more filters to broaden the catalog.",
+  "catalogErrorTitle": "Catalog unavailable",
+  "catalogErrorDescription": "The local catalog could not be loaded.",
+  "catalogCardSemantics": "Open {title}",
+  "@catalogCardSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogTypeTip": "Tip",
+  "catalogTypeTechnique": "Technique",
+  "catalogTypeCuriosity": "Curiosity",
+  "catalogTypeIdea": "Idea",
+  "catalogTypeCommonMistake": "Common mistake",
+  "catalogTypeGuide": "Guide",
+  "catalogTypeChecklist": "Checklist",
+  "catalogTypeChallenge": "Challenge",
+  "catalogTypeGlossary": "Glossary",
+  "catalogTypeHistory": "Photo history",
+  "catalogCategoryExposure": "Exposure",
+  "catalogCategoryPortrait": "Portrait",
+  "catalogCategoryComposition": "Composition",
+  "catalogCategoryLowLight": "Low light",
+  "catalogCategoryColor": "Color",
+  "catalogCategoryMotion": "Motion",
+  "catalogCategoryGear": "Gear",
+  "catalogTagExposure": "Exposure",
+  "catalogTagLight": "Light",
+  "catalogTagComposition": "Composition",
+  "catalogTagStability": "Stability",
+  "catalogTagColor": "Color",
+  "catalogTagFocus": "Focus",
+  "catalogTagMetering": "Metering",
+  "catalogTagPractice": "Practice",
+  "catalogTagMotion": "Motion",
+  "catalogTagMaintenance": "Maintenance",
+  "catalogDetailTitle": "Détail du contenu",
+  "catalogDetailBack": "Retour au catalogue",
+  "catalogDetailLoading": "Chargement du contenu",
+  "catalogDetailUnavailableTitle": "Contenu indisponible",
+  "catalogDetailUnavailableDescription": "Ce contenu n’est pas disponible hors ligne ou ne peut pas être publié.",
+  "catalogDetailErrorTitle": "Impossible de charger le détail",
+  "catalogDetailErrorDescription": "Réessayez de lire ce contenu depuis le catalogue hors ligne.",
+  "catalogDetailOffline": "Disponible hors ligne",
+  "catalogDetailSources": "Sources",
+  "catalogDetailAttribution": "Attribution : {value}",
+  "@catalogDetailAttribution": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailLicense": "Licence : {value}",
+  "@catalogDetailLicense": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailRights": "Droits : {value}",
+  "@catalogDetailRights": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogDetailRightsPublishable": "publiable",
+  "catalogDetailRightsRestricted": "restreint",
+  "catalogDetailRightsUnknown": "inconnu",
+  "profileEquipment": "Équipement photo",
+  "profileCameraBodies": "Boîtiers",
+  "profileLenses": "Objectifs",
+  "profileSmartphones": "Smartphones",
+  "equipmentMirrorless": "Appareil hybride",
+  "equipmentDslr": "Reflex numérique",
+  "equipmentFilm": "Appareil argentique",
+  "equipmentPrimeLens": "Objectif à focale fixe",
+  "equipmentZoomLens": "Objectif zoom",
+  "equipmentTelephotoLens": "Téléobjectif",
+  "equipmentIPhone": "iPhone",
+  "equipmentAndroid": "Téléphone Android"
 }

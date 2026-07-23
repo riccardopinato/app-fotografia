@@ -21,6 +21,10 @@ Usare UUID generati dal client, timestamp UTC e vincoli di chiave esterna. `cont
 
 Le migrazioni Drift devono essere versionate e testate, incluse quelle che marcano `outdated` le traduzioni con `source_version` precedente alla versione canonica. La futura sync aggiungerà identificatori remoti, `syncStatus`, `lastSyncedAt` e tombstone per cancellazioni, senza sostituire indiscriminatamente modifiche locali.
 
+## Implementazione Step 5A
+
+Lo schema Drift `v3` aggiunge l’indice virtuale FTS5 `content_search`, con tokenizer `unicode61 remove_diacritics 2`, per titolo, sommario, corpo, tag localizzati e codici tag. La migrazione esplicita v2 → v3 crea indice e trigger, esegue il backfill e non modifica le tabelle esistenti; le chiavi esterne restano abilitate. I trigger ricostruiscono le righe interessate quando sono inserite o aggiornate traduzioni, relazioni contenuto-tag o traduzioni tag. Il repository usa FTS, filtri e `LIMIT/OFFSET` in SQLite, con una riga completa di traduzione risolta in ordine locale esatto, lingua base, inglese.
+
 ## Implementazione Step 4
 
 Lo schema Drift `v2` implementa i contenuti dello Step 3 e il profilo locale dello Step 4. `user_profiles` conserva la modalità lingua (`device` o `manual`), il locale manuale facoltativo e liste tipizzate serializzate tramite converter Drift JSON versionato per interessi, corpi, obiettivi, smartphone e obiettivi di apprendimento. Il converter normalizza, deduplica e ordina i codici validi ed è retrocompatibile con il primo formato array di v2. La migrazione esplicita da v1 aggiunge questi campi e converte il precedente `preferred_locale` in una selezione manuale, senza eliminare dati locali. I timestamp sono interi SQLite in millisecondi epoch UTC; i mapper li convertono con `DateTime.fromMillisecondsSinceEpoch(..., isUtc: true)`. Le chiavi esterne sono abilitate all'apertura e le relazioni di contenuto usano eliminazione a cascata.

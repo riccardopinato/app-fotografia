@@ -27,4 +27,5 @@ enum AppDestination {
 
 abstract final class AppRoutes {
   static const home = AppDestination.home;
+  static const exploreContentName = 'explore-content';
 }

@@ -198,12 +198,12 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor])
     : super(executor ?? driftDatabase(name: 'framelab_local'));
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (m) async {
       await m.createAll();
-      for (final statement in _schemaIndexes) {
+      for (final statement in _schemaObjects) {
         await customStatement(statement);
       }
     },
@@ -221,6 +221,12 @@ class AppDatabase extends _$AppDatabase {
           SET language_mode = 'manual', selected_locale = preferred_locale
           WHERE preferred_locale IS NOT NULL AND preferred_locale != ''
         ''');
+      }
+      if (from < 3) {
+        for (final statement in _searchSchemaObjects) {
+          await customStatement(statement);
+        }
+        await customStatement(_rebuildSearchIndex);
       }
     },
     beforeOpen: (details) async {
@@ -240,3 +246,115 @@ const _schemaIndexes = <String>[
   'CREATE INDEX content_item_tags_tag_idx ON content_item_tags(tag_id)',
   'CREATE INDEX content_sources_rights_status_idx ON content_sources(rights_status)',
 ];
+
+// FTS5 is available in SQLite bundled by Drift; unicode61 folds case and Latin
+// diacritics. Triggers rebuild only affected content rows, including tag labels.
+const _reindexContentSql =
+    "DELETE FROM content_search WHERE content_id = :content_id; "
+    "INSERT INTO content_search "
+    "SELECT c.id, group_concat(t.title, ' '), group_concat(t.summary, ' '), "
+    "group_concat(t.body, ' '), "
+    "coalesce((SELECT group_concat(tt.label, ' ') FROM content_item_tags x "
+    "JOIN tag_translations tt ON tt.tag_id = x.tag_id "
+    "WHERE x.content_id = c.id), ''), "
+    "coalesce((SELECT group_concat(g.code, ' ') FROM content_item_tags x "
+    "JOIN tags g ON g.id = x.tag_id WHERE x.content_id = c.id), '') "
+    "FROM content_items c LEFT JOIN content_translations t ON t.content_id = c.id "
+    "WHERE c.id = :content_id GROUP BY c.id";
+
+String _contentTrigger(
+  String name,
+  String timing,
+  String table,
+  String contentIdExpression,
+) =>
+    'CREATE TRIGGER $name $timing ON $table BEGIN '
+    '${_reindexContentSql.replaceAll(':content_id', contentIdExpression)}; END';
+
+String _tagTrigger(
+  String name,
+  String timing,
+  String table,
+  String tagIdExpression,
+) =>
+    'CREATE TRIGGER $name $timing ON $table BEGIN '
+    'DELETE FROM content_search WHERE content_id IN '
+    '(SELECT content_id FROM content_item_tags WHERE tag_id = $tagIdExpression); '
+    'INSERT INTO content_search '
+    "SELECT c.id, group_concat(t.title, ' '), group_concat(t.summary, ' '), "
+    "group_concat(t.body, ' '), "
+    "coalesce((SELECT group_concat(tt.label, ' ') FROM content_item_tags x "
+    "JOIN tag_translations tt ON tt.tag_id = x.tag_id "
+    "WHERE x.content_id = c.id), ''), "
+    "coalesce((SELECT group_concat(g.code, ' ') FROM content_item_tags x "
+    "JOIN tags g ON g.id = x.tag_id WHERE x.content_id = c.id), '') "
+    'FROM content_items c LEFT JOIN content_translations t ON t.content_id = c.id '
+    'WHERE c.id IN (SELECT content_id FROM content_item_tags WHERE tag_id = $tagIdExpression) '
+    'GROUP BY c.id; END';
+
+const _searchTableSql =
+    'CREATE VIRTUAL TABLE content_search USING fts5('
+    'content_id UNINDEXED, title, summary, body, tags, tag_codes, '
+    'tokenize="unicode61 remove_diacritics 2")';
+
+final _searchSchemaObjects = <String>[
+  _searchTableSql,
+  _contentTrigger(
+    'content_search_translations_ai',
+    'AFTER INSERT',
+    'content_translations',
+    'NEW.content_id',
+  ),
+  _contentTrigger(
+    'content_search_translations_au',
+    'AFTER UPDATE',
+    'content_translations',
+    'NEW.content_id',
+  ),
+  _contentTrigger(
+    'content_search_translations_ad',
+    'AFTER DELETE',
+    'content_translations',
+    'OLD.content_id',
+  ),
+  _contentTrigger(
+    'content_search_content_tags_ai',
+    'AFTER INSERT',
+    'content_item_tags',
+    'NEW.content_id',
+  ),
+  _contentTrigger(
+    'content_search_content_tags_ad',
+    'AFTER DELETE',
+    'content_item_tags',
+    'OLD.content_id',
+  ),
+  _contentTrigger(
+    'content_search_content_tags_au',
+    'AFTER UPDATE',
+    'content_item_tags',
+    'NEW.content_id',
+  ),
+  _tagTrigger('content_search_tags_au', 'AFTER UPDATE', 'tags', 'NEW.id'),
+  _tagTrigger(
+    'content_search_tag_translations_ai',
+    'AFTER INSERT',
+    'tag_translations',
+    'NEW.tag_id',
+  ),
+  _tagTrigger(
+    'content_search_tag_translations_au',
+    'AFTER UPDATE',
+    'tag_translations',
+    'NEW.tag_id',
+  ),
+  _tagTrigger(
+    'content_search_tag_translations_ad',
+    'AFTER DELETE',
+    'tag_translations',
+    'OLD.tag_id',
+  ),
+];
+final _schemaObjects = <String>[..._schemaIndexes, ..._searchSchemaObjects];
+const _rebuildSearchIndex =
+    '''DELETE FROM content_search; INSERT INTO content_search SELECT c.id, group_concat(t.title,' '), group_concat(t.summary,' '), group_concat(t.body,' '), coalesce((SELECT group_concat(tt.label,' ') FROM content_item_tags x JOIN tag_translations tt ON tt.tag_id=x.tag_id WHERE x.content_id=c.id),''), coalesce((SELECT group_concat(g.code,' ') FROM content_item_tags x JOIN tags g ON g.id=x.tag_id WHERE x.content_id=c.id),'') FROM content_items c LEFT JOIN content_translations t ON t.content_id=c.id GROUP BY c.id;''';
