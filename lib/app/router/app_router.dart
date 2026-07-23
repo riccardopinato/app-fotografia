@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/catalog/presentation/catalog_detail_page.dart';
 import '../../features/catalog/presentation/catalog_page.dart';
 import '../../features/home/presentation/destination_placeholder_page.dart';
+import '../../features/home/presentation/home_page.dart';
 import '../../features/profile/presentation/profile_page.dart';
 import 'app_routes.dart';
 import 'frame_lab_shell.dart';
@@ -22,8 +23,9 @@ final appRouter = GoRouter(
               GoRoute(
                 path: destination.path,
                 name: destination.routeName,
-                builder: (context, state) =>
-                    destination == AppDestination.profile
+                builder: (context, state) => destination == AppDestination.home
+                    ? const HomePage()
+                    : destination == AppDestination.profile
                     ? const ProfilePage()
                     : destination == AppDestination.explore
                     ? const CatalogPage()

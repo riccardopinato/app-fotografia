@@ -119,42 +119,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get topicSmartphone => 'Smartphone';
 
   @override
-  String get profileEquipment => 'Equipo fotográfico';
-
-  @override
-  String get profileCameraBodies => 'Cuerpos de cámara';
-
-  @override
-  String get profileLenses => 'Objetivos';
-
-  @override
-  String get profileSmartphones => 'Teléfonos inteligentes';
-
-  @override
-  String get equipmentMirrorless => 'Cámara sin espejo';
-
-  @override
-  String get equipmentDslr => 'Cámara DSLR';
-
-  @override
-  String get equipmentFilm => 'Cámara analógica';
-
-  @override
-  String get equipmentPrimeLens => 'Objetivo fijo';
-
-  @override
-  String get equipmentZoomLens => 'Objetivo zoom';
-
-  @override
-  String get equipmentTelephotoLens => 'Teleobjetivo';
-
-  @override
-  String get equipmentIPhone => 'iPhone';
-
-  @override
-  String get equipmentAndroid => 'Teléfono Android';
-
-  @override
   String get profileLearningGoals => 'Objetivos de aprendizaje';
 
   @override
@@ -472,4 +436,83 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get catalogDetailRightsUnknown => 'desconocido';
+
+  @override
+  String get profileEquipment => 'Equipo fotográfico';
+
+  @override
+  String get profileCameraBodies => 'Cuerpos de cámara';
+
+  @override
+  String get profileLenses => 'Objetivos';
+
+  @override
+  String get profileSmartphones => 'Teléfonos inteligentes';
+
+  @override
+  String get equipmentMirrorless => 'Cámara sin espejo';
+
+  @override
+  String get equipmentDslr => 'Cámara DSLR';
+
+  @override
+  String get equipmentFilm => 'Cámara analógica';
+
+  @override
+  String get equipmentPrimeLens => 'Objetivo fijo';
+
+  @override
+  String get equipmentZoomLens => 'Objetivo zoom';
+
+  @override
+  String get equipmentTelephotoLens => 'Teleobjetivo';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Teléfono Android';
+
+  @override
+  String get homeGreeting => 'Your photography, at your pace';
+
+  @override
+  String get homeLoading => 'Loading personalised suggestions';
+
+  @override
+  String get homeError => 'Something went wrong. Please try again.';
+
+  @override
+  String get homeIncompleteProfile =>
+      'Complete your profile to refine these suggestions.';
+
+  @override
+  String get homeChosenForYou => 'Chosen for you';
+
+  @override
+  String get homeImproveIdeas => 'Ideas to improve';
+
+  @override
+  String get homeForYourLevel => 'Right for your level';
+
+  @override
+  String get homeOpenCatalog => 'Open the full catalog';
+
+  @override
+  String get homeEmptyCatalog => 'The offline catalog is currently empty.';
+
+  @override
+  String get homeEditorialFallback => 'A useful editorial selection for you';
+
+  @override
+  String get homeReasonInterest => 'Chosen for your photography interest';
+
+  @override
+  String get homeReasonGoal => 'Can help you reach your learning goal';
+
+  @override
+  String get homeReasonLevel => 'Right for your level';
+
+  @override
+  String get homeReasonEquipment => 'Compatible with your equipment';
 }
