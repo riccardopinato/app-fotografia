@@ -146,6 +146,42 @@ class UserProfiles extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+class Collections extends Table {
+  TextColumn get id => text()();
+  TextColumn get name =>
+      text().check(const CustomExpression('length(trim(name)) > 0'))();
+  IntColumn get createdAtUtcMs => integer()();
+  IntColumn get updatedAtUtcMs => integer()();
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+class SavedItems extends Table {
+  TextColumn get id => text()();
+  TextColumn get contentId =>
+      text().references(ContentItems, #id, onDelete: KeyAction.cascade)();
+  TextColumn get collectionId => text().nullable().references(
+    Collections,
+    #id,
+    onDelete: KeyAction.setNull,
+  )();
+  TextColumn get note => text().nullable()();
+  TextColumn get status => text()();
+  IntColumn get savedAtUtcMs => integer()();
+  IntColumn get updatedAtUtcMs => integer()();
+  @override
+  Set<Column> get primaryKey => {id};
+  @override
+  List<Set<Column>> get uniqueKeys => [
+    {contentId},
+  ];
+  @override
+  List<String> get customConstraints => [
+    'FOREIGN KEY(content_id) REFERENCES content_items(id) ON DELETE CASCADE',
+    'FOREIGN KEY(collection_id) REFERENCES collections(id) ON DELETE SET NULL',
+  ];
+}
+
 class ProfileStringListConverter extends TypeConverter<List<String>, String> {
   const ProfileStringListConverter();
 
@@ -192,13 +228,15 @@ List<String> _normalise(Iterable<String> values) =>
     TagTranslations,
     ContentItemTags,
     UserProfiles,
+    Collections,
+    SavedItems,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor])
     : super(executor ?? driftDatabase(name: 'framelab_local'));
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (m) async {
@@ -228,6 +266,13 @@ class AppDatabase extends _$AppDatabase {
         }
         await customStatement(_rebuildSearchIndex);
       }
+      if (from < 4) {
+        await m.createTable(collections);
+        await m.createTable(savedItems);
+        for (final statement in _librarySchemaIndexes) {
+          await customStatement(statement);
+        }
+      }
     },
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');
@@ -245,6 +290,13 @@ const _schemaIndexes = <String>[
   'CREATE INDEX content_item_sources_source_idx ON content_item_sources(source_id)',
   'CREATE INDEX content_item_tags_tag_idx ON content_item_tags(tag_id)',
   'CREATE INDEX content_sources_rights_status_idx ON content_sources(rights_status)',
+  ..._librarySchemaIndexes,
+];
+
+const _librarySchemaIndexes = <String>[
+  'CREATE INDEX saved_items_collection_id_idx ON saved_items(collection_id)',
+  'CREATE INDEX saved_items_status_idx ON saved_items(status)',
+  'CREATE INDEX saved_items_updated_at_idx ON saved_items(updated_at_utc_ms DESC, content_id ASC)',
 ];
 
 // FTS5 is available in SQLite bundled by Drift; unicode61 folds case and Latin

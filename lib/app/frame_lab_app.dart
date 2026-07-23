@@ -4,12 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../l10n/app_localizations.dart';
-import '../core/database/app_database.dart' hide UserProfile;
+import '../core/database/app_database.dart'
+    hide Collection, SavedItem, UserProfile;
 import '../features/catalog/data/drift_catalog_repository.dart';
 import '../features/catalog/data/seed/catalog_seed.dart';
 import '../features/catalog/domain/catalog_models.dart';
 import '../features/catalog/domain/catalog_repository.dart';
 import '../features/catalog/presentation/catalog_scope.dart';
+import '../features/library/data/drift_library_repository.dart';
+import '../features/library/domain/library_models.dart';
+import '../features/library/domain/library_repository.dart';
+import '../features/library/presentation/library_scope.dart';
 import '../features/onboarding/presentation/onboarding_page.dart';
 import '../features/profile/data/drift_profile_repository.dart';
 import '../features/profile/domain/profile_repository.dart';
@@ -32,6 +37,7 @@ class _FrameLabAppState extends State<FrameLabApp> {
   late final AppDatabase? _database;
   late final ProfileRepository _repository;
   late final CatalogRepository _catalogRepository;
+  late final LibraryRepository _libraryRepository;
   late final Stream<UserProfile?> _profileStream;
 
   @override
@@ -46,10 +52,12 @@ class _FrameLabAppState extends State<FrameLabApp> {
         driftCatalogRepository,
         CatalogSeedInstaller(database).install(),
       );
+      _libraryRepository = DriftLibraryRepository(database);
     } else {
       _database = null;
       _repository = widget.profileRepository!;
       _catalogRepository = _EmptyCatalogRepository();
+      _libraryRepository = _EmptyLibraryRepository();
     }
     _profileStream = _repository.watch();
   }
@@ -81,15 +89,18 @@ class _FrameLabAppState extends State<FrameLabApp> {
         supportedLocales: AppLocalizations.supportedLocales,
         builder: (context, child) => CatalogScope(
           repository: _catalogRepository,
-          child: ProfileScope(
-            repository: _repository,
-            child: snapshot.connectionState == ConnectionState.waiting
-                ? const Scaffold(
-                    body: Center(child: CircularProgressIndicator()),
-                  )
-                : snapshot.data == null
-                ? OnboardingPage(repository: _repository)
-                : child!,
+          child: LibraryScope(
+            repository: _libraryRepository,
+            child: ProfileScope(
+              repository: _repository,
+              child: snapshot.connectionState == ConnectionState.waiting
+                  ? const Scaffold(
+                      body: Center(child: CircularProgressIndicator()),
+                    )
+                  : snapshot.data == null
+                  ? OnboardingPage(repository: _repository)
+                  : child!,
+            ),
           ),
         ),
       ),
@@ -105,6 +116,39 @@ class _FrameLabAppState extends State<FrameLabApp> {
     final code = profile!.selectedLocale!.value.split('-');
     return Locale(code.first, code.length > 1 ? code.last : null);
   }
+}
+
+class _EmptyLibraryRepository implements LibraryRepository {
+  @override
+  Future<void> assignCollection(String contentId, String? collectionId) async {}
+  @override
+  Future<Collection> createCollection(String name) =>
+      throw UnsupportedError('Library is unavailable');
+  @override
+  Future<void> deleteCollection(String id) async {}
+  @override
+  Future<List<SavedItem>> getSavedItems({
+    SavedItemStatus? status,
+    String? collectionId,
+  }) async => const [];
+  @override
+  Future<void> remove(String contentId) async {}
+  @override
+  Future<void> renameCollection(String id, String name) async {}
+  @override
+  Future<SavedItem> save(String contentId, {String? collectionId}) =>
+      throw UnsupportedError('Library is unavailable');
+  @override
+  Future<void> updateNote(String contentId, String? note) async {}
+  @override
+  Future<void> updateStatus(String contentId, SavedItemStatus status) async {}
+  @override
+  Stream<List<CollectionWithCount>> watchCollections() =>
+      Stream.value(const []);
+  @override
+  Stream<SavedItem?> watchSavedItem(String contentId) => Stream.value(null);
+  @override
+  Stream<List<SavedItem>> watchSavedItems() => Stream.value(const []);
 }
 
 class _EmptyCatalogRepository implements CatalogRepository {

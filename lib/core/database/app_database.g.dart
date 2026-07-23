@@ -3932,6 +3932,809 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
   }
 }
 
+class $CollectionsTable extends Collections
+    with TableInfo<$CollectionsTable, Collection> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CollectionsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    check: () => const CustomExpression('length(trim(name)) > 0'),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtUtcMsMeta = const VerificationMeta(
+    'createdAtUtcMs',
+  );
+  @override
+  late final GeneratedColumn<int> createdAtUtcMs = GeneratedColumn<int>(
+    'created_at_utc_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtUtcMsMeta = const VerificationMeta(
+    'updatedAtUtcMs',
+  );
+  @override
+  late final GeneratedColumn<int> updatedAtUtcMs = GeneratedColumn<int>(
+    'updated_at_utc_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    name,
+    createdAtUtcMs,
+    updatedAtUtcMs,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'collections';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<Collection> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('created_at_utc_ms')) {
+      context.handle(
+        _createdAtUtcMsMeta,
+        createdAtUtcMs.isAcceptableOrUnknown(
+          data['created_at_utc_ms']!,
+          _createdAtUtcMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtUtcMsMeta);
+    }
+    if (data.containsKey('updated_at_utc_ms')) {
+      context.handle(
+        _updatedAtUtcMsMeta,
+        updatedAtUtcMs.isAcceptableOrUnknown(
+          data['updated_at_utc_ms']!,
+          _updatedAtUtcMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtUtcMsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Collection map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Collection(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      createdAtUtcMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}created_at_utc_ms'],
+      )!,
+      updatedAtUtcMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}updated_at_utc_ms'],
+      )!,
+    );
+  }
+
+  @override
+  $CollectionsTable createAlias(String alias) {
+    return $CollectionsTable(attachedDatabase, alias);
+  }
+}
+
+class Collection extends DataClass implements Insertable<Collection> {
+  final String id;
+  final String name;
+  final int createdAtUtcMs;
+  final int updatedAtUtcMs;
+  const Collection({
+    required this.id,
+    required this.name,
+    required this.createdAtUtcMs,
+    required this.updatedAtUtcMs,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['name'] = Variable<String>(name);
+    map['created_at_utc_ms'] = Variable<int>(createdAtUtcMs);
+    map['updated_at_utc_ms'] = Variable<int>(updatedAtUtcMs);
+    return map;
+  }
+
+  CollectionsCompanion toCompanion(bool nullToAbsent) {
+    return CollectionsCompanion(
+      id: Value(id),
+      name: Value(name),
+      createdAtUtcMs: Value(createdAtUtcMs),
+      updatedAtUtcMs: Value(updatedAtUtcMs),
+    );
+  }
+
+  factory Collection.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return Collection(
+      id: serializer.fromJson<String>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      createdAtUtcMs: serializer.fromJson<int>(json['createdAtUtcMs']),
+      updatedAtUtcMs: serializer.fromJson<int>(json['updatedAtUtcMs']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'name': serializer.toJson<String>(name),
+      'createdAtUtcMs': serializer.toJson<int>(createdAtUtcMs),
+      'updatedAtUtcMs': serializer.toJson<int>(updatedAtUtcMs),
+    };
+  }
+
+  Collection copyWith({
+    String? id,
+    String? name,
+    int? createdAtUtcMs,
+    int? updatedAtUtcMs,
+  }) => Collection(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    createdAtUtcMs: createdAtUtcMs ?? this.createdAtUtcMs,
+    updatedAtUtcMs: updatedAtUtcMs ?? this.updatedAtUtcMs,
+  );
+  Collection copyWithCompanion(CollectionsCompanion data) {
+    return Collection(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      createdAtUtcMs: data.createdAtUtcMs.present
+          ? data.createdAtUtcMs.value
+          : this.createdAtUtcMs,
+      updatedAtUtcMs: data.updatedAtUtcMs.present
+          ? data.updatedAtUtcMs.value
+          : this.updatedAtUtcMs,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('Collection(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('createdAtUtcMs: $createdAtUtcMs, ')
+          ..write('updatedAtUtcMs: $updatedAtUtcMs')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, createdAtUtcMs, updatedAtUtcMs);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Collection &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.createdAtUtcMs == this.createdAtUtcMs &&
+          other.updatedAtUtcMs == this.updatedAtUtcMs);
+}
+
+class CollectionsCompanion extends UpdateCompanion<Collection> {
+  final Value<String> id;
+  final Value<String> name;
+  final Value<int> createdAtUtcMs;
+  final Value<int> updatedAtUtcMs;
+  final Value<int> rowid;
+  const CollectionsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.createdAtUtcMs = const Value.absent(),
+    this.updatedAtUtcMs = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CollectionsCompanion.insert({
+    required String id,
+    required String name,
+    required int createdAtUtcMs,
+    required int updatedAtUtcMs,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       name = Value(name),
+       createdAtUtcMs = Value(createdAtUtcMs),
+       updatedAtUtcMs = Value(updatedAtUtcMs);
+  static Insertable<Collection> custom({
+    Expression<String>? id,
+    Expression<String>? name,
+    Expression<int>? createdAtUtcMs,
+    Expression<int>? updatedAtUtcMs,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (createdAtUtcMs != null) 'created_at_utc_ms': createdAtUtcMs,
+      if (updatedAtUtcMs != null) 'updated_at_utc_ms': updatedAtUtcMs,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CollectionsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? name,
+    Value<int>? createdAtUtcMs,
+    Value<int>? updatedAtUtcMs,
+    Value<int>? rowid,
+  }) {
+    return CollectionsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      createdAtUtcMs: createdAtUtcMs ?? this.createdAtUtcMs,
+      updatedAtUtcMs: updatedAtUtcMs ?? this.updatedAtUtcMs,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (createdAtUtcMs.present) {
+      map['created_at_utc_ms'] = Variable<int>(createdAtUtcMs.value);
+    }
+    if (updatedAtUtcMs.present) {
+      map['updated_at_utc_ms'] = Variable<int>(updatedAtUtcMs.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CollectionsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('createdAtUtcMs: $createdAtUtcMs, ')
+          ..write('updatedAtUtcMs: $updatedAtUtcMs, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $SavedItemsTable extends SavedItems
+    with TableInfo<$SavedItemsTable, SavedItem> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $SavedItemsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _contentIdMeta = const VerificationMeta(
+    'contentId',
+  );
+  @override
+  late final GeneratedColumn<String> contentId = GeneratedColumn<String>(
+    'content_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _collectionIdMeta = const VerificationMeta(
+    'collectionId',
+  );
+  @override
+  late final GeneratedColumn<String> collectionId = GeneratedColumn<String>(
+    'collection_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<String> status = GeneratedColumn<String>(
+    'status',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _savedAtUtcMsMeta = const VerificationMeta(
+    'savedAtUtcMs',
+  );
+  @override
+  late final GeneratedColumn<int> savedAtUtcMs = GeneratedColumn<int>(
+    'saved_at_utc_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtUtcMsMeta = const VerificationMeta(
+    'updatedAtUtcMs',
+  );
+  @override
+  late final GeneratedColumn<int> updatedAtUtcMs = GeneratedColumn<int>(
+    'updated_at_utc_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    contentId,
+    collectionId,
+    note,
+    status,
+    savedAtUtcMs,
+    updatedAtUtcMs,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'saved_items';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<SavedItem> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('content_id')) {
+      context.handle(
+        _contentIdMeta,
+        contentId.isAcceptableOrUnknown(data['content_id']!, _contentIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_contentIdMeta);
+    }
+    if (data.containsKey('collection_id')) {
+      context.handle(
+        _collectionIdMeta,
+        collectionId.isAcceptableOrUnknown(
+          data['collection_id']!,
+          _collectionIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    if (data.containsKey('status')) {
+      context.handle(
+        _statusMeta,
+        status.isAcceptableOrUnknown(data['status']!, _statusMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_statusMeta);
+    }
+    if (data.containsKey('saved_at_utc_ms')) {
+      context.handle(
+        _savedAtUtcMsMeta,
+        savedAtUtcMs.isAcceptableOrUnknown(
+          data['saved_at_utc_ms']!,
+          _savedAtUtcMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_savedAtUtcMsMeta);
+    }
+    if (data.containsKey('updated_at_utc_ms')) {
+      context.handle(
+        _updatedAtUtcMsMeta,
+        updatedAtUtcMs.isAcceptableOrUnknown(
+          data['updated_at_utc_ms']!,
+          _updatedAtUtcMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtUtcMsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {contentId},
+  ];
+  @override
+  SavedItem map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return SavedItem(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      contentId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}content_id'],
+      )!,
+      collectionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}collection_id'],
+      ),
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+      status: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}status'],
+      )!,
+      savedAtUtcMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}saved_at_utc_ms'],
+      )!,
+      updatedAtUtcMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}updated_at_utc_ms'],
+      )!,
+    );
+  }
+
+  @override
+  $SavedItemsTable createAlias(String alias) {
+    return $SavedItemsTable(attachedDatabase, alias);
+  }
+}
+
+class SavedItem extends DataClass implements Insertable<SavedItem> {
+  final String id;
+  final String contentId;
+  final String? collectionId;
+  final String? note;
+  final String status;
+  final int savedAtUtcMs;
+  final int updatedAtUtcMs;
+  const SavedItem({
+    required this.id,
+    required this.contentId,
+    this.collectionId,
+    this.note,
+    required this.status,
+    required this.savedAtUtcMs,
+    required this.updatedAtUtcMs,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['content_id'] = Variable<String>(contentId);
+    if (!nullToAbsent || collectionId != null) {
+      map['collection_id'] = Variable<String>(collectionId);
+    }
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    map['status'] = Variable<String>(status);
+    map['saved_at_utc_ms'] = Variable<int>(savedAtUtcMs);
+    map['updated_at_utc_ms'] = Variable<int>(updatedAtUtcMs);
+    return map;
+  }
+
+  SavedItemsCompanion toCompanion(bool nullToAbsent) {
+    return SavedItemsCompanion(
+      id: Value(id),
+      contentId: Value(contentId),
+      collectionId: collectionId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(collectionId),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+      status: Value(status),
+      savedAtUtcMs: Value(savedAtUtcMs),
+      updatedAtUtcMs: Value(updatedAtUtcMs),
+    );
+  }
+
+  factory SavedItem.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return SavedItem(
+      id: serializer.fromJson<String>(json['id']),
+      contentId: serializer.fromJson<String>(json['contentId']),
+      collectionId: serializer.fromJson<String?>(json['collectionId']),
+      note: serializer.fromJson<String?>(json['note']),
+      status: serializer.fromJson<String>(json['status']),
+      savedAtUtcMs: serializer.fromJson<int>(json['savedAtUtcMs']),
+      updatedAtUtcMs: serializer.fromJson<int>(json['updatedAtUtcMs']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'contentId': serializer.toJson<String>(contentId),
+      'collectionId': serializer.toJson<String?>(collectionId),
+      'note': serializer.toJson<String?>(note),
+      'status': serializer.toJson<String>(status),
+      'savedAtUtcMs': serializer.toJson<int>(savedAtUtcMs),
+      'updatedAtUtcMs': serializer.toJson<int>(updatedAtUtcMs),
+    };
+  }
+
+  SavedItem copyWith({
+    String? id,
+    String? contentId,
+    Value<String?> collectionId = const Value.absent(),
+    Value<String?> note = const Value.absent(),
+    String? status,
+    int? savedAtUtcMs,
+    int? updatedAtUtcMs,
+  }) => SavedItem(
+    id: id ?? this.id,
+    contentId: contentId ?? this.contentId,
+    collectionId: collectionId.present ? collectionId.value : this.collectionId,
+    note: note.present ? note.value : this.note,
+    status: status ?? this.status,
+    savedAtUtcMs: savedAtUtcMs ?? this.savedAtUtcMs,
+    updatedAtUtcMs: updatedAtUtcMs ?? this.updatedAtUtcMs,
+  );
+  SavedItem copyWithCompanion(SavedItemsCompanion data) {
+    return SavedItem(
+      id: data.id.present ? data.id.value : this.id,
+      contentId: data.contentId.present ? data.contentId.value : this.contentId,
+      collectionId: data.collectionId.present
+          ? data.collectionId.value
+          : this.collectionId,
+      note: data.note.present ? data.note.value : this.note,
+      status: data.status.present ? data.status.value : this.status,
+      savedAtUtcMs: data.savedAtUtcMs.present
+          ? data.savedAtUtcMs.value
+          : this.savedAtUtcMs,
+      updatedAtUtcMs: data.updatedAtUtcMs.present
+          ? data.updatedAtUtcMs.value
+          : this.updatedAtUtcMs,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SavedItem(')
+          ..write('id: $id, ')
+          ..write('contentId: $contentId, ')
+          ..write('collectionId: $collectionId, ')
+          ..write('note: $note, ')
+          ..write('status: $status, ')
+          ..write('savedAtUtcMs: $savedAtUtcMs, ')
+          ..write('updatedAtUtcMs: $updatedAtUtcMs')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    contentId,
+    collectionId,
+    note,
+    status,
+    savedAtUtcMs,
+    updatedAtUtcMs,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is SavedItem &&
+          other.id == this.id &&
+          other.contentId == this.contentId &&
+          other.collectionId == this.collectionId &&
+          other.note == this.note &&
+          other.status == this.status &&
+          other.savedAtUtcMs == this.savedAtUtcMs &&
+          other.updatedAtUtcMs == this.updatedAtUtcMs);
+}
+
+class SavedItemsCompanion extends UpdateCompanion<SavedItem> {
+  final Value<String> id;
+  final Value<String> contentId;
+  final Value<String?> collectionId;
+  final Value<String?> note;
+  final Value<String> status;
+  final Value<int> savedAtUtcMs;
+  final Value<int> updatedAtUtcMs;
+  final Value<int> rowid;
+  const SavedItemsCompanion({
+    this.id = const Value.absent(),
+    this.contentId = const Value.absent(),
+    this.collectionId = const Value.absent(),
+    this.note = const Value.absent(),
+    this.status = const Value.absent(),
+    this.savedAtUtcMs = const Value.absent(),
+    this.updatedAtUtcMs = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  SavedItemsCompanion.insert({
+    required String id,
+    required String contentId,
+    this.collectionId = const Value.absent(),
+    this.note = const Value.absent(),
+    required String status,
+    required int savedAtUtcMs,
+    required int updatedAtUtcMs,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       contentId = Value(contentId),
+       status = Value(status),
+       savedAtUtcMs = Value(savedAtUtcMs),
+       updatedAtUtcMs = Value(updatedAtUtcMs);
+  static Insertable<SavedItem> custom({
+    Expression<String>? id,
+    Expression<String>? contentId,
+    Expression<String>? collectionId,
+    Expression<String>? note,
+    Expression<String>? status,
+    Expression<int>? savedAtUtcMs,
+    Expression<int>? updatedAtUtcMs,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (contentId != null) 'content_id': contentId,
+      if (collectionId != null) 'collection_id': collectionId,
+      if (note != null) 'note': note,
+      if (status != null) 'status': status,
+      if (savedAtUtcMs != null) 'saved_at_utc_ms': savedAtUtcMs,
+      if (updatedAtUtcMs != null) 'updated_at_utc_ms': updatedAtUtcMs,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  SavedItemsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? contentId,
+    Value<String?>? collectionId,
+    Value<String?>? note,
+    Value<String>? status,
+    Value<int>? savedAtUtcMs,
+    Value<int>? updatedAtUtcMs,
+    Value<int>? rowid,
+  }) {
+    return SavedItemsCompanion(
+      id: id ?? this.id,
+      contentId: contentId ?? this.contentId,
+      collectionId: collectionId ?? this.collectionId,
+      note: note ?? this.note,
+      status: status ?? this.status,
+      savedAtUtcMs: savedAtUtcMs ?? this.savedAtUtcMs,
+      updatedAtUtcMs: updatedAtUtcMs ?? this.updatedAtUtcMs,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (contentId.present) {
+      map['content_id'] = Variable<String>(contentId.value);
+    }
+    if (collectionId.present) {
+      map['collection_id'] = Variable<String>(collectionId.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (status.present) {
+      map['status'] = Variable<String>(status.value);
+    }
+    if (savedAtUtcMs.present) {
+      map['saved_at_utc_ms'] = Variable<int>(savedAtUtcMs.value);
+    }
+    if (updatedAtUtcMs.present) {
+      map['updated_at_utc_ms'] = Variable<int>(updatedAtUtcMs.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SavedItemsCompanion(')
+          ..write('id: $id, ')
+          ..write('contentId: $contentId, ')
+          ..write('collectionId: $collectionId, ')
+          ..write('note: $note, ')
+          ..write('status: $status, ')
+          ..write('savedAtUtcMs: $savedAtUtcMs, ')
+          ..write('updatedAtUtcMs: $updatedAtUtcMs, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3949,6 +4752,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     this,
   );
   late final $UserProfilesTable userProfiles = $UserProfilesTable(this);
+  late final $CollectionsTable collections = $CollectionsTable(this);
+  late final $SavedItemsTable savedItems = $SavedItemsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3962,6 +4767,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     tagTranslations,
     contentItemTags,
     userProfiles,
+    collections,
+    savedItems,
   ];
 }
 
@@ -6007,6 +6814,432 @@ typedef $$UserProfilesTableProcessedTableManager =
       UserProfile,
       PrefetchHooks Function()
     >;
+typedef $$CollectionsTableCreateCompanionBuilder =
+    CollectionsCompanion Function({
+      required String id,
+      required String name,
+      required int createdAtUtcMs,
+      required int updatedAtUtcMs,
+      Value<int> rowid,
+    });
+typedef $$CollectionsTableUpdateCompanionBuilder =
+    CollectionsCompanion Function({
+      Value<String> id,
+      Value<String> name,
+      Value<int> createdAtUtcMs,
+      Value<int> updatedAtUtcMs,
+      Value<int> rowid,
+    });
+
+class $$CollectionsTableFilterComposer
+    extends Composer<_$AppDatabase, $CollectionsTable> {
+  $$CollectionsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get createdAtUtcMs => $composableBuilder(
+    column: $table.createdAtUtcMs,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get updatedAtUtcMs => $composableBuilder(
+    column: $table.updatedAtUtcMs,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$CollectionsTableOrderingComposer
+    extends Composer<_$AppDatabase, $CollectionsTable> {
+  $$CollectionsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get createdAtUtcMs => $composableBuilder(
+    column: $table.createdAtUtcMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get updatedAtUtcMs => $composableBuilder(
+    column: $table.updatedAtUtcMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$CollectionsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $CollectionsTable> {
+  $$CollectionsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<int> get createdAtUtcMs => $composableBuilder(
+    column: $table.createdAtUtcMs,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get updatedAtUtcMs => $composableBuilder(
+    column: $table.updatedAtUtcMs,
+    builder: (column) => column,
+  );
+}
+
+class $$CollectionsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $CollectionsTable,
+          Collection,
+          $$CollectionsTableFilterComposer,
+          $$CollectionsTableOrderingComposer,
+          $$CollectionsTableAnnotationComposer,
+          $$CollectionsTableCreateCompanionBuilder,
+          $$CollectionsTableUpdateCompanionBuilder,
+          (
+            Collection,
+            BaseReferences<_$AppDatabase, $CollectionsTable, Collection>,
+          ),
+          Collection,
+          PrefetchHooks Function()
+        > {
+  $$CollectionsTableTableManager(_$AppDatabase db, $CollectionsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$CollectionsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CollectionsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$CollectionsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<int> createdAtUtcMs = const Value.absent(),
+                Value<int> updatedAtUtcMs = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => CollectionsCompanion(
+                id: id,
+                name: name,
+                createdAtUtcMs: createdAtUtcMs,
+                updatedAtUtcMs: updatedAtUtcMs,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String name,
+                required int createdAtUtcMs,
+                required int updatedAtUtcMs,
+                Value<int> rowid = const Value.absent(),
+              }) => CollectionsCompanion.insert(
+                id: id,
+                name: name,
+                createdAtUtcMs: createdAtUtcMs,
+                updatedAtUtcMs: updatedAtUtcMs,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$CollectionsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $CollectionsTable,
+      Collection,
+      $$CollectionsTableFilterComposer,
+      $$CollectionsTableOrderingComposer,
+      $$CollectionsTableAnnotationComposer,
+      $$CollectionsTableCreateCompanionBuilder,
+      $$CollectionsTableUpdateCompanionBuilder,
+      (
+        Collection,
+        BaseReferences<_$AppDatabase, $CollectionsTable, Collection>,
+      ),
+      Collection,
+      PrefetchHooks Function()
+    >;
+typedef $$SavedItemsTableCreateCompanionBuilder =
+    SavedItemsCompanion Function({
+      required String id,
+      required String contentId,
+      Value<String?> collectionId,
+      Value<String?> note,
+      required String status,
+      required int savedAtUtcMs,
+      required int updatedAtUtcMs,
+      Value<int> rowid,
+    });
+typedef $$SavedItemsTableUpdateCompanionBuilder =
+    SavedItemsCompanion Function({
+      Value<String> id,
+      Value<String> contentId,
+      Value<String?> collectionId,
+      Value<String?> note,
+      Value<String> status,
+      Value<int> savedAtUtcMs,
+      Value<int> updatedAtUtcMs,
+      Value<int> rowid,
+    });
+
+class $$SavedItemsTableFilterComposer
+    extends Composer<_$AppDatabase, $SavedItemsTable> {
+  $$SavedItemsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get contentId => $composableBuilder(
+    column: $table.contentId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get collectionId => $composableBuilder(
+    column: $table.collectionId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get savedAtUtcMs => $composableBuilder(
+    column: $table.savedAtUtcMs,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get updatedAtUtcMs => $composableBuilder(
+    column: $table.updatedAtUtcMs,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$SavedItemsTableOrderingComposer
+    extends Composer<_$AppDatabase, $SavedItemsTable> {
+  $$SavedItemsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get contentId => $composableBuilder(
+    column: $table.contentId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get collectionId => $composableBuilder(
+    column: $table.collectionId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get savedAtUtcMs => $composableBuilder(
+    column: $table.savedAtUtcMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get updatedAtUtcMs => $composableBuilder(
+    column: $table.updatedAtUtcMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$SavedItemsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $SavedItemsTable> {
+  $$SavedItemsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get contentId =>
+      $composableBuilder(column: $table.contentId, builder: (column) => column);
+
+  GeneratedColumn<String> get collectionId => $composableBuilder(
+    column: $table.collectionId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get note =>
+      $composableBuilder(column: $table.note, builder: (column) => column);
+
+  GeneratedColumn<String> get status =>
+      $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<int> get savedAtUtcMs => $composableBuilder(
+    column: $table.savedAtUtcMs,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get updatedAtUtcMs => $composableBuilder(
+    column: $table.updatedAtUtcMs,
+    builder: (column) => column,
+  );
+}
+
+class $$SavedItemsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $SavedItemsTable,
+          SavedItem,
+          $$SavedItemsTableFilterComposer,
+          $$SavedItemsTableOrderingComposer,
+          $$SavedItemsTableAnnotationComposer,
+          $$SavedItemsTableCreateCompanionBuilder,
+          $$SavedItemsTableUpdateCompanionBuilder,
+          (
+            SavedItem,
+            BaseReferences<_$AppDatabase, $SavedItemsTable, SavedItem>,
+          ),
+          SavedItem,
+          PrefetchHooks Function()
+        > {
+  $$SavedItemsTableTableManager(_$AppDatabase db, $SavedItemsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$SavedItemsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$SavedItemsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$SavedItemsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> contentId = const Value.absent(),
+                Value<String?> collectionId = const Value.absent(),
+                Value<String?> note = const Value.absent(),
+                Value<String> status = const Value.absent(),
+                Value<int> savedAtUtcMs = const Value.absent(),
+                Value<int> updatedAtUtcMs = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => SavedItemsCompanion(
+                id: id,
+                contentId: contentId,
+                collectionId: collectionId,
+                note: note,
+                status: status,
+                savedAtUtcMs: savedAtUtcMs,
+                updatedAtUtcMs: updatedAtUtcMs,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String contentId,
+                Value<String?> collectionId = const Value.absent(),
+                Value<String?> note = const Value.absent(),
+                required String status,
+                required int savedAtUtcMs,
+                required int updatedAtUtcMs,
+                Value<int> rowid = const Value.absent(),
+              }) => SavedItemsCompanion.insert(
+                id: id,
+                contentId: contentId,
+                collectionId: collectionId,
+                note: note,
+                status: status,
+                savedAtUtcMs: savedAtUtcMs,
+                updatedAtUtcMs: updatedAtUtcMs,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$SavedItemsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $SavedItemsTable,
+      SavedItem,
+      $$SavedItemsTableFilterComposer,
+      $$SavedItemsTableOrderingComposer,
+      $$SavedItemsTableAnnotationComposer,
+      $$SavedItemsTableCreateCompanionBuilder,
+      $$SavedItemsTableUpdateCompanionBuilder,
+      (SavedItem, BaseReferences<_$AppDatabase, $SavedItemsTable, SavedItem>),
+      SavedItem,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -6026,4 +7259,8 @@ class $AppDatabaseManager {
       $$ContentItemTagsTableTableManager(_db, _db.contentItemTags);
   $$UserProfilesTableTableManager get userProfiles =>
       $$UserProfilesTableTableManager(_db, _db.userProfiles);
+  $$CollectionsTableTableManager get collections =>
+      $$CollectionsTableTableManager(_db, _db.collections);
+  $$SavedItemsTableTableManager get savedItems =>
+      $$SavedItemsTableTableManager(_db, _db.savedItems);
 }

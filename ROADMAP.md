@@ -11,7 +11,11 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 | 4 | Onboarding e profilo | preferenze locali modificabili | completato |
 | 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | completato |
 | 6 | Home e idee a regole | proposte personalizzate spiegabili | completato |
-| 7 | Archivio personale | salvataggi, cartelle, note e stati | da fare |
+| 7 | Archivio personale | salvataggi, cartelle, note e stati | in corso (7A completato) |
+
+## Step 7A — Fondamenta tecniche Archivio personale
+
+**Step 7A.** Implementati dominio Library, schema Drift v4 e migrazione non distruttiva v3 → v4, repository locale e wiring nel bootstrap per salvataggi, raccolte, note e stati. Le interfacce per salvare dal catalogo e consultare/modificare l'archivio sono esplicitamente rimandate agli Step 7B e 7C.
 | 8 | Hardening MVP | test integrazione, accessibilità e screenshot | da fare |
 | 9 | Pipeline editoriale | importazione/revisione separata e tracciabile | da fare |
 | 10 | Account e sync | auth opzionale, Firestore e conflitti gestiti | da fare |

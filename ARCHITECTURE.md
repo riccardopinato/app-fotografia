@@ -2,7 +2,7 @@
 
 ## Scelta target
 
-Flutter/Dart, Material 3 personalizzato, Riverpod e GoRouter. Il modello è clean architecture pragmatica, feature-first, offline-first e localizzato fin dall'origine. Android e iOS usano il renderer Impeller previsto dalla piattaforma: non è una dipendenza da aggiungere né una tecnologia da configurare come SDK esterno.
+Flutter/Dart, Material 3 personalizzato e GoRouter. Il modello è clean architecture pragmatica, feature-first, offline-first e localizzato fin dall'origine. Android e iOS usano il renderer Impeller previsto dalla piattaforma: non è una dipendenza da aggiungere né una tecnologia da configurare come SDK esterno.
 
 ```text
 lib/
@@ -18,7 +18,7 @@ lib/
 
 ## Confini
 
-- **Presentation:** pagine, widget, controller Riverpod e stato UI.
+- **Presentation:** pagine, widget, controller e stato UI.
 - **Domain:** entità immutabili, use case e contratti repository.
 - **Data:** DTO, database Drift/SQLite, mapper e implementazioni repository.
 - **Core:** primitive non legate a feature e policy trasversali.
@@ -26,6 +26,10 @@ lib/
 ## Dati e sincronizzazione
 
 SQLite/Drift è la fonte locale per profilo, catalogo e archivio. Il catalogo è localizzato per pacchetti linguistici: il dispositivo conserva e aggiorna separatamente la lingua selezionata, con indici di ricerca per locale e aggiornamenti incrementali; non scarica automaticamente tutte le traduzioni. Preferiti e progressi restano associati all'identità concettuale del contenuto, quindi il cambio lingua non li perde. In una fase successiva Firestore sincronizzerà solo dati autorizzati; una coda di operazioni con timestamp e strategia di conflitto documentata eviterà che la rete impedisca lettura o salvataggio.
+
+## Archivio personale (Step 7A)
+
+Il dominio `library` espone le entità immutabili `SavedItem` e `Collection`, lo stato `toTry`/`tried`/`completed` e il contratto `LibraryRepository`. Lo schema Drift v4 introduce `collections` e `saved_items`: ogni salvataggio conserva solo il `contentId` stabile, stato, nota opzionale, raccolta e timestamp UTC; titoli e testi localizzati restano nel catalogo. `saved_items.content_id` è univoco e referenzia `content_items.id`; `collection_id` è nullable e referenzia `collections.id` con `ON DELETE SET NULL`, così eliminare una raccolta conserva i salvataggi. Indici su raccolta, stato e ordinamento temporale supportano le query locali. La UI dell'archivio e l'azione di salvataggio restano fuori da questo step.
 
 ## Localizzazione
 
