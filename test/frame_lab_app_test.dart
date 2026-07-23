@@ -15,14 +15,14 @@ import 'package:framelab/l10n/app_localizations.dart';
 void main() {
   setUp(() => appRouter.go(AppDestination.home.path));
 
-  testWidgets('starts with the localized Home placeholder', (tester) async {
+  testWidgets('starts with the localized Home state', (tester) async {
     await tester.pumpWidget(
       FrameLabApp(profileRepository: _ProfileRepository()),
     );
     await tester.pumpAndSettle();
 
     expect(find.text('Home'), findsAtLeastNWidgets(1));
-    expect(find.text('Your photography space is taking shape'), findsOneWidget);
+    expect(find.text('Your photography, at your pace'), findsOneWidget);
   });
 
   testWidgets('shows onboarding before a local profile exists', (tester) async {
@@ -174,7 +174,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      Theme.of(tester.element(find.byType(Scaffold))).brightness,
+      Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
       Brightness.dark,
     );
   });

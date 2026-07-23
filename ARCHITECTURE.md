@@ -42,3 +42,7 @@ Firebase Authentication, Firestore, Storage e Remote Config; RevenueCat; AdMob; 
 ## Immagini e rendering
 
 La UI richiede un'astrazione per immagini remota/cache quando arriverà il catalogo sincronizzato. L'implementazione deve richiedere varianti thumbnail e dettaglio dimensionate alla superficie reale, mantenere un aspect ratio noto con placeholder/skeleton, usare lazy loading e paginazione, e annullare richieste fuori viewport se il client scelto lo supporta. La cache disco e memoria deve avere limiti, TTL e invalidazione tramite versione o URL firmato; nessuna immagine originale va richiesta per una miniatura. Questi requisiti sono dettagliati in `VISUAL_DIRECTION.md` e non giustificano l'aggiunta anticipata di package.
+
+## RecommendationEngine (Step 6)
+
+La Home legge i soli contenuti pubblicabili dal repository esistente e passa entità di dominio al `RecommendationEngine`, puro e senza dipendenze Flutter o Drift. Il motore deduplica per id, assegna pesi espliciti (interesse 40, obiettivo 24, livello 18, attrezzatura 12, locale esatto 4, penalità premium 3), conserva le motivazioni e risolve i pareggi per id. Con un profilo incompleto offre una selezione editoriale locale, senza inventare contenuti e senza AI generativa.

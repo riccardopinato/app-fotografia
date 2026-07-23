@@ -118,42 +118,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get topicSmartphone => 'Smartphone';
 
   @override
-  String get profileEquipment => 'Équipement photo';
-
-  @override
-  String get profileCameraBodies => 'Boîtiers';
-
-  @override
-  String get profileLenses => 'Objectifs';
-
-  @override
-  String get profileSmartphones => 'Smartphones';
-
-  @override
-  String get equipmentMirrorless => 'Appareil hybride';
-
-  @override
-  String get equipmentDslr => 'Reflex numérique';
-
-  @override
-  String get equipmentFilm => 'Appareil argentique';
-
-  @override
-  String get equipmentPrimeLens => 'Objectif à focale fixe';
-
-  @override
-  String get equipmentZoomLens => 'Objectif zoom';
-
-  @override
-  String get equipmentTelephotoLens => 'Téléobjectif';
-
-  @override
-  String get equipmentIPhone => 'iPhone';
-
-  @override
-  String get equipmentAndroid => 'Téléphone Android';
-
-  @override
   String get profileLearningGoals => 'Objectifs d\'apprentissage';
 
   @override
@@ -471,4 +435,83 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get catalogDetailRightsUnknown => 'inconnu';
+
+  @override
+  String get profileEquipment => 'Équipement photo';
+
+  @override
+  String get profileCameraBodies => 'Boîtiers';
+
+  @override
+  String get profileLenses => 'Objectifs';
+
+  @override
+  String get profileSmartphones => 'Smartphones';
+
+  @override
+  String get equipmentMirrorless => 'Appareil hybride';
+
+  @override
+  String get equipmentDslr => 'Reflex numérique';
+
+  @override
+  String get equipmentFilm => 'Appareil argentique';
+
+  @override
+  String get equipmentPrimeLens => 'Objectif à focale fixe';
+
+  @override
+  String get equipmentZoomLens => 'Objectif zoom';
+
+  @override
+  String get equipmentTelephotoLens => 'Téléobjectif';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Téléphone Android';
+
+  @override
+  String get homeGreeting => 'Your photography, at your pace';
+
+  @override
+  String get homeLoading => 'Loading personalised suggestions';
+
+  @override
+  String get homeError => 'Something went wrong. Please try again.';
+
+  @override
+  String get homeIncompleteProfile =>
+      'Complete your profile to refine these suggestions.';
+
+  @override
+  String get homeChosenForYou => 'Chosen for you';
+
+  @override
+  String get homeImproveIdeas => 'Ideas to improve';
+
+  @override
+  String get homeForYourLevel => 'Right for your level';
+
+  @override
+  String get homeOpenCatalog => 'Open the full catalog';
+
+  @override
+  String get homeEmptyCatalog => 'The offline catalog is currently empty.';
+
+  @override
+  String get homeEditorialFallback => 'A useful editorial selection for you';
+
+  @override
+  String get homeReasonInterest => 'Chosen for your photography interest';
+
+  @override
+  String get homeReasonGoal => 'Can help you reach your learning goal';
+
+  @override
+  String get homeReasonLevel => 'Right for your level';
+
+  @override
+  String get homeReasonEquipment => 'Compatible with your equipment';
 }

@@ -311,78 +311,6 @@ abstract class AppLocalizations {
   /// **'Smartphone'**
   String get topicSmartphone;
 
-  /// No description provided for @profileEquipment.
-  ///
-  /// In en, this message translates to:
-  /// **'Photography equipment'**
-  String get profileEquipment;
-
-  /// No description provided for @profileCameraBodies.
-  ///
-  /// In en, this message translates to:
-  /// **'Camera bodies'**
-  String get profileCameraBodies;
-
-  /// No description provided for @profileLenses.
-  ///
-  /// In en, this message translates to:
-  /// **'Lenses'**
-  String get profileLenses;
-
-  /// No description provided for @profileSmartphones.
-  ///
-  /// In en, this message translates to:
-  /// **'Smartphones'**
-  String get profileSmartphones;
-
-  /// No description provided for @equipmentMirrorless.
-  ///
-  /// In en, this message translates to:
-  /// **'Mirrorless camera'**
-  String get equipmentMirrorless;
-
-  /// No description provided for @equipmentDslr.
-  ///
-  /// In en, this message translates to:
-  /// **'DSLR camera'**
-  String get equipmentDslr;
-
-  /// No description provided for @equipmentFilm.
-  ///
-  /// In en, this message translates to:
-  /// **'Film camera'**
-  String get equipmentFilm;
-
-  /// No description provided for @equipmentPrimeLens.
-  ///
-  /// In en, this message translates to:
-  /// **'Prime lens'**
-  String get equipmentPrimeLens;
-
-  /// No description provided for @equipmentZoomLens.
-  ///
-  /// In en, this message translates to:
-  /// **'Zoom lens'**
-  String get equipmentZoomLens;
-
-  /// No description provided for @equipmentTelephotoLens.
-  ///
-  /// In en, this message translates to:
-  /// **'Telephoto lens'**
-  String get equipmentTelephotoLens;
-
-  /// No description provided for @equipmentIPhone.
-  ///
-  /// In en, this message translates to:
-  /// **'iPhone'**
-  String get equipmentIPhone;
-
-  /// No description provided for @equipmentAndroid.
-  ///
-  /// In en, this message translates to:
-  /// **'Android phone'**
-  String get equipmentAndroid;
-
   /// No description provided for @profileLearningGoals.
   ///
   /// In en, this message translates to:
@@ -964,6 +892,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'unknown'**
   String get catalogDetailRightsUnknown;
+
+  /// No description provided for @profileEquipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Photography equipment'**
+  String get profileEquipment;
+
+  /// No description provided for @profileCameraBodies.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera bodies'**
+  String get profileCameraBodies;
+
+  /// No description provided for @profileLenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Lenses'**
+  String get profileLenses;
+
+  /// No description provided for @profileSmartphones.
+  ///
+  /// In en, this message translates to:
+  /// **'Smartphones'**
+  String get profileSmartphones;
+
+  /// No description provided for @equipmentMirrorless.
+  ///
+  /// In en, this message translates to:
+  /// **'Mirrorless camera'**
+  String get equipmentMirrorless;
+
+  /// No description provided for @equipmentDslr.
+  ///
+  /// In en, this message translates to:
+  /// **'DSLR camera'**
+  String get equipmentDslr;
+
+  /// No description provided for @equipmentFilm.
+  ///
+  /// In en, this message translates to:
+  /// **'Film camera'**
+  String get equipmentFilm;
+
+  /// No description provided for @equipmentPrimeLens.
+  ///
+  /// In en, this message translates to:
+  /// **'Prime lens'**
+  String get equipmentPrimeLens;
+
+  /// No description provided for @equipmentZoomLens.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom lens'**
+  String get equipmentZoomLens;
+
+  /// No description provided for @equipmentTelephotoLens.
+  ///
+  /// In en, this message translates to:
+  /// **'Telephoto lens'**
+  String get equipmentTelephotoLens;
+
+  /// No description provided for @equipmentIPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'iPhone'**
+  String get equipmentIPhone;
+
+  /// No description provided for @equipmentAndroid.
+  ///
+  /// In en, this message translates to:
+  /// **'Android phone'**
+  String get equipmentAndroid;
+
+  /// No description provided for @homeGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Your photography, at your pace'**
+  String get homeGreeting;
+
+  /// No description provided for @homeLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading personalised suggestions'**
+  String get homeLoading;
+
+  /// No description provided for @homeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get homeError;
+
+  /// No description provided for @homeIncompleteProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your profile to refine these suggestions.'**
+  String get homeIncompleteProfile;
+
+  /// No description provided for @homeChosenForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Chosen for you'**
+  String get homeChosenForYou;
+
+  /// No description provided for @homeImproveIdeas.
+  ///
+  /// In en, this message translates to:
+  /// **'Ideas to improve'**
+  String get homeImproveIdeas;
+
+  /// No description provided for @homeForYourLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Right for your level'**
+  String get homeForYourLevel;
+
+  /// No description provided for @homeOpenCatalog.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the full catalog'**
+  String get homeOpenCatalog;
+
+  /// No description provided for @homeEmptyCatalog.
+  ///
+  /// In en, this message translates to:
+  /// **'The offline catalog is currently empty.'**
+  String get homeEmptyCatalog;
+
+  /// No description provided for @homeEditorialFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'A useful editorial selection for you'**
+  String get homeEditorialFallback;
+
+  /// No description provided for @homeReasonInterest.
+  ///
+  /// In en, this message translates to:
+  /// **'Chosen for your photography interest'**
+  String get homeReasonInterest;
+
+  /// No description provided for @homeReasonGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Can help you reach your learning goal'**
+  String get homeReasonGoal;
+
+  /// No description provided for @homeReasonLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Right for your level'**
+  String get homeReasonLevel;
+
+  /// No description provided for @homeReasonEquipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Compatible with your equipment'**
+  String get homeReasonEquipment;
 }
 
 class _AppLocalizationsDelegate

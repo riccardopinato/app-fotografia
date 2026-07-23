@@ -119,42 +119,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get topicSmartphone => 'Smartphone';
 
   @override
-  String get profileEquipment => 'Equipamento fotográfico';
-
-  @override
-  String get profileCameraBodies => 'Corpos de câmara';
-
-  @override
-  String get profileLenses => 'Objetivas';
-
-  @override
-  String get profileSmartphones => 'Smartphones';
-
-  @override
-  String get equipmentMirrorless => 'Câmara mirrorless';
-
-  @override
-  String get equipmentDslr => 'Câmara DSLR';
-
-  @override
-  String get equipmentFilm => 'Câmara analógica';
-
-  @override
-  String get equipmentPrimeLens => 'Objetiva fixa';
-
-  @override
-  String get equipmentZoomLens => 'Objetiva zoom';
-
-  @override
-  String get equipmentTelephotoLens => 'Teleobjetiva';
-
-  @override
-  String get equipmentIPhone => 'iPhone';
-
-  @override
-  String get equipmentAndroid => 'Telemóvel Android';
-
-  @override
   String get profileLearningGoals => 'Objetivos de aprendizagem';
 
   @override
@@ -472,6 +436,85 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get catalogDetailRightsUnknown => 'desconhecido';
+
+  @override
+  String get profileEquipment => 'Equipamento fotográfico';
+
+  @override
+  String get profileCameraBodies => 'Corpos de câmara';
+
+  @override
+  String get profileLenses => 'Objetivas';
+
+  @override
+  String get profileSmartphones => 'Smartphones';
+
+  @override
+  String get equipmentMirrorless => 'Câmara mirrorless';
+
+  @override
+  String get equipmentDslr => 'Câmara DSLR';
+
+  @override
+  String get equipmentFilm => 'Câmara analógica';
+
+  @override
+  String get equipmentPrimeLens => 'Objetiva fixa';
+
+  @override
+  String get equipmentZoomLens => 'Objetiva zoom';
+
+  @override
+  String get equipmentTelephotoLens => 'Teleobjetiva';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Telemóvel Android';
+
+  @override
+  String get homeGreeting => 'Your photography, at your pace';
+
+  @override
+  String get homeLoading => 'Loading personalised suggestions';
+
+  @override
+  String get homeError => 'Something went wrong. Please try again.';
+
+  @override
+  String get homeIncompleteProfile =>
+      'Complete your profile to refine these suggestions.';
+
+  @override
+  String get homeChosenForYou => 'Chosen for you';
+
+  @override
+  String get homeImproveIdeas => 'Ideas to improve';
+
+  @override
+  String get homeForYourLevel => 'Right for your level';
+
+  @override
+  String get homeOpenCatalog => 'Open the full catalog';
+
+  @override
+  String get homeEmptyCatalog => 'The offline catalog is currently empty.';
+
+  @override
+  String get homeEditorialFallback => 'A useful editorial selection for you';
+
+  @override
+  String get homeReasonInterest => 'Chosen for your photography interest';
+
+  @override
+  String get homeReasonGoal => 'Can help you reach your learning goal';
+
+  @override
+  String get homeReasonLevel => 'Right for your level';
+
+  @override
+  String get homeReasonEquipment => 'Compatible with your equipment';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -587,42 +630,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get topicSmartphone => 'Smartphone';
-
-  @override
-  String get profileEquipment => 'Equipamento fotográfico';
-
-  @override
-  String get profileCameraBodies => 'Corpos de câmera';
-
-  @override
-  String get profileLenses => 'Lentes';
-
-  @override
-  String get profileSmartphones => 'Smartphones';
-
-  @override
-  String get equipmentMirrorless => 'Câmera mirrorless';
-
-  @override
-  String get equipmentDslr => 'Câmera DSLR';
-
-  @override
-  String get equipmentFilm => 'Câmera analógica';
-
-  @override
-  String get equipmentPrimeLens => 'Lente fixa';
-
-  @override
-  String get equipmentZoomLens => 'Lente zoom';
-
-  @override
-  String get equipmentTelephotoLens => 'Teleobjetiva';
-
-  @override
-  String get equipmentIPhone => 'iPhone';
-
-  @override
-  String get equipmentAndroid => 'Telefone Android';
 
   @override
   String get profileLearningGoals => 'Objetivos de aprendizagem';
@@ -942,4 +949,83 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get catalogDetailRightsUnknown => 'desconhecido';
+
+  @override
+  String get profileEquipment => 'Equipamento fotográfico';
+
+  @override
+  String get profileCameraBodies => 'Corpos de câmera';
+
+  @override
+  String get profileLenses => 'Lentes';
+
+  @override
+  String get profileSmartphones => 'Smartphones';
+
+  @override
+  String get equipmentMirrorless => 'Câmera mirrorless';
+
+  @override
+  String get equipmentDslr => 'Câmera DSLR';
+
+  @override
+  String get equipmentFilm => 'Câmera analógica';
+
+  @override
+  String get equipmentPrimeLens => 'Lente fixa';
+
+  @override
+  String get equipmentZoomLens => 'Lente zoom';
+
+  @override
+  String get equipmentTelephotoLens => 'Teleobjetiva';
+
+  @override
+  String get equipmentIPhone => 'iPhone';
+
+  @override
+  String get equipmentAndroid => 'Telefone Android';
+
+  @override
+  String get homeGreeting => 'Your photography, at your pace';
+
+  @override
+  String get homeLoading => 'Loading personalised suggestions';
+
+  @override
+  String get homeError => 'Something went wrong. Please try again.';
+
+  @override
+  String get homeIncompleteProfile =>
+      'Complete your profile to refine these suggestions.';
+
+  @override
+  String get homeChosenForYou => 'Chosen for you';
+
+  @override
+  String get homeImproveIdeas => 'Ideas to improve';
+
+  @override
+  String get homeForYourLevel => 'Right for your level';
+
+  @override
+  String get homeOpenCatalog => 'Open the full catalog';
+
+  @override
+  String get homeEmptyCatalog => 'The offline catalog is currently empty.';
+
+  @override
+  String get homeEditorialFallback => 'A useful editorial selection for you';
+
+  @override
+  String get homeReasonInterest => 'Chosen for your photography interest';
+
+  @override
+  String get homeReasonGoal => 'Can help you reach your learning goal';
+
+  @override
+  String get homeReasonLevel => 'Right for your level';
+
+  @override
+  String get homeReasonEquipment => 'Compatible with your equipment';
 }

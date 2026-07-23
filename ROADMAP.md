@@ -10,7 +10,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 | 3 | Dominio, database locale e localizzazione dei contenuti | entità localizzabili, migrazioni e repository contenuti/profilo offline | completato |
 | 4 | Onboarding e profilo | preferenze locali modificabili | completato |
 | 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | completato |
-| 6 | Home e idee a regole | proposte personalizzate spiegabili | da fare |
+| 6 | Home e idee a regole | proposte personalizzate spiegabili | completato |
 | 7 | Archivio personale | salvataggi, cartelle, note e stati | da fare |
 | 8 | Hardening MVP | test integrazione, accessibilità e screenshot | da fare |
 | 9 | Pipeline editoriale | importazione/revisione separata e tracciabile | da fare |
@@ -43,3 +43,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 **Step 5C.** Completata l’interfaccia catalogo Esplora con ricerca locale debounce, filtri combinabili, stati accessibili e paginazione controllata dal repository SQLite.
 
 **Step 5D.** Completata la route GoRouter deep-linkable `/explore/content/:contentId` e la schermata dettaglio offline con caricamento tramite repository pubblicabile, fallback locale coerente, metadati, fonti, licenze, stati localizzati e layout accessibile/responsive. Step 5 è completato; archivio, salvataggi, home a regole, cloud e monetizzazione restano negli step successivi.
+
+## Step 6 — Home e idee a regole
+
+**Step 6.** Completata la Home offline con suggerimenti spiegabili, calcolati da regole deterministiche locali su profilo, livello, attrezzatura, tag e lingua. Non usa AI generativa, rete, analytics o monetizzazione; lo schema Drift resta alla versione 3.

@@ -219,5 +219,19 @@
   "equipmentZoomLens": "Objetivo zoom",
   "equipmentTelephotoLens": "Teleobjetivo",
   "equipmentIPhone": "iPhone",
-  "equipmentAndroid": "Teléfono Android"
+  "equipmentAndroid": "Teléfono Android",
+  "homeGreeting": "Your photography, at your pace",
+  "homeLoading": "Loading personalised suggestions",
+  "homeError": "Something went wrong. Please try again.",
+  "homeIncompleteProfile": "Complete your profile to refine these suggestions.",
+  "homeChosenForYou": "Chosen for you",
+  "homeImproveIdeas": "Ideas to improve",
+  "homeForYourLevel": "Right for your level",
+  "homeOpenCatalog": "Open the full catalog",
+  "homeEmptyCatalog": "The offline catalog is currently empty.",
+  "homeEditorialFallback": "A useful editorial selection for you",
+  "homeReasonInterest": "Chosen for your photography interest",
+  "homeReasonGoal": "Can help you reach your learning goal",
+  "homeReasonLevel": "Right for your level",
+  "homeReasonEquipment": "Compatible with your equipment"
 }
