@@ -14,6 +14,19 @@
   "ideasPlaceholderDescription": "Des propositions photo personnalisées apparaîtront ici.",
   "libraryPlaceholderTitle": "Votre bibliothèque arrive bientôt",
   "libraryPlaceholderDescription": "Vos inspirations et notes enregistrées apparaîtront ici.",
+  "libraryLoading": "Chargement du contenu enregistré",
+  "libraryEmptyTitle": "Aucun contenu enregistré",
+  "libraryEmptyDescription": "Enregistrez du contenu du catalogue pour le retrouver ici.",
+  "libraryErrorTitle": "Archive indisponible",
+  "libraryErrorDescription": "Réessayez de charger votre contenu enregistré.",
+  "libraryCardSemantics": "Ouvrir le contenu enregistré : {title}",
+  "@libraryCardSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "profilePlaceholderTitle": "Votre profil arrive bientôt",
   "profilePlaceholderDescription": "Vos préférences et votre parcours photo apparaîtront ici.",
   "navigationLabel": "Navigation principale",
@@ -179,6 +192,9 @@
   "catalogDetailUnavailableDescription": "Ce contenu n’est pas disponible hors ligne ou ne peut pas être publié.",
   "catalogDetailErrorTitle": "Impossible de charger le détail",
   "catalogDetailErrorDescription": "Réessayez de lire ce contenu depuis le catalogue hors ligne.",
+  "catalogDetailSave": "Enregistrer",
+  "catalogDetailSaved": "Enregistré",
+  "catalogDetailSaveError": "Impossible de mettre à jour l’enregistrement. Réessayez.",
   "catalogDetailOffline": "Disponible hors ligne",
   "catalogDetailSources": "Sources",
   "catalogDetailAttribution": "Attribution : {value}",

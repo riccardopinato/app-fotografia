@@ -191,6 +191,42 @@ abstract class AppLocalizations {
   /// **'Saved inspiration and notes will appear here.'**
   String get libraryPlaceholderDescription;
 
+  /// No description provided for @libraryLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading saved content'**
+  String get libraryLoading;
+
+  /// No description provided for @libraryEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved content yet'**
+  String get libraryEmptyTitle;
+
+  /// No description provided for @libraryEmptyDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Save content from the catalog to find it here.'**
+  String get libraryEmptyDescription;
+
+  /// No description provided for @libraryErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Library unavailable'**
+  String get libraryErrorTitle;
+
+  /// No description provided for @libraryErrorDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Try loading your saved content again.'**
+  String get libraryErrorDescription;
+
+  /// No description provided for @libraryCardSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Open saved content: {title}'**
+  String libraryCardSemantics(String title);
+
   /// No description provided for @profilePlaceholderTitle.
   ///
   /// In en, this message translates to:
@@ -844,6 +880,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try reading this content again from the offline catalog.'**
   String get catalogDetailErrorDescription;
+
+  /// No description provided for @catalogDetailSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get catalogDetailSave;
+
+  /// No description provided for @catalogDetailSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get catalogDetailSaved;
+
+  /// No description provided for @catalogDetailSaveError.
+  ///
+  /// In en, this message translates to:
+  /// **'The saved state could not be updated. Try again.'**
+  String get catalogDetailSaveError;
 
   /// No description provided for @catalogDetailOffline.
   ///

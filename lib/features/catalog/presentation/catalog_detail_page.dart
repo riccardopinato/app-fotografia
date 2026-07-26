@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import '../../../app/router/app_routes.dart';
 import '../../../core/design/frame_lab_tokens.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../library/domain/library_repository.dart';
+import '../../library/presentation/library_scope.dart';
+import '../../library/presentation/saved_item_controller.dart';
 import '../domain/catalog_models.dart';
 import 'catalog_detail_controller.dart';
 import 'catalog_scope.dart';
@@ -19,13 +22,18 @@ class CatalogDetailPage extends StatefulWidget {
 
 class _CatalogDetailPageState extends State<CatalogDetailPage> {
   CatalogDetailController? _controller;
+  SavedItemController? _savedItemController;
+  LibraryRepository? _libraryRepository;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = _localeOf(context);
     final id = widget.contentId;
-    if (id == null || id.trim().isEmpty) return;
+    if (id == null || id.trim().isEmpty) {
+      _replaceSavedItemController(null, null);
+      return;
+    }
     final controller = _controller;
     if (controller == null || controller.contentId != id) {
       controller?.removeListener(_onChanged);
@@ -37,13 +45,35 @@ class _CatalogDetailPageState extends State<CatalogDetailPage> {
     } else {
       controller.setLocale(locale);
     }
+    final libraryRepository = LibraryScope.maybeOf(context);
+    if (_savedItemController == null ||
+        _savedItemController!.contentId != id ||
+        _libraryRepository != libraryRepository) {
+      _replaceSavedItemController(libraryRepository, id);
+    }
   }
 
   @override
   void dispose() {
     _controller?.removeListener(_onChanged);
     _controller?.dispose();
+    _savedItemController?.removeListener(_onChanged);
+    _savedItemController?.dispose();
     super.dispose();
+  }
+
+  void _replaceSavedItemController(
+    LibraryRepository? repository,
+    String? contentId,
+  ) {
+    _savedItemController?.removeListener(_onChanged);
+    _savedItemController?.dispose();
+    _libraryRepository = repository;
+    _savedItemController = repository == null || contentId == null
+        ? null
+        : (SavedItemController(repository, contentId)
+            ..addListener(_onChanged)
+            ..start());
   }
 
   void _onChanged() {
@@ -78,7 +108,10 @@ class _CatalogDetailPageState extends State<CatalogDetailPage> {
             ? _ErrorState(onRetry: controller.retry)
             : controller.notFound || controller.detail == null
             ? _UnavailableState(onRetry: controller.retry)
-            : _DetailContent(detail: controller.detail!),
+            : _DetailContent(
+                detail: controller.detail!,
+                savedItemController: _savedItemController,
+              ),
       ),
     );
   }
@@ -94,8 +127,10 @@ class _CatalogDetailPageState extends State<CatalogDetailPage> {
 }
 
 class _DetailContent extends StatelessWidget {
-  const _DetailContent({required this.detail});
+  const _DetailContent({required this.detail, this.savedItemController});
+
   final CatalogDetail detail;
+  final SavedItemController? savedItemController;
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +157,10 @@ class _DetailContent extends StatelessWidget {
                   content.translation.summary,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
+                if (savedItemController != null) ...[
+                  const SizedBox(height: FrameLabSpacing.medium),
+                  _SaveToggle(controller: savedItemController!),
+                ],
                 const SizedBox(height: FrameLabSpacing.medium),
                 Wrap(
                   spacing: FrameLabSpacing.small,
@@ -155,6 +194,49 @@ class _DetailContent extends StatelessWidget {
   }
 
   Widget _chip(String label) => Chip(label: Text(label));
+}
+
+class _SaveToggle extends StatelessWidget {
+  const _SaveToggle({required this.controller});
+
+  final SavedItemController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final label = controller.isSaved
+        ? l10n.catalogDetailSaved
+        : l10n.catalogDetailSave;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Semantics(
+          label: label,
+          button: true,
+          enabled: controller.canToggle,
+          excludeSemantics: true,
+          child: Tooltip(
+            message: label,
+            child: OutlinedButton.icon(
+              key: const ValueKey('catalog-detail-save-toggle'),
+              onPressed: controller.canToggle ? controller.toggle : null,
+              icon: Icon(
+                controller.isSaved ? Icons.bookmark : Icons.bookmark_outline,
+              ),
+              label: Text(label),
+            ),
+          ),
+        ),
+        if (controller.error != null) ...[
+          const SizedBox(height: FrameLabSpacing.xSmall),
+          Text(
+            l10n.catalogDetailSaveError,
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
+        ],
+      ],
+    );
+  }
 }
 
 class _SourceTile extends StatelessWidget {

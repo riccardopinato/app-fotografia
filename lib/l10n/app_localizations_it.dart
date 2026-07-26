@@ -56,6 +56,28 @@ class AppLocalizationsIt extends AppLocalizations {
       'Qui appariranno ispirazioni e note salvate.';
 
   @override
+  String get libraryLoading => 'Caricamento contenuti salvati';
+
+  @override
+  String get libraryEmptyTitle => 'Nessun contenuto salvato';
+
+  @override
+  String get libraryEmptyDescription =>
+      'Salva un contenuto dal catalogo per ritrovarlo qui.';
+
+  @override
+  String get libraryErrorTitle => 'Archivio non disponibile';
+
+  @override
+  String get libraryErrorDescription =>
+      'Riprova a caricare i contenuti salvati.';
+
+  @override
+  String libraryCardSemantics(String title) {
+    return 'Apri contenuto salvato: $title';
+  }
+
+  @override
   String get profilePlaceholderTitle => 'Il tuo profilo arriverà presto';
 
   @override
@@ -407,6 +429,16 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get catalogDetailErrorDescription =>
       'Riprova a leggere questo contenuto dal catalogo offline.';
+
+  @override
+  String get catalogDetailSave => 'Salva';
+
+  @override
+  String get catalogDetailSaved => 'Salvato';
+
+  @override
+  String get catalogDetailSaveError =>
+      'Impossibile aggiornare il salvataggio. Riprova.';
 
   @override
   String get catalogDetailOffline => 'Disponibile offline';

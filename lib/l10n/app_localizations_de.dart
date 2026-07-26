@@ -55,6 +55,28 @@ class AppLocalizationsDe extends AppLocalizations {
       'Hier erscheinen gespeicherte Inspirationen und Notizen.';
 
   @override
+  String get libraryLoading => 'Gespeicherte Inhalte werden geladen';
+
+  @override
+  String get libraryEmptyTitle => 'Noch keine gespeicherten Inhalte';
+
+  @override
+  String get libraryEmptyDescription =>
+      'Speichere Inhalte aus dem Katalog, um sie hier zu finden.';
+
+  @override
+  String get libraryErrorTitle => 'Archiv nicht verfügbar';
+
+  @override
+  String get libraryErrorDescription =>
+      'Versuche erneut, deine gespeicherten Inhalte zu laden.';
+
+  @override
+  String libraryCardSemantics(String title) {
+    return 'Gespeicherten Inhalt öffnen: $title';
+  }
+
+  @override
   String get profilePlaceholderTitle => 'Dein Profil kommt bald';
 
   @override
@@ -405,6 +427,16 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get catalogDetailErrorDescription =>
       'Versuche erneut, diesen Inhalt aus dem Offline-Katalog zu öffnen.';
+
+  @override
+  String get catalogDetailSave => 'Speichern';
+
+  @override
+  String get catalogDetailSaved => 'Gespeichert';
+
+  @override
+  String get catalogDetailSaveError =>
+      'Der Speicherstatus konnte nicht aktualisiert werden. Versuche es erneut.';
 
   @override
   String get catalogDetailOffline => 'Offline verfügbar';

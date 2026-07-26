@@ -14,6 +14,19 @@
   "ideasPlaceholderDescription": "Qui appariranno proposte fotografiche personalizzate.",
   "libraryPlaceholderTitle": "Il tuo archivio arriverà presto",
   "libraryPlaceholderDescription": "Qui appariranno ispirazioni e note salvate.",
+  "libraryLoading": "Caricamento contenuti salvati",
+  "libraryEmptyTitle": "Nessun contenuto salvato",
+  "libraryEmptyDescription": "Salva un contenuto dal catalogo per ritrovarlo qui.",
+  "libraryErrorTitle": "Archivio non disponibile",
+  "libraryErrorDescription": "Riprova a caricare i contenuti salvati.",
+  "libraryCardSemantics": "Apri contenuto salvato: {title}",
+  "@libraryCardSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "profilePlaceholderTitle": "Il tuo profilo arriverà presto",
   "profilePlaceholderDescription": "Qui appariranno preferenze e percorso fotografico.",
   "navigationLabel": "Navigazione principale",
@@ -179,6 +192,9 @@
   "catalogDetailUnavailableDescription": "Questo contenuto non è disponibile offline o non è pubblicabile.",
   "catalogDetailErrorTitle": "Impossibile caricare il dettaglio",
   "catalogDetailErrorDescription": "Riprova a leggere questo contenuto dal catalogo offline.",
+  "catalogDetailSave": "Salva",
+  "catalogDetailSaved": "Salvato",
+  "catalogDetailSaveError": "Impossibile aggiornare il salvataggio. Riprova.",
   "catalogDetailOffline": "Disponibile offline",
   "catalogDetailSources": "Fonti",
   "catalogDetailAttribution": "Attribuzione: {value}",

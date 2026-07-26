@@ -55,6 +55,27 @@ class AppLocalizationsEn extends AppLocalizations {
       'Saved inspiration and notes will appear here.';
 
   @override
+  String get libraryLoading => 'Loading saved content';
+
+  @override
+  String get libraryEmptyTitle => 'No saved content yet';
+
+  @override
+  String get libraryEmptyDescription =>
+      'Save content from the catalog to find it here.';
+
+  @override
+  String get libraryErrorTitle => 'Library unavailable';
+
+  @override
+  String get libraryErrorDescription => 'Try loading your saved content again.';
+
+  @override
+  String libraryCardSemantics(String title) {
+    return 'Open saved content: $title';
+  }
+
+  @override
   String get profilePlaceholderTitle => 'Your profile is coming soon';
 
   @override
@@ -405,6 +426,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get catalogDetailErrorDescription =>
       'Try reading this content again from the offline catalog.';
+
+  @override
+  String get catalogDetailSave => 'Save';
+
+  @override
+  String get catalogDetailSaved => 'Saved';
+
+  @override
+  String get catalogDetailSaveError =>
+      'The saved state could not be updated. Try again.';
 
   @override
   String get catalogDetailOffline => 'Available offline';
