@@ -14,6 +14,9 @@ class LibraryScope extends InheritedWidget {
   static LibraryRepository of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<LibraryScope>()!.repository;
 
+  static LibraryRepository? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<LibraryScope>()?.repository;
+
   @override
   bool updateShouldNotify(LibraryScope oldWidget) =>
       repository != oldWidget.repository;

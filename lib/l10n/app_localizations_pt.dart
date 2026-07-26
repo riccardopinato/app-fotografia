@@ -56,6 +56,28 @@ class AppLocalizationsPt extends AppLocalizations {
       'Inspirações e notas salvas aparecerão aqui.';
 
   @override
+  String get libraryLoading => 'A carregar conteúdo guardado';
+
+  @override
+  String get libraryEmptyTitle => 'Ainda não há conteúdo guardado';
+
+  @override
+  String get libraryEmptyDescription =>
+      'Guarde conteúdo do catálogo para o encontrar aqui.';
+
+  @override
+  String get libraryErrorTitle => 'Arquivo indisponível';
+
+  @override
+  String get libraryErrorDescription =>
+      'Tente carregar novamente o conteúdo guardado.';
+
+  @override
+  String libraryCardSemantics(String title) {
+    return 'Abrir conteúdo guardado: $title';
+  }
+
+  @override
   String get profilePlaceholderTitle => 'Seu perfil em breve';
 
   @override
@@ -408,6 +430,16 @@ class AppLocalizationsPt extends AppLocalizations {
       'Tenta ler novamente este conteúdo a partir do catálogo offline.';
 
   @override
+  String get catalogDetailSave => 'Guardar';
+
+  @override
+  String get catalogDetailSaved => 'Guardado';
+
+  @override
+  String get catalogDetailSaveError =>
+      'Não foi possível atualizar o estado guardado. Tente novamente.';
+
+  @override
   String get catalogDetailOffline => 'Disponível offline';
 
   @override
@@ -567,6 +599,28 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get libraryPlaceholderDescription =>
       'Inspirações e notas salvas aparecerão aqui.';
+
+  @override
+  String get libraryLoading => 'Carregando conteúdo salvo';
+
+  @override
+  String get libraryEmptyTitle => 'Nenhum conteúdo salvo';
+
+  @override
+  String get libraryEmptyDescription =>
+      'Salve conteúdo do catálogo para encontrá-lo aqui.';
+
+  @override
+  String get libraryErrorTitle => 'Arquivo indisponível';
+
+  @override
+  String get libraryErrorDescription =>
+      'Tente carregar novamente o conteúdo salvo.';
+
+  @override
+  String libraryCardSemantics(String title) {
+    return 'Abrir conteúdo salvo: $title';
+  }
 
   @override
   String get profilePlaceholderTitle => 'Seu perfil em breve';
@@ -919,6 +973,16 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get catalogDetailErrorDescription =>
       'Tente abrir este conteúdo novamente pelo catálogo offline.';
+
+  @override
+  String get catalogDetailSave => 'Salvar';
+
+  @override
+  String get catalogDetailSaved => 'Salvo';
+
+  @override
+  String get catalogDetailSaveError =>
+      'Não foi possível atualizar o estado salvo. Tente novamente.';
 
   @override
   String get catalogDetailOffline => 'Disponível offline';

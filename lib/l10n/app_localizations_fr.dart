@@ -55,6 +55,28 @@ class AppLocalizationsFr extends AppLocalizations {
       'Vos inspirations et notes enregistrées apparaîtront ici.';
 
   @override
+  String get libraryLoading => 'Chargement du contenu enregistré';
+
+  @override
+  String get libraryEmptyTitle => 'Aucun contenu enregistré';
+
+  @override
+  String get libraryEmptyDescription =>
+      'Enregistrez du contenu du catalogue pour le retrouver ici.';
+
+  @override
+  String get libraryErrorTitle => 'Archive indisponible';
+
+  @override
+  String get libraryErrorDescription =>
+      'Réessayez de charger votre contenu enregistré.';
+
+  @override
+  String libraryCardSemantics(String title) {
+    return 'Ouvrir le contenu enregistré : $title';
+  }
+
+  @override
   String get profilePlaceholderTitle => 'Votre profil arrive bientôt';
 
   @override
@@ -405,6 +427,16 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get catalogDetailErrorDescription =>
       'Réessayez de lire ce contenu depuis le catalogue hors ligne.';
+
+  @override
+  String get catalogDetailSave => 'Enregistrer';
+
+  @override
+  String get catalogDetailSaved => 'Enregistré';
+
+  @override
+  String get catalogDetailSaveError =>
+      'Impossible de mettre à jour l’enregistrement. Réessayez.';
 
   @override
   String get catalogDetailOffline => 'Disponible hors ligne';

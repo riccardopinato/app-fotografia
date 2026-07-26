@@ -14,6 +14,19 @@
   "ideasPlaceholderDescription": "Personalized photo prompts will appear here.",
   "libraryPlaceholderTitle": "Your library is coming soon",
   "libraryPlaceholderDescription": "Saved inspiration and notes will appear here.",
+  "libraryLoading": "Loading saved content",
+  "libraryEmptyTitle": "No saved content yet",
+  "libraryEmptyDescription": "Save content from the catalog to find it here.",
+  "libraryErrorTitle": "Library unavailable",
+  "libraryErrorDescription": "Try loading your saved content again.",
+  "libraryCardSemantics": "Open saved content: {title}",
+  "@libraryCardSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "profilePlaceholderTitle": "Your profile is coming soon",
   "profilePlaceholderDescription": "Your preferences and photography journey will appear here.",
   "navigationLabel": "Main navigation",
@@ -179,6 +192,9 @@
   "catalogDetailUnavailableDescription": "This content is not available offline or is not publishable.",
   "catalogDetailErrorTitle": "Detail unavailable",
   "catalogDetailErrorDescription": "Try reading this content again from the offline catalog.",
+  "catalogDetailSave": "Save",
+  "catalogDetailSaved": "Saved",
+  "catalogDetailSaveError": "The saved state could not be updated. Try again.",
   "catalogDetailOffline": "Available offline",
   "catalogDetailSources": "Sources",
   "catalogDetailAttribution": "Attribution: {value}",

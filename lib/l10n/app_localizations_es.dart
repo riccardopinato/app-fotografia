@@ -56,6 +56,28 @@ class AppLocalizationsEs extends AppLocalizations {
       'Aquí aparecerán inspiración y notas guardadas.';
 
   @override
+  String get libraryLoading => 'Cargando contenido guardado';
+
+  @override
+  String get libraryEmptyTitle => 'Aún no hay contenido guardado';
+
+  @override
+  String get libraryEmptyDescription =>
+      'Guarda contenido del catálogo para encontrarlo aquí.';
+
+  @override
+  String get libraryErrorTitle => 'Archivo no disponible';
+
+  @override
+  String get libraryErrorDescription =>
+      'Intenta cargar de nuevo el contenido guardado.';
+
+  @override
+  String libraryCardSemantics(String title) {
+    return 'Abrir contenido guardado: $title';
+  }
+
+  @override
   String get profilePlaceholderTitle => 'Tu perfil llegará pronto';
 
   @override
@@ -406,6 +428,16 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get catalogDetailErrorDescription =>
       'Intenta leer este contenido de nuevo desde el catálogo sin conexión.';
+
+  @override
+  String get catalogDetailSave => 'Guardar';
+
+  @override
+  String get catalogDetailSaved => 'Guardado';
+
+  @override
+  String get catalogDetailSaveError =>
+      'No se pudo actualizar el guardado. Inténtalo de nuevo.';
 
   @override
   String get catalogDetailOffline => 'Disponible sin conexión';

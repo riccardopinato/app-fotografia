@@ -14,6 +14,19 @@
   "ideasPlaceholderDescription": "Hier erscheinen persönliche Fotoimpulse.",
   "libraryPlaceholderTitle": "Dein Archiv kommt bald",
   "libraryPlaceholderDescription": "Hier erscheinen gespeicherte Inspirationen und Notizen.",
+  "libraryLoading": "Gespeicherte Inhalte werden geladen",
+  "libraryEmptyTitle": "Noch keine gespeicherten Inhalte",
+  "libraryEmptyDescription": "Speichere Inhalte aus dem Katalog, um sie hier zu finden.",
+  "libraryErrorTitle": "Archiv nicht verfügbar",
+  "libraryErrorDescription": "Versuche erneut, deine gespeicherten Inhalte zu laden.",
+  "libraryCardSemantics": "Gespeicherten Inhalt öffnen: {title}",
+  "@libraryCardSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "profilePlaceholderTitle": "Dein Profil kommt bald",
   "profilePlaceholderDescription": "Hier erscheinen deine Präferenzen und dein Fotoweg.",
   "navigationLabel": "Hauptnavigation",
@@ -179,6 +192,9 @@
   "catalogDetailUnavailableDescription": "Dieser Inhalt ist offline nicht verfügbar oder nicht veröffentlichbar.",
   "catalogDetailErrorTitle": "Details konnten nicht geladen werden",
   "catalogDetailErrorDescription": "Versuche erneut, diesen Inhalt aus dem Offline-Katalog zu öffnen.",
+  "catalogDetailSave": "Speichern",
+  "catalogDetailSaved": "Gespeichert",
+  "catalogDetailSaveError": "Der Speicherstatus konnte nicht aktualisiert werden. Versuche es erneut.",
   "catalogDetailOffline": "Offline verfügbar",
   "catalogDetailSources": "Quellen",
   "catalogDetailAttribution": "Namensnennung: {value}",

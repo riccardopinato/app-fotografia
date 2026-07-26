@@ -152,7 +152,7 @@ void main() {
 
     await tester.tap(find.text('Library'));
     await tester.pumpAndSettle();
-    expect(find.text('Your library is coming soon'), findsOneWidget);
+    expect(find.text('No saved content yet'), findsOneWidget);
 
     await tester.tap(find.text('Profile'));
     await tester.pumpAndSettle();

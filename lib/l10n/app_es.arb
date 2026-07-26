@@ -14,6 +14,19 @@
   "ideasPlaceholderDescription": "Aquí aparecerán propuestas fotográficas personalizadas.",
   "libraryPlaceholderTitle": "Tu biblioteca llegará pronto",
   "libraryPlaceholderDescription": "Aquí aparecerán inspiración y notas guardadas.",
+  "libraryLoading": "Cargando contenido guardado",
+  "libraryEmptyTitle": "Aún no hay contenido guardado",
+  "libraryEmptyDescription": "Guarda contenido del catálogo para encontrarlo aquí.",
+  "libraryErrorTitle": "Archivo no disponible",
+  "libraryErrorDescription": "Intenta cargar de nuevo el contenido guardado.",
+  "libraryCardSemantics": "Abrir contenido guardado: {title}",
+  "@libraryCardSemantics": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "profilePlaceholderTitle": "Tu perfil llegará pronto",
   "profilePlaceholderDescription": "Aquí aparecerán tus preferencias y recorrido fotográfico.",
   "navigationLabel": "Navegación principal",
@@ -179,6 +192,9 @@
   "catalogDetailUnavailableDescription": "Este contenido no está disponible sin conexión o no se puede publicar.",
   "catalogDetailErrorTitle": "No se puede cargar el detalle",
   "catalogDetailErrorDescription": "Intenta leer este contenido de nuevo desde el catálogo sin conexión.",
+  "catalogDetailSave": "Guardar",
+  "catalogDetailSaved": "Guardado",
+  "catalogDetailSaveError": "No se pudo actualizar el guardado. Inténtalo de nuevo.",
   "catalogDetailOffline": "Disponible sin conexión",
   "catalogDetailSources": "Fuentes",
   "catalogDetailAttribution": "Atribución: {value}",
