@@ -91,6 +91,35 @@ void main() {
       expect(controller.mutationError, isNull);
     },
   );
+
+  test(
+    'blocks concurrent collection mutations until Drift write completes',
+    () async {
+      final library = _LibraryFake();
+      final controller = LibraryController(
+        library,
+        _CatalogFake(),
+        const LocaleCode('en'),
+      )..start();
+      addTearDown(() async {
+        controller.dispose();
+        await library.dispose();
+      });
+      library.collectionWrite = Completer<void>();
+
+      final first = controller.createCollection('Street');
+      expect(controller.isCollectionBusy, isTrue);
+      final duplicate = await controller.createCollection('Street');
+      final competing = await controller.renameCollection('id', 'Portraits');
+
+      expect(duplicate, isFalse);
+      expect(competing, isFalse);
+      expect(library.collectionWriteCalls, 1);
+      library.collectionWrite!.complete();
+      expect(await first, isTrue);
+      expect(controller.isCollectionBusy, isFalse);
+    },
+  );
 }
 
 Future<void> _flush() async {
@@ -191,6 +220,8 @@ class _LibraryFake implements LibraryRepository {
   String? lastNote;
   SavedItemStatus? lastStatus;
   String? lastCollectionId;
+  Completer<void>? collectionWrite;
+  int collectionWriteCalls = 0;
 
   void emitSaved(List<SavedItem> value) => saved.add(value);
   void emitCollections(List<CollectionWithCount> value) =>
@@ -236,8 +267,17 @@ class _LibraryFake implements LibraryRepository {
   @override
   Future<void> remove(String contentId) => _write();
   @override
-  Future<Collection> createCollection(String name) =>
-      throw UnimplementedError();
+  Future<Collection> createCollection(String name) async {
+    collectionWriteCalls += 1;
+    await collectionWrite?.future;
+    return Collection(
+      id: 'collection',
+      name: name,
+      createdAtUtc: DateTime.utc(2026),
+      updatedAtUtc: DateTime.utc(2026),
+    );
+  }
+
   @override
   Future<void> renameCollection(String id, String name) => _write();
   @override
