@@ -7,12 +7,14 @@ class FrameLabEmptyState extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.description,
+    this.action,
     super.key,
   });
 
   final IconData icon;
   final String title;
   final String description;
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,10 @@ class FrameLabEmptyState extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
+                      if (action case final action?) ...[
+                        const SizedBox(height: FrameLabSpacing.medium),
+                        action,
+                      ],
                     ],
                   ),
                 ),

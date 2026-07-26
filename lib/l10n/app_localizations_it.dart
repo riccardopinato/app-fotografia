@@ -548,4 +548,112 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get homeReasonEquipment => 'Compatible with your equipment';
+
+  @override
+  String get libraryNoResultsTitle => 'Nessun contenuto trovato';
+
+  @override
+  String get libraryNoResultsDescription =>
+      'Prova a modificare la ricerca o i filtri.';
+
+  @override
+  String get libraryClearFilters => 'Cancella ricerca e filtri';
+
+  @override
+  String get librarySearchHint => 'Cerca nei contenuti e nelle note';
+
+  @override
+  String get librarySearchClear => 'Cancella ricerca archivio';
+
+  @override
+  String get libraryAllStatuses => 'Tutti gli stati';
+
+  @override
+  String get libraryAllCollections => 'Tutte le raccolte';
+
+  @override
+  String get libraryManageCollections => 'Gestisci raccolte';
+
+  @override
+  String get libraryStatusToTry => 'Da provare';
+
+  @override
+  String get libraryStatusTried => 'Provato';
+
+  @override
+  String get libraryStatusCompleted => 'Completato';
+
+  @override
+  String libraryEditItem(String title) {
+    return 'Modifica $title';
+  }
+
+  @override
+  String get libraryStatusLabel => 'Stato';
+
+  @override
+  String get libraryCollectionLabel => 'Raccolta';
+
+  @override
+  String get libraryNoCollection => 'Nessuna raccolta';
+
+  @override
+  String get libraryNoteLabel => 'Nota personale';
+
+  @override
+  String get libraryRemoveTitle => 'Rimuovere il contenuto salvato?';
+
+  @override
+  String get libraryRemoveMessage =>
+      'La nota, lo stato e l’assegnazione alla raccolta verranno eliminati.';
+
+  @override
+  String get libraryRemoveAction => 'Rimuovi';
+
+  @override
+  String get libraryCancel => 'Annulla';
+
+  @override
+  String get librarySaveChanges => 'Salva';
+
+  @override
+  String get libraryMutationError =>
+      'Impossibile salvare la modifica. Riprova.';
+
+  @override
+  String get libraryNoCollections => 'Non hai ancora creato raccolte.';
+
+  @override
+  String libraryCollectionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count elementi',
+      one: '1 elemento',
+      zero: 'Nessun elemento',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get libraryRenameCollection => 'Rinomina raccolta';
+
+  @override
+  String get libraryDeleteCollection => 'Elimina raccolta';
+
+  @override
+  String get libraryDeleteCollectionMessage =>
+      'I contenuti salvati resteranno nell’archivio senza raccolta.';
+
+  @override
+  String get libraryCreateCollection => 'Nuova raccolta';
+
+  @override
+  String get libraryDone => 'Fine';
+
+  @override
+  String get libraryCollectionName => 'Nome raccolta';
+
+  @override
+  String get libraryConfirm => 'Conferma';
 }

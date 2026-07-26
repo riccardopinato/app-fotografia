@@ -249,5 +249,50 @@
   "homeReasonInterest": "Chosen for your photography interest",
   "homeReasonGoal": "Can help you reach your learning goal",
   "homeReasonLevel": "Right for your level",
-  "homeReasonEquipment": "Compatible with your equipment"
+  "homeReasonEquipment": "Compatible with your equipment",
+  "libraryNoResultsTitle": "No saved content found",
+  "libraryNoResultsDescription": "Try changing the search or filters.",
+  "libraryClearFilters": "Clear search and filters",
+  "librarySearchHint": "Search saved content and notes",
+  "librarySearchClear": "Clear library search",
+  "libraryAllStatuses": "All statuses",
+  "libraryAllCollections": "All collections",
+  "libraryManageCollections": "Manage collections",
+  "libraryStatusToTry": "To try",
+  "libraryStatusTried": "Tried",
+  "libraryStatusCompleted": "Completed",
+  "libraryEditItem": "Edit {title}",
+  "libraryStatusLabel": "Status",
+  "libraryCollectionLabel": "Collection",
+  "libraryNoCollection": "No collection",
+  "libraryNoteLabel": "Personal note",
+  "libraryRemoveTitle": "Remove saved content?",
+  "libraryRemoveMessage": "This removes the note, status, and collection assignment.",
+  "libraryRemoveAction": "Remove",
+  "libraryCancel": "Cancel",
+  "librarySaveChanges": "Save",
+  "libraryMutationError": "The change could not be saved. Try again.",
+  "libraryNoCollections": "No collections yet.",
+  "libraryCollectionCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "libraryRenameCollection": "Rename collection",
+  "libraryDeleteCollection": "Delete collection",
+  "libraryDeleteCollectionMessage": "Saved content will remain in the library without a collection.",
+  "libraryCreateCollection": "New collection",
+  "libraryDone": "Done",
+  "libraryCollectionName": "Collection name",
+  "libraryConfirm": "Confirm",
+  "@libraryEditItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "@libraryCollectionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

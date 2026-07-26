@@ -25,31 +25,81 @@ class LibraryController extends ChangeNotifier {
   final CatalogRepository _catalogRepository;
   LocaleCode _locale;
 
-  StreamSubscription<List<SavedItem>>? _subscription;
+  StreamSubscription<List<SavedItem>>? _savedSubscription;
+  StreamSubscription<List<CollectionWithCount>>? _collectionSubscription;
   List<SavedItem> _savedItems = const [];
-  List<LibraryEntry> _entries = const [];
+  List<LibraryEntry> _allEntries = const [];
+  List<CollectionWithCount> _collections = const [];
+  String _query = '';
+  SavedItemStatus? _statusFilter;
+  String? _collectionFilter;
   Object? _error;
+  Object? _mutationError;
   bool _isLoading = true;
   bool _disposed = false;
   int _requestSerial = 0;
+  final Set<String> _busyContentIds = {};
 
-  List<LibraryEntry> get entries => _entries;
+  List<LibraryEntry> get entries {
+    final normalizedQuery = _query.trim().toLowerCase();
+    return List.unmodifiable(
+      _allEntries.where((entry) {
+        final item = entry.savedItem;
+        if (_statusFilter != null && item.status != _statusFilter) return false;
+        if (_collectionFilter != null &&
+            item.collectionId != _collectionFilter) {
+          return false;
+        }
+        if (normalizedQuery.isEmpty) return true;
+        return entry.content.translation.title.toLowerCase().contains(
+              normalizedQuery,
+            ) ||
+            entry.content.translation.summary.toLowerCase().contains(
+              normalizedQuery,
+            ) ||
+            (item.note?.toLowerCase().contains(normalizedQuery) ?? false);
+      }),
+    );
+  }
+
+  List<CollectionWithCount> get collections => _collections;
+  String get query => _query;
+  SavedItemStatus? get statusFilter => _statusFilter;
+  String? get collectionFilter => _collectionFilter;
   Object? get error => _error;
+  Object? get mutationError => _mutationError;
   bool get isLoading => _isLoading;
+  bool get hasSavedItems => _allEntries.isNotEmpty;
+  bool get hasActiveFilters =>
+      _query.trim().isNotEmpty ||
+      _statusFilter != null ||
+      _collectionFilter != null;
+  bool isBusy(String contentId) => _busyContentIds.contains(contentId);
 
   void start() {
-    if (_subscription != null) return;
-    _subscription = _libraryRepository.watchSavedItems().listen(
-      (items) {
-        _savedItems = List.unmodifiable(items);
-        unawaited(_resolve(items));
-      },
-      onError: (Object error, StackTrace stackTrace) {
-        _error = error;
-        _isLoading = false;
-        _notify();
-      },
-    );
+    if (_savedSubscription != null) return;
+    _savedSubscription = _libraryRepository.watchSavedItems().listen((items) {
+      _savedItems = List.unmodifiable(items);
+      unawaited(_resolve(items));
+    }, onError: _onStreamError);
+    _collectionSubscription = _libraryRepository.watchCollections().listen((
+      collections,
+    ) {
+      _collections = List.unmodifiable(collections);
+      if (_collectionFilter != null &&
+          !_collections.any(
+            (entry) => entry.collection.id == _collectionFilter,
+          )) {
+        _collectionFilter = null;
+      }
+      _notify();
+    }, onError: _onStreamError);
+  }
+
+  void _onStreamError(Object error, StackTrace stackTrace) {
+    _error = error;
+    _isLoading = false;
+    _notify();
   }
 
   void setLocale(LocaleCode locale) {
@@ -58,7 +108,113 @@ class LibraryController extends ChangeNotifier {
     unawaited(_resolve(_savedItems));
   }
 
+  void setQuery(String value) {
+    if (_query == value) return;
+    _query = value;
+    _notify();
+  }
+
+  void setStatusFilter(SavedItemStatus? value) {
+    if (_statusFilter == value) return;
+    _statusFilter = value;
+    _notify();
+  }
+
+  void setCollectionFilter(String? value) {
+    if (_collectionFilter == value) return;
+    _collectionFilter = value;
+    _notify();
+  }
+
+  void clearFilters() {
+    _query = '';
+    _statusFilter = null;
+    _collectionFilter = null;
+    _notify();
+  }
+
+  void clearMutationError() {
+    if (_mutationError == null) return;
+    _mutationError = null;
+    _notify();
+  }
+
   Future<void> retry() => _resolve(_savedItems);
+
+  Future<bool> updateNote(String contentId, String? note) =>
+      _mutate(contentId, () => _libraryRepository.updateNote(contentId, note));
+
+  Future<bool> updateStatus(String contentId, SavedItemStatus status) =>
+      _mutate(
+        contentId,
+        () => _libraryRepository.updateStatus(contentId, status),
+      );
+
+  Future<bool> assignCollection(String contentId, String? collectionId) =>
+      _mutate(
+        contentId,
+        () => _libraryRepository.assignCollection(contentId, collectionId),
+      );
+
+  Future<bool> updateDetails(
+    String contentId, {
+    required String? note,
+    required SavedItemStatus status,
+    required String? collectionId,
+  }) => _mutate(
+    contentId,
+    () => _libraryRepository.updateDetails(
+      contentId,
+      note: note,
+      status: status,
+      collectionId: collectionId,
+    ),
+  );
+
+  Future<bool> remove(String contentId) =>
+      _mutate(contentId, () => _libraryRepository.remove(contentId));
+
+  Future<bool> _mutate(
+    String contentId,
+    Future<void> Function() operation,
+  ) async {
+    if (_busyContentIds.contains(contentId)) return false;
+    _busyContentIds.add(contentId);
+    _mutationError = null;
+    _notify();
+    try {
+      await operation();
+      return true;
+    } catch (error) {
+      _mutationError = error;
+      return false;
+    } finally {
+      _busyContentIds.remove(contentId);
+      _notify();
+    }
+  }
+
+  Future<bool> createCollection(String name) =>
+      _collectionMutation(() => _libraryRepository.createCollection(name));
+
+  Future<bool> renameCollection(String id, String name) =>
+      _collectionMutation(() => _libraryRepository.renameCollection(id, name));
+
+  Future<bool> deleteCollection(String id) =>
+      _collectionMutation(() => _libraryRepository.deleteCollection(id));
+
+  Future<bool> _collectionMutation(Future<Object?> Function() operation) async {
+    _mutationError = null;
+    _notify();
+    try {
+      await operation();
+      return true;
+    } catch (error) {
+      _mutationError = error;
+      _notify();
+      return false;
+    }
+  }
 
   Future<void> _resolve(List<SavedItem> items) async {
     final serial = ++_requestSerial;
@@ -78,7 +234,7 @@ class LibraryController extends ChangeNotifier {
         }),
       );
       if (serial != _requestSerial) return;
-      _entries = List.unmodifiable(resolved.whereType<LibraryEntry>());
+      _allEntries = List.unmodifiable(resolved.whereType<LibraryEntry>());
     } catch (error) {
       if (serial != _requestSerial) return;
       _error = error;
@@ -97,7 +253,8 @@ class LibraryController extends ChangeNotifier {
   @override
   void dispose() {
     _disposed = true;
-    unawaited(_subscription?.cancel());
+    unawaited(_savedSubscription?.cancel());
+    unawaited(_collectionSubscription?.cancel());
     super.dispose();
   }
 }

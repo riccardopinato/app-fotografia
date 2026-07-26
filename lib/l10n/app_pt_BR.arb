@@ -249,5 +249,50 @@
   "homeReasonInterest": "Chosen for your photography interest",
   "homeReasonGoal": "Can help you reach your learning goal",
   "homeReasonLevel": "Right for your level",
-  "homeReasonEquipment": "Compatible with your equipment"
+  "homeReasonEquipment": "Compatible with your equipment",
+  "libraryNoResultsTitle": "Nenhum conteúdo encontrado",
+  "libraryNoResultsDescription": "Altere a pesquisa ou os filtros.",
+  "libraryClearFilters": "Limpar pesquisa e filtros",
+  "librarySearchHint": "Pesquisar conteúdos e notas",
+  "librarySearchClear": "Limpar pesquisa",
+  "libraryAllStatuses": "Todos os estados",
+  "libraryAllCollections": "Todas as coleções",
+  "libraryManageCollections": "Gerir coleções",
+  "libraryStatusToTry": "Para experimentar",
+  "libraryStatusTried": "Experimentado",
+  "libraryStatusCompleted": "Concluído",
+  "libraryEditItem": "Editar {title}",
+  "libraryStatusLabel": "Estado",
+  "libraryCollectionLabel": "Coleção",
+  "libraryNoCollection": "Sem coleção",
+  "libraryNoteLabel": "Nota pessoal",
+  "libraryRemoveTitle": "Remover conteúdo guardado?",
+  "libraryRemoveMessage": "A nota, o estado e a coleção serão removidos.",
+  "libraryRemoveAction": "Remover",
+  "libraryCancel": "Cancelar",
+  "librarySaveChanges": "Guardar",
+  "libraryMutationError": "Não foi possível guardar a alteração. Tente novamente.",
+  "libraryNoCollections": "Ainda não existem coleções.",
+  "libraryCollectionCount": "{count, plural, =0{Nenhum item} =1{1 item} other{{count} itens}}",
+  "libraryRenameCollection": "Mudar nome da coleção",
+  "libraryDeleteCollection": "Eliminar coleção",
+  "libraryDeleteCollectionMessage": "O conteúdo guardado permanecerá no arquivo sem coleção.",
+  "libraryCreateCollection": "Nova coleção",
+  "libraryDone": "Concluir",
+  "libraryCollectionName": "Nome da coleção",
+  "libraryConfirm": "Confirmar",
+  "@libraryEditItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "@libraryCollectionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

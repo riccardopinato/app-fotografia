@@ -139,6 +139,14 @@ class _EmptyLibraryRepository implements LibraryRepository {
   Future<SavedItem> save(String contentId, {String? collectionId}) =>
       throw UnsupportedError('Library is unavailable');
   @override
+  Future<void> updateDetails(
+    String contentId, {
+    required String? note,
+    required SavedItemStatus status,
+    required String? collectionId,
+  }) async {}
+
+  @override
   Future<void> updateNote(String contentId, String? note) async {}
   @override
   Future<void> updateStatus(String contentId, SavedItemStatus status) async {}

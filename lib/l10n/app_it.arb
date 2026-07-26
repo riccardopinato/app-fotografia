@@ -249,5 +249,50 @@
   "homeReasonInterest": "Chosen for your photography interest",
   "homeReasonGoal": "Can help you reach your learning goal",
   "homeReasonLevel": "Right for your level",
-  "homeReasonEquipment": "Compatible with your equipment"
+  "homeReasonEquipment": "Compatible with your equipment",
+  "libraryNoResultsTitle": "Nessun contenuto trovato",
+  "libraryNoResultsDescription": "Prova a modificare la ricerca o i filtri.",
+  "libraryClearFilters": "Cancella ricerca e filtri",
+  "librarySearchHint": "Cerca nei contenuti e nelle note",
+  "librarySearchClear": "Cancella ricerca archivio",
+  "libraryAllStatuses": "Tutti gli stati",
+  "libraryAllCollections": "Tutte le raccolte",
+  "libraryManageCollections": "Gestisci raccolte",
+  "libraryStatusToTry": "Da provare",
+  "libraryStatusTried": "Provato",
+  "libraryStatusCompleted": "Completato",
+  "libraryEditItem": "Modifica {title}",
+  "libraryStatusLabel": "Stato",
+  "libraryCollectionLabel": "Raccolta",
+  "libraryNoCollection": "Nessuna raccolta",
+  "libraryNoteLabel": "Nota personale",
+  "libraryRemoveTitle": "Rimuovere il contenuto salvato?",
+  "libraryRemoveMessage": "La nota, lo stato e l’assegnazione alla raccolta verranno eliminati.",
+  "libraryRemoveAction": "Rimuovi",
+  "libraryCancel": "Annulla",
+  "librarySaveChanges": "Salva",
+  "libraryMutationError": "Impossibile salvare la modifica. Riprova.",
+  "libraryNoCollections": "Non hai ancora creato raccolte.",
+  "libraryCollectionCount": "{count, plural, =0{Nessun elemento} =1{1 elemento} other{{count} elementi}}",
+  "libraryRenameCollection": "Rinomina raccolta",
+  "libraryDeleteCollection": "Elimina raccolta",
+  "libraryDeleteCollectionMessage": "I contenuti salvati resteranno nell’archivio senza raccolta.",
+  "libraryCreateCollection": "Nuova raccolta",
+  "libraryDone": "Fine",
+  "libraryCollectionName": "Nome raccolta",
+  "libraryConfirm": "Conferma",
+  "@libraryEditItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "@libraryCollectionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

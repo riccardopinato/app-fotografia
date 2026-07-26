@@ -12,6 +12,12 @@ abstract interface class LibraryRepository {
   Future<void> updateNote(String contentId, String? note);
   Future<void> updateStatus(String contentId, SavedItemStatus status);
   Future<void> assignCollection(String contentId, String? collectionId);
+  Future<void> updateDetails(
+    String contentId, {
+    required String? note,
+    required SavedItemStatus status,
+    required String? collectionId,
+  });
   Stream<List<CollectionWithCount>> watchCollections();
   Future<Collection> createCollection(String name);
   Future<void> renameCollection(String id, String name);

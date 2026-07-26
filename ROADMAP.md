@@ -11,7 +11,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 | 4 | Onboarding e profilo | preferenze locali modificabili | completato |
 | 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | completato |
 | 6 | Home e idee a regole | proposte personalizzate spiegabili | completato |
-| 7 | Archivio personale | salvataggi, cartelle, note e stati | in corso (7A e 7B completati) |
+| 7 | Archivio personale | salvataggi, cartelle, note e stati | completato (7A–7C) |
 
 ## Step 7A — Fondamenta tecniche Archivio personale
 
@@ -20,6 +20,10 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 ## Step 7B — Salvataggio dal dettaglio e Archivio in sola lettura
 
 **Step 7B.** Implementati il toggle localizzato e accessibile `Salva`/`Salvato` nel dettaglio catalogo e la pagina Archivio in sola lettura, alimentata dai salvataggi locali e dai contenuti catalogo nella lingua attiva. Le mutazioni non sono ottimistiche e restano recuperabili in caso di errore. Note, raccolte, filtri, ricerca, modifica dello stato e rimozione dalla lista sono rimandati allo Step 7C.
+
+## Step 7C — Gestione completa dell’Archivio personale
+
+**Step 7C.** Completato l’Archivio locale con ricerca su contenuti e note, filtri combinabili per stato e raccolta, modifica di nota/stato/raccolta, rimozione con conferma e creazione, rinomina ed eliminazione delle raccolte. Le mutazioni attendono l’esito del repository e mostrano errori recuperabili; l’eliminazione di una raccolta conserva i salvataggi senza raccolta. Interfaccia e semantica sono localizzate nelle lingue di lancio. Lo schema Drift resta alla versione 4; hardening generale e test d’integrazione end-to-end restano allo Step 8.
 | 8 | Hardening MVP | test integrazione, accessibilità e screenshot | da fare |
 | 9 | Pipeline editoriale | importazione/revisione separata e tracciabile | da fare |
 | 10 | Account e sync | auth opzionale, Firestore e conflitti gestiti | da fare |
