@@ -149,6 +149,18 @@ class _LibraryPageState extends State<LibraryPage> {
                           const SizedBox(height: FrameLabSpacing.small),
                       itemBuilder: (context, index) => _LibraryCard(
                         entry: controller.entries[index],
+                        collectionName: controller.collections
+                            .where(
+                              (value) =>
+                                  value.collection.id ==
+                                  controller
+                                      .entries[index]
+                                      .savedItem
+                                      .collectionId,
+                            )
+                            .firstOrNull
+                            ?.collection
+                            .name,
                         busy: controller.isBusy(
                           controller.entries[index].savedItem.contentId,
                         ),
@@ -211,12 +223,11 @@ class _LibraryControls extends StatelessWidget {
           onChanged: controller.setQuery,
         ),
         const SizedBox(height: FrameLabSpacing.small),
-        Wrap(
-          spacing: FrameLabSpacing.small,
-          runSpacing: FrameLabSpacing.small,
-          crossAxisAlignment: WrapCrossAlignment.center,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             DropdownButton<SavedItemStatus?>(
+              isExpanded: true,
               value: controller.statusFilter,
               hint: Text(l10n.libraryAllStatuses),
               onChanged: controller.setStatusFilter,
@@ -233,6 +244,7 @@ class _LibraryControls extends StatelessWidget {
               ],
             ),
             DropdownButton<String?>(
+              isExpanded: true,
               value: controller.collectionFilter,
               hint: Text(l10n.libraryAllCollections),
               onChanged: controller.setCollectionFilter,
@@ -263,11 +275,13 @@ class _LibraryControls extends StatelessWidget {
 class _LibraryCard extends StatelessWidget {
   const _LibraryCard({
     required this.entry,
+    required this.collectionName,
     required this.busy,
     required this.onEdit,
   });
 
   final LibraryEntry entry;
+  final String? collectionName;
   final bool busy;
   final VoidCallback onEdit;
 
@@ -275,6 +289,13 @@ class _LibraryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final content = entry.content;
+    final semanticsParts = <String>[
+      l10n.libraryCardSemantics(content.translation.title),
+      '${l10n.libraryStatusLabel}: ${_statusLabel(l10n, entry.savedItem.status)}',
+      '${l10n.libraryNoteLabel}: ${entry.savedItem.note ?? l10n.libraryNoNote}',
+      if (collectionName != null)
+        '${l10n.libraryCollectionLabel}: $collectionName',
+    ];
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(FrameLabSpacing.medium),
@@ -289,7 +310,7 @@ class _LibraryCard extends StatelessWidget {
                 ),
                 child: Semantics(
                   button: true,
-                  label: l10n.libraryCardSemantics(content.translation.title),
+                  label: semanticsParts.join('. '),
                   excludeSemantics: true,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -461,8 +482,8 @@ Future<void> _showCollectionManager(
       final l10n = AppLocalizations.of(context)!;
       return AlertDialog(
         title: Text(l10n.libraryManageCollections),
-        content: SizedBox(
-          width: 420,
+        content: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 420),
           child: controller.collections.isEmpty
               ? Text(l10n.libraryNoCollections)
               : ListView.builder(
@@ -479,32 +500,37 @@ Future<void> _showCollectionManager(
                         children: [
                           IconButton(
                             tooltip: l10n.libraryRenameCollection,
-                            onPressed: () => _collectionNameDialog(
-                              context,
-                              initialName: value.collection.name,
-                              title: l10n.libraryRenameCollection,
-                              action: (name) => controller.renameCollection(
-                                value.collection.id,
-                                name,
-                              ),
-                            ),
+                            onPressed: controller.isCollectionBusy
+                                ? null
+                                : () => _collectionNameDialog(
+                                    context,
+                                    initialName: value.collection.name,
+                                    title: l10n.libraryRenameCollection,
+                                    action: (name) =>
+                                        controller.renameCollection(
+                                          value.collection.id,
+                                          name,
+                                        ),
+                                  ),
                             icon: const Icon(Icons.edit_outlined),
                           ),
                           IconButton(
                             tooltip: l10n.libraryDeleteCollection,
-                            onPressed: () async {
-                              if (await _confirm(
-                                    context,
-                                    title: l10n.libraryDeleteCollection,
-                                    message:
-                                        l10n.libraryDeleteCollectionMessage,
-                                  ) &&
-                                  context.mounted) {
-                                await controller.deleteCollection(
-                                  value.collection.id,
-                                );
-                              }
-                            },
+                            onPressed: controller.isCollectionBusy
+                                ? null
+                                : () async {
+                                    if (await _confirm(
+                                          context,
+                                          title: l10n.libraryDeleteCollection,
+                                          message: l10n
+                                              .libraryDeleteCollectionMessage,
+                                        ) &&
+                                        context.mounted) {
+                                      await controller.deleteCollection(
+                                        value.collection.id,
+                                      );
+                                    }
+                                  },
                             icon: const Icon(Icons.delete_outline),
                           ),
                         ],
@@ -514,12 +540,19 @@ Future<void> _showCollectionManager(
                 ),
         ),
         actions: [
-          TextButton.icon(
-            onPressed: () => _collectionNameDialog(
-              context,
-              title: l10n.libraryCreateCollection,
-              action: controller.createCollection,
+          if (controller.isCollectionBusy)
+            const SizedBox.square(
+              dimension: 24,
+              child: CircularProgressIndicator(strokeWidth: 2),
             ),
+          TextButton.icon(
+            onPressed: controller.isCollectionBusy
+                ? null
+                : () => _collectionNameDialog(
+                    context,
+                    title: l10n.libraryCreateCollection,
+                    action: controller.createCollection,
+                  ),
             icon: const Icon(Icons.create_new_folder_outlined),
             label: Text(l10n.libraryCreateCollection),
           ),
@@ -541,31 +574,47 @@ Future<void> _collectionNameDialog(
 }) async {
   final l10n = AppLocalizations.of(context)!;
   var name = initialName;
+  var saving = false;
   await showDialog<void>(
     context: context,
-    builder: (dialogContext) => AlertDialog(
-      title: Text(title),
-      content: TextFormField(
-        initialValue: initialName,
-        autofocus: true,
-        decoration: InputDecoration(labelText: l10n.libraryCollectionName),
-        onChanged: (value) => name = value,
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(dialogContext),
-          child: Text(l10n.libraryCancel),
-        ),
-        FilledButton(
-          onPressed: () async {
-            if (name.trim().isEmpty) return;
-            if (await action(name) && dialogContext.mounted) {
-              Navigator.pop(dialogContext);
-            }
-          },
-          child: Text(l10n.librarySaveChanges),
-        ),
-      ],
+    builder: (dialogContext) => StatefulBuilder(
+      builder: (context, setDialogState) {
+        return AlertDialog(
+          title: Text(title),
+          content: TextFormField(
+            initialValue: initialName,
+            autofocus: true,
+            decoration: InputDecoration(labelText: l10n.libraryCollectionName),
+            onChanged: (value) => name = value,
+          ),
+          actions: [
+            TextButton(
+              onPressed: saving ? null : () => Navigator.pop(dialogContext),
+              child: Text(l10n.libraryCancel),
+            ),
+            FilledButton(
+              onPressed: saving
+                  ? null
+                  : () async {
+                      if (name.trim().isEmpty) return;
+                      setDialogState(() => saving = true);
+                      final saved = await action(name);
+                      if (saved && dialogContext.mounted) {
+                        Navigator.pop(dialogContext);
+                      } else if (dialogContext.mounted) {
+                        setDialogState(() => saving = false);
+                      }
+                    },
+              child: saving
+                  ? const SizedBox.square(
+                      dimension: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : Text(l10n.librarySaveChanges),
+            ),
+          ],
+        );
+      },
     ),
   );
 }

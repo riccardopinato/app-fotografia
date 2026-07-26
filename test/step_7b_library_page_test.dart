@@ -31,7 +31,14 @@ void main() {
       lessThan(tester.getTopLeft(find.text('Title a')).dy),
     );
 
-    await tester.tap(find.bySemanticsLabel('Open saved content: Title b'));
+    await tester.tap(
+      find.bySemanticsLabel(
+        RegExp(
+          r'^Open saved content: Title b\. Status: To try\. '
+          r'Personal note: No note$',
+        ),
+      ),
+    );
     await tester.pumpAndSettle();
     expect(find.text('detail:b'), findsOneWidget);
   });
@@ -81,16 +88,58 @@ void main() {
       locale: const Locale('it'),
       textScaler: const TextScaler.linear(2),
     );
-    library.emit([_saved('a', 1)]);
+    library.emit([
+      _saved(
+        'a',
+        1,
+        note: 'Provare con luce laterale',
+        status: SavedItemStatus.completed,
+        collectionId: 'portraits',
+      ),
+    ]);
+    library.emitCollections([_collection('portraits', 'Ritratti')]);
     await _flush(tester);
 
     expect(find.text('Archivio'), findsOneWidget);
     expect(
-      find.bySemanticsLabel('Apri contenuto salvato: Titolo a'),
+      find.bySemanticsLabel(
+        RegExp(
+          r'^Apri contenuto salvato: Titolo a\. Stato: Completato\. '
+          r'Nota personale: Provare con luce laterale\. Raccolta: Ritratti$',
+        ),
+      ),
       findsOneWidget,
     );
     expect(tester.takeException(), isNull);
     semantics.dispose();
+  });
+
+  testWidgets('fits long German copy in a compact dark viewport at 2x', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(640, 960);
+    tester.view.devicePixelRatio = 2;
+    addTearDown(tester.view.reset);
+    final library = _FakeLibraryRepository();
+    final catalog = _FakeCatalogRepository();
+    addTearDown(library.dispose);
+
+    await _pumpLibrary(
+      tester,
+      library: library,
+      catalog: catalog,
+      locale: const Locale('de'),
+      textScaler: const TextScaler.linear(2),
+      themeMode: ThemeMode.dark,
+    );
+    library.emit([_saved('a', 1, note: 'Eine hilfreiche persönliche Notiz')]);
+    await _flush(tester);
+
+    expect(
+      find.text('Gespeicherte Inhalte und Notizen durchsuchen'),
+      findsOneWidget,
+    );
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('searches the library and opens the personal item editor', (
@@ -130,6 +179,7 @@ Future<void> _pumpLibrary(
   required _FakeCatalogRepository catalog,
   Locale locale = const Locale('en'),
   TextScaler textScaler = TextScaler.noScaling,
+  ThemeMode themeMode = ThemeMode.light,
 }) async {
   final router = GoRouter(
     initialLocation: '/library',
@@ -150,6 +200,9 @@ Future<void> _pumpLibrary(
 
   await tester.pumpWidget(
     MaterialApp.router(
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: themeMode,
       locale: locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -171,11 +224,30 @@ Future<void> _flush(WidgetTester tester) async {
   await tester.pump();
 }
 
-SavedItem _saved(String contentId, int order) => SavedItem(
+SavedItem _saved(
+  String contentId,
+  int order, {
+  String? note,
+  String? collectionId,
+  SavedItemStatus status = SavedItemStatus.toTry,
+}) => SavedItem(
   id: 'saved-$contentId',
   contentId: contentId,
+  note: note,
+  collectionId: collectionId,
+  status: status,
   savedAtUtc: DateTime.utc(2026, 1, order),
   updatedAtUtc: DateTime.utc(2026, 1, order),
+);
+
+CollectionWithCount _collection(String id, String name) => CollectionWithCount(
+  collection: Collection(
+    id: id,
+    name: name,
+    createdAtUtc: DateTime.utc(2026),
+    updatedAtUtc: DateTime.utc(2026),
+  ),
+  savedItemCount: 1,
 );
 
 LocalizedContent _content(String id, LocaleCode locale) => LocalizedContent(
@@ -252,12 +324,20 @@ class _FakeCatalogRepository implements CatalogRepository {
 
 class _FakeLibraryRepository implements LibraryRepository {
   final _savedItems = StreamController<List<SavedItem>>.broadcast(sync: true);
+  final _collections = StreamController<List<CollectionWithCount>>.broadcast(
+    sync: true,
+  );
   int detailUpdateCalls = 0;
   String? lastNote;
 
   void emit(List<SavedItem> items) => _savedItems.add(items);
+  void emitCollections(List<CollectionWithCount> items) =>
+      _collections.add(items);
 
-  Future<void> dispose() => _savedItems.close();
+  Future<void> dispose() async {
+    await _savedItems.close();
+    await _collections.close();
+  }
 
   @override
   Stream<List<SavedItem>> watchSavedItems() => _savedItems.stream;
@@ -309,5 +389,5 @@ class _FakeLibraryRepository implements LibraryRepository {
   Future<void> updateStatus(String contentId, SavedItemStatus status) async {}
 
   @override
-  Stream<List<CollectionWithCount>> watchCollections() => const Stream.empty();
+  Stream<List<CollectionWithCount>> watchCollections() => _collections.stream;
 }

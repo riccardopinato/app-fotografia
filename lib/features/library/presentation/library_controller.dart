@@ -37,6 +37,7 @@ class LibraryController extends ChangeNotifier {
   Object? _mutationError;
   bool _isLoading = true;
   bool _disposed = false;
+  bool _collectionBusy = false;
   int _requestSerial = 0;
   final Set<String> _busyContentIds = {};
 
@@ -70,6 +71,7 @@ class LibraryController extends ChangeNotifier {
   Object? get mutationError => _mutationError;
   bool get isLoading => _isLoading;
   bool get hasSavedItems => _allEntries.isNotEmpty;
+  bool get isCollectionBusy => _collectionBusy;
   bool get hasActiveFilters =>
       _query.trim().isNotEmpty ||
       _statusFilter != null ||
@@ -204,6 +206,8 @@ class LibraryController extends ChangeNotifier {
       _collectionMutation(() => _libraryRepository.deleteCollection(id));
 
   Future<bool> _collectionMutation(Future<Object?> Function() operation) async {
+    if (_collectionBusy) return false;
+    _collectionBusy = true;
     _mutationError = null;
     _notify();
     try {
@@ -211,8 +215,10 @@ class LibraryController extends ChangeNotifier {
       return true;
     } catch (error) {
       _mutationError = error;
-      _notify();
       return false;
+    } finally {
+      _collectionBusy = false;
+      _notify();
     }
   }
 

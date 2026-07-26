@@ -653,4 +653,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get libraryConfirm => 'Confirm';
+
+  @override
+  String get libraryNoNote => 'No note';
 }
