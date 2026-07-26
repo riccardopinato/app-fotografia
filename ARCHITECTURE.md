@@ -27,11 +27,13 @@ lib/
 
 SQLite/Drift è la fonte locale per profilo, catalogo e archivio. Il catalogo è localizzato per pacchetti linguistici: il dispositivo conserva e aggiorna separatamente la lingua selezionata, con indici di ricerca per locale e aggiornamenti incrementali; non scarica automaticamente tutte le traduzioni. Preferiti e progressi restano associati all'identità concettuale del contenuto, quindi il cambio lingua non li perde. In una fase successiva Firestore sincronizzerà solo dati autorizzati; una coda di operazioni con timestamp e strategia di conflitto documentata eviterà che la rete impedisca lettura o salvataggio.
 
-## Archivio personale (Step 7A–7B)
+## Archivio personale (Step 7A–7C)
 
 Il dominio `library` espone le entità immutabili `SavedItem` e `Collection`, lo stato `toTry`/`tried`/`completed` e il contratto `LibraryRepository`. Lo schema Drift v4 introduce `collections` e `saved_items`: ogni salvataggio conserva solo il `contentId` stabile, stato, nota opzionale, raccolta e timestamp UTC; titoli e testi localizzati restano nel catalogo. `saved_items.content_id` è univoco e referenzia `content_items.id`; `collection_id` è nullable e referenzia `collections.id` con `ON DELETE SET NULL`, così eliminare una raccolta conserva i salvataggi. Indici su raccolta, stato e ordinamento temporale supportano le query locali.
 
-Lo Step 7B aggiunge un `SavedItemController` per il toggle del dettaglio e un read model di presentazione che combina i salvataggi con il catalogo localizzato senza duplicare i testi editoriali nell'archivio. Entrambe le superfici reagiscono agli stream locali e non mostrano stati ottimistici durante le mutazioni. Le operazioni di Step 7C restano escluse.
+Lo Step 7B aggiunge un `SavedItemController` per il toggle del dettaglio e un read model di presentazione che combina i salvataggi con il catalogo localizzato senza duplicare i testi editoriali nell'archivio. Entrambe le superfici reagiscono agli stream locali e non mostrano stati ottimistici durante le mutazioni.
+
+Lo Step 7C estende il read model dell’Archivio con ricerca locale su titolo, sommario e nota e filtri combinabili per stato e raccolta. Il controller orchestra note, stato, assegnazione, rimozione e CRUD delle raccolte attraverso `LibraryRepository`; nota, stato e raccolta vengono salvati insieme con un singolo aggiornamento locale, evitando modifiche parziali. Le modifiche diventano visibili solo quando gli stream Drift restituiscono i dati persistiti e gli errori restano recuperabili. La presentazione mantiene separati i contenuti editoriali dal dato personale, richiede conferma per le eliminazioni e conserva i salvataggi quando una raccolta viene eliminata.
 
 ## Localizzazione
 

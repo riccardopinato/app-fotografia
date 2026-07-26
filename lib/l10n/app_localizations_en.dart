@@ -545,4 +545,112 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeReasonEquipment => 'Compatible with your equipment';
+
+  @override
+  String get libraryNoResultsTitle => 'No saved content found';
+
+  @override
+  String get libraryNoResultsDescription =>
+      'Try changing the search or filters.';
+
+  @override
+  String get libraryClearFilters => 'Clear search and filters';
+
+  @override
+  String get librarySearchHint => 'Search saved content and notes';
+
+  @override
+  String get librarySearchClear => 'Clear library search';
+
+  @override
+  String get libraryAllStatuses => 'All statuses';
+
+  @override
+  String get libraryAllCollections => 'All collections';
+
+  @override
+  String get libraryManageCollections => 'Manage collections';
+
+  @override
+  String get libraryStatusToTry => 'To try';
+
+  @override
+  String get libraryStatusTried => 'Tried';
+
+  @override
+  String get libraryStatusCompleted => 'Completed';
+
+  @override
+  String libraryEditItem(String title) {
+    return 'Edit $title';
+  }
+
+  @override
+  String get libraryStatusLabel => 'Status';
+
+  @override
+  String get libraryCollectionLabel => 'Collection';
+
+  @override
+  String get libraryNoCollection => 'No collection';
+
+  @override
+  String get libraryNoteLabel => 'Personal note';
+
+  @override
+  String get libraryRemoveTitle => 'Remove saved content?';
+
+  @override
+  String get libraryRemoveMessage =>
+      'This removes the note, status, and collection assignment.';
+
+  @override
+  String get libraryRemoveAction => 'Remove';
+
+  @override
+  String get libraryCancel => 'Cancel';
+
+  @override
+  String get librarySaveChanges => 'Save';
+
+  @override
+  String get libraryMutationError =>
+      'The change could not be saved. Try again.';
+
+  @override
+  String get libraryNoCollections => 'No collections yet.';
+
+  @override
+  String libraryCollectionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+      zero: 'No items',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get libraryRenameCollection => 'Rename collection';
+
+  @override
+  String get libraryDeleteCollection => 'Delete collection';
+
+  @override
+  String get libraryDeleteCollectionMessage =>
+      'Saved content will remain in the library without a collection.';
+
+  @override
+  String get libraryCreateCollection => 'New collection';
+
+  @override
+  String get libraryDone => 'Done';
+
+  @override
+  String get libraryCollectionName => 'Collection name';
+
+  @override
+  String get libraryConfirm => 'Confirm';
 }

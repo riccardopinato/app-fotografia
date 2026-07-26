@@ -1102,6 +1102,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Compatible with your equipment'**
   String get homeReasonEquipment;
+
+  /// No description provided for @libraryNoResultsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved content found'**
+  String get libraryNoResultsTitle;
+
+  /// No description provided for @libraryNoResultsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Try changing the search or filters.'**
+  String get libraryNoResultsDescription;
+
+  /// No description provided for @libraryClearFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search and filters'**
+  String get libraryClearFilters;
+
+  /// No description provided for @librarySearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search saved content and notes'**
+  String get librarySearchHint;
+
+  /// No description provided for @librarySearchClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear library search'**
+  String get librarySearchClear;
+
+  /// No description provided for @libraryAllStatuses.
+  ///
+  /// In en, this message translates to:
+  /// **'All statuses'**
+  String get libraryAllStatuses;
+
+  /// No description provided for @libraryAllCollections.
+  ///
+  /// In en, this message translates to:
+  /// **'All collections'**
+  String get libraryAllCollections;
+
+  /// No description provided for @libraryManageCollections.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage collections'**
+  String get libraryManageCollections;
+
+  /// No description provided for @libraryStatusToTry.
+  ///
+  /// In en, this message translates to:
+  /// **'To try'**
+  String get libraryStatusToTry;
+
+  /// No description provided for @libraryStatusTried.
+  ///
+  /// In en, this message translates to:
+  /// **'Tried'**
+  String get libraryStatusTried;
+
+  /// No description provided for @libraryStatusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get libraryStatusCompleted;
+
+  /// No description provided for @libraryEditItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit {title}'**
+  String libraryEditItem(String title);
+
+  /// No description provided for @libraryStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get libraryStatusLabel;
+
+  /// No description provided for @libraryCollectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Collection'**
+  String get libraryCollectionLabel;
+
+  /// No description provided for @libraryNoCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'No collection'**
+  String get libraryNoCollection;
+
+  /// No description provided for @libraryNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal note'**
+  String get libraryNoteLabel;
+
+  /// No description provided for @libraryRemoveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove saved content?'**
+  String get libraryRemoveTitle;
+
+  /// No description provided for @libraryRemoveMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This removes the note, status, and collection assignment.'**
+  String get libraryRemoveMessage;
+
+  /// No description provided for @libraryRemoveAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get libraryRemoveAction;
+
+  /// No description provided for @libraryCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get libraryCancel;
+
+  /// No description provided for @librarySaveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get librarySaveChanges;
+
+  /// No description provided for @libraryMutationError.
+  ///
+  /// In en, this message translates to:
+  /// **'The change could not be saved. Try again.'**
+  String get libraryMutationError;
+
+  /// No description provided for @libraryNoCollections.
+  ///
+  /// In en, this message translates to:
+  /// **'No collections yet.'**
+  String get libraryNoCollections;
+
+  /// No description provided for @libraryCollectionCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No items} =1{1 item} other{{count} items}}'**
+  String libraryCollectionCount(int count);
+
+  /// No description provided for @libraryRenameCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename collection'**
+  String get libraryRenameCollection;
+
+  /// No description provided for @libraryDeleteCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete collection'**
+  String get libraryDeleteCollection;
+
+  /// No description provided for @libraryDeleteCollectionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved content will remain in the library without a collection.'**
+  String get libraryDeleteCollectionMessage;
+
+  /// No description provided for @libraryCreateCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'New collection'**
+  String get libraryCreateCollection;
+
+  /// No description provided for @libraryDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get libraryDone;
+
+  /// No description provided for @libraryCollectionName.
+  ///
+  /// In en, this message translates to:
+  /// **'Collection name'**
+  String get libraryCollectionName;
+
+  /// No description provided for @libraryConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get libraryConfirm;
 }
 
 class _AppLocalizationsDelegate

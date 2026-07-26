@@ -249,5 +249,50 @@
   "homeReasonInterest": "Chosen for your photography interest",
   "homeReasonGoal": "Can help you reach your learning goal",
   "homeReasonLevel": "Right for your level",
-  "homeReasonEquipment": "Compatible with your equipment"
+  "homeReasonEquipment": "Compatible with your equipment",
+  "libraryNoResultsTitle": "Aucun contenu trouvé",
+  "libraryNoResultsDescription": "Modifiez la recherche ou les filtres.",
+  "libraryClearFilters": "Effacer la recherche et les filtres",
+  "librarySearchHint": "Rechercher dans les contenus et les notes",
+  "librarySearchClear": "Effacer la recherche",
+  "libraryAllStatuses": "Tous les statuts",
+  "libraryAllCollections": "Toutes les collections",
+  "libraryManageCollections": "Gérer les collections",
+  "libraryStatusToTry": "À essayer",
+  "libraryStatusTried": "Essayé",
+  "libraryStatusCompleted": "Terminé",
+  "libraryEditItem": "Modifier {title}",
+  "libraryStatusLabel": "Statut",
+  "libraryCollectionLabel": "Collection",
+  "libraryNoCollection": "Aucune collection",
+  "libraryNoteLabel": "Note personnelle",
+  "libraryRemoveTitle": "Supprimer le contenu enregistré ?",
+  "libraryRemoveMessage": "La note, le statut et la collection seront supprimés.",
+  "libraryRemoveAction": "Supprimer",
+  "libraryCancel": "Annuler",
+  "librarySaveChanges": "Enregistrer",
+  "libraryMutationError": "La modification n’a pas pu être enregistrée. Réessayez.",
+  "libraryNoCollections": "Aucune collection pour le moment.",
+  "libraryCollectionCount": "{count, plural, =0{Aucun élément} =1{1 élément} other{{count} éléments}}",
+  "libraryRenameCollection": "Renommer la collection",
+  "libraryDeleteCollection": "Supprimer la collection",
+  "libraryDeleteCollectionMessage": "Le contenu enregistré restera dans la bibliothèque sans collection.",
+  "libraryCreateCollection": "Nouvelle collection",
+  "libraryDone": "Terminé",
+  "libraryCollectionName": "Nom de la collection",
+  "libraryConfirm": "Confirmer",
+  "@libraryEditItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "@libraryCollectionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

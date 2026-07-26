@@ -240,6 +240,14 @@ class _FakeLibraryRepository implements LibraryRepository {
   Future<void> renameCollection(String id, String name) async {}
 
   @override
+  Future<void> updateDetails(
+    String contentId, {
+    required String? note,
+    required SavedItemStatus status,
+    required String? collectionId,
+  }) async {}
+
+  @override
   Future<void> updateNote(String contentId, String? note) async {}
 
   @override

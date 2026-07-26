@@ -116,6 +116,22 @@ class DriftLibraryRepository implements LibraryRepository {
       );
 
   @override
+  Future<void> updateDetails(
+    String contentId, {
+    required String? note,
+    required SavedItemStatus status,
+    required String? collectionId,
+  }) => _update(
+    contentId,
+    db.SavedItemsCompanion(
+      note: Value(normalizeSavedItemNote(note)),
+      status: Value(status.name),
+      collectionId: Value(collectionId),
+      updatedAtUtcMs: Value(_milliseconds(_utcNow)),
+    ),
+  );
+
+  @override
   Stream<List<CollectionWithCount>> watchCollections() => _database
       .customSelect(
         'SELECT c.id, c.name, c.created_at_utc_ms, c.updated_at_utc_ms, count(s.id) AS saved_item_count FROM collections c LEFT JOIN saved_items s ON s.collection_id = c.id GROUP BY c.id ORDER BY c.updated_at_utc_ms DESC, c.id ASC',

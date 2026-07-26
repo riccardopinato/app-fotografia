@@ -92,6 +92,36 @@ void main() {
     expect(tester.takeException(), isNull);
     semantics.dispose();
   });
+
+  testWidgets('searches the library and opens the personal item editor', (
+    tester,
+  ) async {
+    final library = _FakeLibraryRepository();
+    final catalog = _FakeCatalogRepository();
+    addTearDown(library.dispose);
+
+    await _pumpLibrary(tester, library: library, catalog: catalog);
+    library.emit([_saved('a', 1), _saved('b', 2)]);
+    await _flush(tester);
+
+    await tester.enterText(find.byType(TextField).first, 'Title b');
+    await tester.pump();
+    expect(find.text('Title a'), findsNothing);
+    expect(find.text('Title b'), findsNWidgets(2));
+
+    await tester.tap(find.byTooltip('Edit Title b'));
+    await tester.pumpAndSettle();
+    expect(find.text('Personal note'), findsOneWidget);
+    expect(find.text('Status'), findsOneWidget);
+    expect(find.text('Collection'), findsOneWidget);
+    expect(find.text('Remove'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField).last, 'Personal reminder');
+    await tester.tap(find.text('Save'));
+    await tester.pumpAndSettle();
+    expect(library.detailUpdateCalls, 1);
+    expect(library.lastNote, 'Personal reminder');
+  });
 }
 
 Future<void> _pumpLibrary(
@@ -222,6 +252,8 @@ class _FakeCatalogRepository implements CatalogRepository {
 
 class _FakeLibraryRepository implements LibraryRepository {
   final _savedItems = StreamController<List<SavedItem>>.broadcast(sync: true);
+  int detailUpdateCalls = 0;
+  String? lastNote;
 
   void emit(List<SavedItem> items) => _savedItems.add(items);
 
@@ -258,6 +290,17 @@ class _FakeLibraryRepository implements LibraryRepository {
 
   @override
   Future<void> renameCollection(String id, String name) async {}
+
+  @override
+  Future<void> updateDetails(
+    String contentId, {
+    required String? note,
+    required SavedItemStatus status,
+    required String? collectionId,
+  }) async {
+    detailUpdateCalls += 1;
+    lastNote = note;
+  }
 
   @override
   Future<void> updateNote(String contentId, String? note) async {}

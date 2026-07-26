@@ -120,8 +120,12 @@ void main() {
         final collection = await repo.createCollection('  Exercises ');
         final first = await repo.save('one', collectionId: collection.id);
         expect((await repo.save('one')).id, first.id);
-        await repo.updateNote('one', '  remember exposure  ');
-        await repo.updateStatus('one', SavedItemStatus.completed);
+        await repo.updateDetails(
+          'one',
+          note: '  remember exposure  ',
+          status: SavedItemStatus.completed,
+          collectionId: collection.id,
+        );
         await repo.save('two');
         expect(
           (await repo.getSavedItems(
