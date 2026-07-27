@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:drift/drift.dart';
-import 'package:drift_flutter/drift_flutter.dart';
+
+import 'database_connection.dart';
 part 'app_database.g.dart';
 
 class ContentItems extends Table {

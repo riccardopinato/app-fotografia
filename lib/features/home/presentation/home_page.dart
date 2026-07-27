@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
     ]),
     builder: (context, snapshot) {
       final l = AppLocalizations.of(context)!;
-      if (snapshot.connectionState != ConnectionState.done)
+      if (snapshot.connectionState != ConnectionState.done) {
         return Scaffold(
           body: Center(
             child: Semantics(
@@ -27,8 +27,10 @@ class HomePage extends StatelessWidget {
             ),
           ),
         );
-      if (snapshot.hasError)
+      }
+      if (snapshot.hasError) {
         return Scaffold(body: Center(child: Text(l.homeError)));
+      }
       final profile = snapshot.data![0] as UserProfile?;
       final content = snapshot.data![1] as List<LocalizedContent>;
       final recommendations = const RecommendationEngine().recommend(
@@ -82,7 +84,7 @@ class HomePage extends StatelessWidget {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: recommendations.skip(1).take(4).length,
-                    separatorBuilder: (_, __) => const SizedBox(width: 12),
+                    separatorBuilder: (_, _) => const SizedBox(width: 12),
                     itemBuilder: (_, i) => SizedBox(
                       width: 250,
                       child: _SmallCard(

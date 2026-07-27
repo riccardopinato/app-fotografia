@@ -25,7 +25,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 
 **Step 7C.** Completato l’Archivio locale con ricerca su contenuti e note, filtri combinabili per stato e raccolta, modifica di nota/stato/raccolta, rimozione con conferma e creazione, rinomina ed eliminazione delle raccolte. Le mutazioni attendono l’esito del repository e mostrano errori recuperabili; l’eliminazione di una raccolta conserva i salvataggi senza raccolta. Interfaccia e semantica sono localizzate nelle lingue di lancio. Lo schema Drift resta alla versione 4; hardening generale e test d’integrazione end-to-end restano allo Step 8.
 
-| 9 | Pipeline editoriale | importazione/revisione separata e tracciabile | da fare |
+| 9 | Pipeline editoriale | importazione/revisione separata e tracciabile | in corso (9A implementato; gate finali da verificare) |
 | 10 | Account e sync | auth opzionale, Firestore e conflitti gestiti | da fare |
 | 11 | Monetizzazione | entitlement, paywall, acquisti e annunci con consenso | da fare |
 | 12 | Strumenti e AI | calcolatori, dati esterni e analisi foto a crediti | da fare |
@@ -64,3 +64,6 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 
 **Step 8A.** Verificato il percorso locale dal profilo al catalogo localizzato e all'Archivio con un test d'integrazione su database Drift persistente, inclusi modifica atomica, ricerca e filtri, ricostruzione dei repository e cambio lingua senza perdita dei dati personali. Rafforzate la semantica delle card, la robustezza del layout compatto con testo scalato e la protezione da mutazioni concorrenti delle raccolte. Lo schema Drift resta alla versione 4. Le verifiche manuali su dispositivi rappresentativi e gli altri interventi di hardening restano nello Step 8.
 
+## Step 9A — Contratto, validazione e importazione editoriale offline
+
+**Step 9A.** Implementati contratto JSON v1 revisionabile, validatore/report CLI deterministico e importer Drift atomico/idempotente con controllo di downgrade. Fonti, diritti, traduzioni e asset sono validati offline; le sole strutture catalogo v4 compatibili vengono importate, conservando integralmente profilo e Archivio. Il seed esistente resta compatibile e lo schema rimane v4. Cheat Sheet, Percorsi, CMS, rete e persistenza degli asset restano fuori scope. Lo Step 8 rimane in corso per le validazioni Android e manuali residue.

@@ -16,6 +16,8 @@
 
 I seed editoriali devono essere verificati per campi obbligatori, tipo valido, fonte/licenza e stato `pubblicato` prima di essere visibili all'utente.
 
+Lo Step 9A aggiunge test del contratto e del report, incluso exit code CLI, più test con SQLite reale per idempotenza, upgrade/downgrade, rollback transazionale, fallback, publication gate e conservazione di salvataggio, nota, stato e raccolta. Il pacchetto valido e quello intenzionalmente invalido devono essere entrambi eseguiti nei gate.
+
 Le verifiche di localizzazione coprono le sei lingue di lancio (`en`, `it`, `es`, `fr`, `de`, `pt-BR`), con inglese come fallback. Testare l'ordine `locale completo → lingua base compatibile → inglese → indisponibile`, assenza di pagine con frammenti di lingue diverse, pluralizzazione, parametri, formati regionali e semantica accessibile localizzata. I dati test devono verificare che una modifica al contenuto canonico renda obsolete le traduzioni collegate e che solo le traduzioni `published` siano esposte; le traduzioni generate richiedono revisione.
 
 Le schermate con immagini devono essere controllate per ratio stabile, assenza di layout shift, miniature dimensionate correttamente, errore rete e memoria durante scorrimento prolungato. Le animazioni devono essere testate con riduzione del movimento attiva e non devono impedire l'interazione.
