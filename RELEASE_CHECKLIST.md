@@ -4,6 +4,7 @@
 
 ### Evidenze automatiche di hardening
 
+- [x] Catalogo bundle validato offline: 30 contenuti pubblicabili, sette locali completi, asset/checksum/diritti e bootstrap SQLite atomico e idempotente verificati sul runner host.
 - [x] Percorso UI critico verificato sul runner widget host con SQLite su file, ricostruzione completa dell'app, riapertura del database e cambio lingua senza perdita dei dati personali.
 - [ ] Lo stesso percorso UI critico è stato eseguito su Android tramite l'entry point in `integration_test/`.
 - [ ] Verifiche manuali e screenshot completati su dispositivi Android/iOS rappresentativi.

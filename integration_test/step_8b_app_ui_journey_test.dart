@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:framelab/app/frame_lab_app.dart';
 import 'package:framelab/app/router/app_router.dart';
 import 'package:framelab/core/database/app_database.dart';
-import 'package:framelab/features/catalog/data/seed/catalog_seed.dart';
+import 'package:framelab/features/editorial/data/bundled_catalog_bootstrap.dart';
 import 'package:framelab/features/library/data/drift_library_repository.dart';
 import 'package:framelab/features/library/domain/library_models.dart';
 import 'package:framelab/features/profile/data/drift_profile_repository.dart';
@@ -32,7 +32,7 @@ void registerStep8bAppUiJourney() {
     appRouter.go('/home');
 
     var database = AppDatabase(NativeDatabase(file));
-    await tester.runAsync(() => CatalogSeedInstaller(database).install());
+    await tester.runAsync(() => BundledCatalogBootstrap(database).install());
     await tester.pumpWidget(FrameLabApp(database: database));
 
     // Onboarding and bootstrap are exercised through the real app tree.
@@ -43,15 +43,10 @@ void registerStep8bAppUiJourney() {
     // Real shell navigation, catalog, detail route, and local save toggle.
     await tester.tap(find.text('Explore').last);
     await _pumpUntilFound(tester, find.text('Explore catalog'));
-    await _pumpUntilFound(
-      tester,
-      find.text('Check the histogram after difficult light'),
-    );
+    await _pumpUntilFound(tester, find.text('Align the focus plane in macro'));
     await _tapVisible(
       tester,
-      find
-          .bySemanticsLabel('Open Check the histogram after difficult light')
-          .first,
+      find.bySemanticsLabel('Open Align the focus plane in macro').first,
     );
     await _pumpUntilFound(tester, find.text('Content detail'));
     expect(find.text('Available offline'), findsWidgets);
@@ -61,10 +56,7 @@ void registerStep8bAppUiJourney() {
     // Archive collection CRUD and the atomic personal-item editor.
     await tester.tap(find.text('Library').last);
     await _pumpUntilFound(tester, find.text('Search saved content and notes'));
-    await _pumpUntilFound(
-      tester,
-      find.text('Check the histogram after difficult light'),
-    );
+    await _pumpUntilFound(tester, find.text('Align the focus plane in macro'));
     await tester.tap(find.text('Manage collections'));
     await _pumpUntilFound(tester, find.text('No collections yet.'));
     await tester.tap(find.text('New collection'));
@@ -76,9 +68,7 @@ void registerStep8bAppUiJourney() {
     await _tapVisible(tester, find.text('Done'));
     await _pumpTransition(tester);
 
-    await tester.tap(
-      find.byTooltip('Edit Check the histogram after difficult light'),
-    );
+    await tester.tap(find.byTooltip('Edit Align the focus plane in macro'));
     await _pumpUntilFound(tester, find.text('Personal note'));
     await _tapVisible(tester, find.text('To try'));
     await _pumpTransition(tester);
@@ -97,28 +87,19 @@ void registerStep8bAppUiJourney() {
     );
     await tester.enterText(search, 'Sunset');
     await tester.pump();
-    expect(
-      find.text('Check the histogram after difficult light'),
-      findsOneWidget,
-    );
+    expect(find.text('Align the focus plane in macro'), findsOneWidget);
     await _tapVisible(tester, find.text('All statuses'));
     await _pumpTransition(tester);
     await tester.tap(find.text('Completed').last);
     await _tapVisible(tester, find.text('All collections'));
     await _pumpTransition(tester);
     await tester.tap(find.text('Field practice').last);
-    expect(
-      find.text('Check the histogram after difficult light'),
-      findsOneWidget,
-    );
+    expect(find.text('Align the focus plane in macro'), findsOneWidget);
     await tester.enterText(search, 'not present');
     await tester.pump();
     await _pumpUntilFound(tester, find.text('No saved content found'));
     await _tapVisible(tester, find.text('Clear search and filters'));
-    await _pumpUntilFound(
-      tester,
-      find.text('Check the histogram after difficult light'),
-    );
+    await _pumpUntilFound(tester, find.text('Align the focus plane in macro'));
 
     // Dispose the whole application and rebuild all scopes and repositories
     // against the same persistent SQLite database.
@@ -128,10 +109,7 @@ void registerStep8bAppUiJourney() {
     await tester.runAsync(database.close);
     database = AppDatabase(NativeDatabase(file));
     await tester.pumpWidget(FrameLabApp(database: database));
-    await _pumpUntilFound(
-      tester,
-      find.text('Check the histogram after difficult light'),
-    );
+    await _pumpUntilFound(tester, find.text('Align the focus plane in macro'));
     expect(find.text('Sunset checklist'), findsOneWidget);
     expect(find.text('Completed'), findsOneWidget);
 
@@ -149,7 +127,7 @@ void registerStep8bAppUiJourney() {
     await tester.tap(find.text('Archiv').last);
     await _pumpUntilFound(
       tester,
-      find.text('Prüfe nach schwierigem Licht das Histogramm'),
+      find.text('Richte die Schärfeebene bei Makros aus'),
     );
     expect(find.text('Sunset checklist'), findsOneWidget);
 

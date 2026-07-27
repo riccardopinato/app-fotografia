@@ -297,7 +297,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get catalogEmptyTitle => 'No catalog items yet';
 
   @override
-  String get catalogEmptyDescription => 'Install the local seed or try again.';
+  String get catalogEmptyDescription =>
+      'O catálogo offline não está disponível. Tenta novamente.';
 
   @override
   String get catalogNoSearchResultsTitle => 'No search results';
@@ -952,7 +953,8 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get catalogEmptyTitle => 'No catalog items yet';
 
   @override
-  String get catalogEmptyDescription => 'Install the local seed or try again.';
+  String get catalogEmptyDescription =>
+      'O catálogo offline não está disponível. Tente novamente.';
 
   @override
   String get catalogNoSearchResultsTitle => 'No search results';

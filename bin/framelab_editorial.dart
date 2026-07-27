@@ -6,18 +6,13 @@ import 'package:framelab/features/editorial/data/editorial_importer.dart';
 import 'package:framelab/features/editorial/domain/editorial_package.dart';
 import 'package:framelab/features/editorial/domain/editorial_validation.dart';
 
-Future<void> main(List<String> arguments) async {
-  if (arguments.length < 2 ||
-      !{'validate', 'import'}.contains(arguments.first)) {
-    stderr.writeln(
-      'Usage: dart run bin/framelab_editorial.dart <validate|import> <package.json> [database.sqlite]',
     );
     exitCode = 64;
     return;
   }
   try {
     final package = await EditorialPackage.load(File(arguments[1]));
-    final report = await EditorialValidator().validate(package);
+
     stdout.write(report.render());
     if (!report.isValid) {
       exitCode = 1;

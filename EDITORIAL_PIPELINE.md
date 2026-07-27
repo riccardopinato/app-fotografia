@@ -2,7 +2,7 @@
 
 ## Confine e struttura
 
-La pipeline è uno strumento interno, locale e riproducibile. Non è una CMS, non usa la rete e non modifica la navigazione. Un pacchetto è una directory con `package.json` e file sotto `assets/`; `editorial/example/` è il riferimento valido e `editorial/invalid/` verifica il gate negativo.
+
 
 Il contratto JSON `1.0` separa:
 
@@ -21,6 +21,7 @@ Il versionamento ha due livelli: `formatVersion` cambia quando cambia il contrat
 dart run bin/framelab_editorial.dart validate editorial/example/package.json
 dart run bin/framelab_editorial.dart validate editorial/invalid/package.json
 dart run bin/framelab_editorial.dart import editorial/example/package.json /tmp/framelab.sqlite
+
 ```
 
 Il report, ordinato deterministicamente, mostra pacchetto, conteggi, severità (`ERROR`, `WARNING`, `INFO`), percorso JSON, spiegazione e correzione. Gli errori restituiscono exit code `1`; uso errato `64`. L'import parte solo dopo una validazione completa.
@@ -42,7 +43,7 @@ Le tabelle `user_profiles`, `collections` e `saved_items` non sono scritte. Poic
 
 ## Limiti correnti
 
-- Il seed Step 5 resta compatibile e non viene sostituito: la migrazione integrale sarà un change set successivo.
+
 - Non sono elaborati raster, scaricati asset, creati pacchetti remoti o aggiunti nuovi tipi.
 - Il checksum v1 è `fnv1a64`; un algoritmo differente richiede evoluzione esplicita del contratto.
 - La prova legale resta responsabilità editoriale: il validatore verifica coerenza e presenza, non certifica la titolarità.

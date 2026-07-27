@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'editorial_package.dart';
 
@@ -227,8 +227,7 @@ class EditorialValidator {
         );
         continue;
       }
-      final file = File('${package.directory.path}/$relative');
-      if (!await file.exists()) {
+
         error(
           'asset.missing',
           '\$.assets[$i].path',
@@ -237,7 +236,7 @@ class EditorialValidator {
         );
         continue;
       }
-      final bytes = await file.readAsBytes();
+
       if (asset['byteSize'] != bytes.length) {
         error(
           'asset.size',

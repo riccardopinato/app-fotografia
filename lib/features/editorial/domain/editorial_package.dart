@@ -2,18 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 /// Parsed, immutable boundary between editorial JSON and persistence.
-class EditorialPackage {
-  EditorialPackage._(this.root, this.directory);
 
-  final Map<String, Object?> root;
-  final Directory directory;
 
   static Future<EditorialPackage> load(File file) async {
     final decoded = jsonDecode(await file.readAsString());
     if (decoded is! Map<String, Object?>) {
       throw const FormatException('The package root must be a JSON object.');
     }
-    return EditorialPackage._(decoded, file.parent);
+
   }
 
   String get id => string('packageId');

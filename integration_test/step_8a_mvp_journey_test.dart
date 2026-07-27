@@ -4,7 +4,7 @@ import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:framelab/core/database/app_database.dart' hide UserProfile;
 import 'package:framelab/features/catalog/data/drift_catalog_repository.dart';
-import 'package:framelab/features/catalog/data/seed/catalog_seed.dart';
+import 'package:framelab/features/editorial/data/bundled_catalog_bootstrap.dart';
 import 'package:framelab/features/catalog/domain/catalog_models.dart';
 import 'package:framelab/features/library/data/drift_library_repository.dart';
 import 'package:framelab/features/library/domain/library_models.dart';
@@ -26,7 +26,7 @@ void main() {
       var profiles = DriftProfileRepository(database);
       var catalog = DriftCatalogRepository(database);
       var library = DriftLibraryRepository(database);
-      await CatalogSeedInstaller(database).install();
+      await BundledCatalogBootstrap(database).install();
 
       final createdAt = DateTime.utc(2026, 7, 26);
       await profiles.save(
