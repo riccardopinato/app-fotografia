@@ -7,7 +7,7 @@ import '../l10n/app_localizations.dart';
 import '../core/database/app_database.dart'
     hide Collection, SavedItem, UserProfile;
 import '../features/catalog/data/drift_catalog_repository.dart';
-import '../features/catalog/data/seed/catalog_seed.dart';
+import '../features/editorial/data/bundled_catalog_bootstrap.dart';
 import '../features/catalog/domain/catalog_models.dart';
 import '../features/catalog/domain/catalog_repository.dart';
 import '../features/catalog/presentation/catalog_scope.dart';
@@ -59,9 +59,9 @@ class _FrameLabAppState extends State<FrameLabApp> {
       _database = database;
       _repository = DriftProfileRepository(database);
       final driftCatalogRepository = DriftCatalogRepository(database);
-      _catalogRepository = _SeededCatalogRepository(
+      _catalogRepository = _BootstrappedCatalogRepository(
         driftCatalogRepository,
-        CatalogSeedInstaller(database).install(),
+        BundledCatalogBootstrap(database).install(),
       );
       _libraryRepository = DriftLibraryRepository(database);
     } else {
@@ -206,14 +206,14 @@ class _EmptyCatalogRepository implements CatalogRepository {
   }) => const Stream.empty();
 }
 
-class _SeededCatalogRepository implements CatalogRepository {
-  _SeededCatalogRepository(this._delegate, this._seedReady);
+class _BootstrappedCatalogRepository implements CatalogRepository {
+  _BootstrappedCatalogRepository(this._delegate, this._catalogReady);
 
   final CatalogRepository _delegate;
-  final Future<void> _seedReady;
+  final Future<void> _catalogReady;
 
-  Future<T> _afterSeed<T>(Future<T> Function() action) async {
-    await _seedReady;
+  Future<T> _afterCatalogReady<T>(Future<T> Function() action) async {
+    await _catalogReady;
     return action();
   }
 
@@ -224,7 +224,7 @@ class _SeededCatalogRepository implements CatalogRepository {
     CatalogFilter filter = const CatalogFilter(),
     int limit = 20,
     int offset = 0,
-  }) => _afterSeed(
+  }) => _afterCatalogReady(
     () => _delegate.getPage(
       locale: locale,
       query: query,
@@ -238,27 +238,31 @@ class _SeededCatalogRepository implements CatalogRepository {
   Future<List<LocalizedContent>> getPublished({
     required LocaleCode locale,
     CatalogFilter filter = const CatalogFilter(),
-  }) =>
-      _afterSeed(() => _delegate.getPublished(locale: locale, filter: filter));
+  }) => _afterCatalogReady(
+    () => _delegate.getPublished(locale: locale, filter: filter),
+  );
 
   @override
   Future<LocalizedContent?> getPublishedById(
     String id, {
     required LocaleCode locale,
-  }) => _afterSeed(() => _delegate.getPublishedById(id, locale: locale));
+  }) =>
+      _afterCatalogReady(() => _delegate.getPublishedById(id, locale: locale));
 
   @override
   Future<CatalogDetail?> getPublishedDetailById(
     String id, {
     required LocaleCode locale,
-  }) => _afterSeed(() => _delegate.getPublishedDetailById(id, locale: locale));
+  }) => _afterCatalogReady(
+    () => _delegate.getPublishedDetailById(id, locale: locale),
+  );
 
   @override
   Stream<List<LocalizedContent>> watchPublished({
     required LocaleCode locale,
     CatalogFilter filter = const CatalogFilter(),
   }) async* {
-    await _seedReady;
+    await _catalogReady;
     yield* _delegate.watchPublished(locale: locale, filter: filter);
   }
 }

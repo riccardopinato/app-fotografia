@@ -295,7 +295,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get catalogEmptyTitle => 'No catalog items yet';
 
   @override
-  String get catalogEmptyDescription => 'Install the local seed or try again.';
+  String get catalogEmptyDescription =>
+      'The offline catalog is unavailable. Try again.';
 
   @override
   String get catalogNoSearchResultsTitle => 'No search results';

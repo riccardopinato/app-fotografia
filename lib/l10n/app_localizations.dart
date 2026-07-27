@@ -632,7 +632,7 @@ abstract class AppLocalizations {
   /// No description provided for @catalogEmptyDescription.
   ///
   /// In en, this message translates to:
-  /// **'Install the local seed or try again.'**
+  /// **'The offline catalog is unavailable. Try again.'**
   String get catalogEmptyDescription;
 
   /// No description provided for @catalogNoSearchResultsTitle.

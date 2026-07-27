@@ -143,7 +143,7 @@
   "catalogNextPageError": "The next page could not be loaded.",
   "catalogEndOfResults": "End of results",
   "catalogEmptyTitle": "No catalog items yet",
-  "catalogEmptyDescription": "Install the local seed or try again.",
+  "catalogEmptyDescription": "Il catalogo offline non è disponibile. Riprova.",
   "catalogNoSearchResultsTitle": "Nessun risultato",
   "catalogNoSearchResultsDescription": "Try a different term or clear the search.",
   "catalogNoFilterResultsTitle": "Nessun risultato con questi filtri",

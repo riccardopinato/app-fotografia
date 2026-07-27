@@ -1,0 +1,48 @@
+{
+  "formatVersion": "1.0",
+  "packageId": "framelab-step9a-example",
+  "packageVersion": 2,
+  "generatedAt": "2026-07-27T12:00:00Z",
+  "baseLocale": "en",
+  "locales": ["en", "it", "es", "fr", "de", "pt", "pt-BR"],
+  "sources": [{
+    "id": "source-framelab-original", "title": "FrameLab original editorial content",
+    "author": "FrameLab editorial team", "publisher": "FrameLab", "url": null,
+    "publicationYear": 2026, "originalLocale": "en", "sourceType": "original",
+    "verificationStatus": "verified", "editorialNote": "Original educational copy.",
+    "licenseType": "FrameLab-Proprietary", "licenseUrl": null,
+    "attributionRequired": false, "attributionText": "FrameLab",
+    "rightsStatus": "publishable", "rightsVerification": "verified",
+    "restrictions": "Redistribution outside FrameLab is not granted."
+  }],
+  "tags": [{"id": "tag-exposure", "code": "exposure", "labels": {"en": "Exposure", "it": "Esposizione"}}],
+  "assets": [{
+    "id": "asset-exposure-diagram", "path": "assets/exposure.svg", "mimeType": "image/svg+xml",
+    "width": 320, "height": 180, "byteSize": 306, "checksum": "fnv1a64:9b95cdb772330b70",
+    "altTexts": {"en": "A triangle linking aperture, shutter speed and ISO.", "it": "Un triangolo collega diaframma, tempo e ISO."},
+    "captions": {"en": "The exposure triangle."}, "credit": "FrameLab editorial team",
+    "sourceId": "source-framelab-original", "licenseType": "FrameLab-Proprietary",
+    "licenseUrl": null, "attribution": "FrameLab", "modifications": "None",
+    "permissionEvidence": "Original work recorded in editorial review.", "restrictions": "FrameLab use only",
+    "rightsVerification": "verified", "role": "cover", "focalPoint": {"x": 0.5, "y": 0.5},
+    "editorialStatus": "published"
+  }],
+  "contents": [
+    {
+      "id": "editorial-exposure-practice", "type": "tip", "editorialStatus": "published",
+      "canonicalLocale": "en", "version": 2, "updatedAt": "2026-07-27T12:00:00Z",
+      "category": "fundamentals", "difficulty": "beginner", "premium": false,
+      "tags": ["tag-exposure"], "sourceIds": ["source-framelab-original"], "coverAssetId": "asset-exposure-diagram",
+      "translations": [
+        {"locale": "en", "title": "Change one exposure control at a time", "summary": "A short practice for seeing how each control changes the frame.", "body": "Photograph the same still scene three times. Keep two exposure controls fixed and change only the third. Compare brightness, motion and depth of field before repeating with another control.", "status": "published", "method": "original", "sourceVersion": 2, "reviewedAt": "2026-07-27T12:00:00Z", "searchTerms": ["aperture", "shutter", "ISO"]},
+        {"locale": "it", "title": "Cambia un parametro di esposizione alla volta", "summary": "Un esercizio breve per osservare l'effetto di ogni parametro.", "body": "Fotografa tre volte la stessa scena immobile. Mantieni fissi due parametri e modifica soltanto il terzo. Confronta luminosità, movimento e profondità di campo, poi ripeti con un altro parametro.", "status": "published", "method": "human", "sourceVersion": 2, "reviewedAt": "2026-07-27T12:00:00Z", "searchTerms": ["diaframma", "tempo", "ISO"]}
+      ]
+    },
+    {
+      "id": "editorial-review-only", "type": "curiosity", "editorialStatus": "needsReview",
+      "canonicalLocale": "en", "version": 1, "category": "history", "difficulty": "beginner", "premium": false,
+      "tags": [], "sourceIds": ["source-framelab-original"],
+      "translations": [{"locale": "en", "title": "Review-only example", "summary": "This complete record demonstrates publication gating.", "body": "The catalog excludes this record because its conceptual editorial status is not published.", "status": "approved", "method": "original", "sourceVersion": 1, "reviewedAt": "2026-07-27T12:00:00Z", "searchTerms": ["review"]}]
+    }
+  ]
+}
