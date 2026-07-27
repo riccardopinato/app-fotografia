@@ -4,7 +4,7 @@
 
 - **Unit:** entità, use case, ranking delle `IdeaRule`, mapper, validazione, migrazioni e policy di fallback delle traduzioni.
 - **Widget:** componenti design system, filtri, stati vuoti/errori, ARB/plurali-parametri e accessibilità base.
-- **Integration:** onboarding → home → salvataggio → archivio con database locale, cambio lingua senza perdita di preferiti/progressi e pacchetto linguistico offline. Il percorso critico dello Step 8A usa un file SQLite temporaneo e repository Drift reali, chiude e riapre il database prima di confermare profilo, nota, stato e raccolta; il runner in `integration_test/` richiede un dispositivo o simulatore supportato.
+
 - **Manuale:** tema chiaro/scuro, testo scalato, assenza di rete, lettore schermo e dispositivi Android/iOS rappresentativi, inclusi schermi piccoli, grandi, tablet e Android di fascia media; verifiche LTR/RTL, tedesco lungo, caratteri accentati e alfabeti non latini.
 
 ## Gate per ogni step

@@ -24,10 +24,19 @@ import 'router/app_router.dart';
 import 'theme/frame_lab_theme.dart';
 
 class FrameLabApp extends StatefulWidget {
-  const FrameLabApp({this.locale, this.profileRepository, super.key});
+  const FrameLabApp({
+    this.locale,
+    this.profileRepository,
+    this.database,
+    super.key,
+  }) : assert(profileRepository == null || database == null);
 
   final Locale? locale;
   final ProfileRepository? profileRepository;
+
+  /// Optional local database seam for integration tests. Production creates
+  /// and owns its database exactly as before.
+  final AppDatabase? database;
 
   @override
   State<FrameLabApp> createState() => _FrameLabAppState();
@@ -39,12 +48,14 @@ class _FrameLabAppState extends State<FrameLabApp> {
   late final CatalogRepository _catalogRepository;
   late final LibraryRepository _libraryRepository;
   late final Stream<UserProfile?> _profileStream;
+  late final bool _ownsDatabase;
 
   @override
   void initState() {
     super.initState();
     if (widget.profileRepository == null) {
-      final database = AppDatabase();
+      final database = widget.database ?? AppDatabase();
+      _ownsDatabase = widget.database == null;
       _database = database;
       _repository = DriftProfileRepository(database);
       final driftCatalogRepository = DriftCatalogRepository(database);
@@ -54,6 +65,7 @@ class _FrameLabAppState extends State<FrameLabApp> {
       );
       _libraryRepository = DriftLibraryRepository(database);
     } else {
+      _ownsDatabase = false;
       _database = null;
       _repository = widget.profileRepository!;
       _catalogRepository = _EmptyCatalogRepository();
@@ -64,7 +76,7 @@ class _FrameLabAppState extends State<FrameLabApp> {
 
   @override
   void dispose() {
-    unawaited(_database?.close());
+    if (_ownsDatabase) unawaited(_database?.close());
     super.dispose();
   }
 

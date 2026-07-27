@@ -171,6 +171,34 @@ void main() {
     expect(library.detailUpdateCalls, 1);
     expect(library.lastNote, 'Personal reminder');
   });
+
+  testWidgets('disables collection submission while its write is pending', (
+    tester,
+  ) async {
+    final library = _FakeLibraryRepository();
+    final catalog = _FakeCatalogRepository();
+    addTearDown(library.dispose);
+    library.collectionWrite = Completer<void>();
+
+    await _pumpLibrary(tester, library: library, catalog: catalog);
+    library.emit(const []);
+    await _flush(tester);
+    await tester.tap(find.text('Manage collections'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('New collection'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextFormField).last, 'Street');
+    await tester.tap(find.text('Save').last);
+    await tester.pump();
+
+    final submit = tester.widget<FilledButton>(find.byType(FilledButton).last);
+    expect(submit.onPressed, isNull);
+    expect(find.byType(CircularProgressIndicator), findsWidgets);
+    expect(library.collectionWriteCalls, 1);
+
+    library.collectionWrite!.complete();
+    await tester.pumpAndSettle();
+  });
 }
 
 Future<void> _pumpLibrary(
@@ -329,6 +357,8 @@ class _FakeLibraryRepository implements LibraryRepository {
   );
   int detailUpdateCalls = 0;
   String? lastNote;
+  Completer<void>? collectionWrite;
+  int collectionWriteCalls = 0;
 
   void emit(List<SavedItem> items) => _savedItems.add(items);
   void emitCollections(List<CollectionWithCount> items) =>
@@ -362,8 +392,16 @@ class _FakeLibraryRepository implements LibraryRepository {
   Future<void> assignCollection(String contentId, String? collectionId) async {}
 
   @override
-  Future<Collection> createCollection(String name) =>
-      throw UnsupportedError('not used');
+  Future<Collection> createCollection(String name) async {
+    collectionWriteCalls += 1;
+    await collectionWrite?.future;
+    return Collection(
+      id: 'collection',
+      name: name,
+      createdAtUtc: DateTime.utc(2026),
+      updatedAtUtc: DateTime.utc(2026),
+    );
+  }
 
   @override
   Future<void> deleteCollection(String id) async {}

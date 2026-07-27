@@ -72,7 +72,13 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 SizedBox(
-                  height: 156,
+                  height:
+                      204 +
+                      100 *
+                          (MediaQuery.textScalerOf(context).scale(1) - 1).clamp(
+                            0,
+                            1,
+                          ),
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: recommendations.skip(1).take(4).length,

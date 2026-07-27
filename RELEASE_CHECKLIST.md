@@ -2,6 +2,12 @@
 
 ## Prodotto e qualità
 
+### Evidenze automatiche di hardening
+
+- [x] Percorso UI critico verificato sul runner widget host con SQLite su file, ricostruzione completa dell'app, riapertura del database e cambio lingua senza perdita dei dati personali.
+- [ ] Lo stesso percorso UI critico è stato eseguito su Android tramite l'entry point in `integration_test/`.
+- [ ] Verifiche manuali e screenshot completati su dispositivi Android/iOS rappresentativi.
+
 - [ ] Flussi MVP verificati offline e dopo riavvio.
 - [ ] Nessun contenuto non approvato è esposto.
 - [ ] Accessibilità, testo scalato, temi e localizzazione verificati per `en`, `it`, `es`, `fr`, `de` e `pt-BR`; inglese verificato come fallback globale.
