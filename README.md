@@ -4,7 +4,7 @@ FrameLab è un'app mobile offline-first per fotografi aspiranti, intermedi e ava
 
 ## Stato del progetto
 
-Step 9B distribuisce tramite la pipeline editoriale un catalogo offline di 30 contenuti pubblicabili, interamente localizzato nelle sette varianti supportate. Lo Step 8 resta in corso per i gate Android e manuali residui. Vedere la [guida della pipeline editoriale](EDITORIAL_PIPELINE.md).
+
 
 ## Obiettivo dell'MVP
 

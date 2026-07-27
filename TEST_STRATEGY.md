@@ -18,7 +18,6 @@ I seed editoriali devono essere verificati per campi obbligatori, tipo valido, f
 
 Lo Step 9A aggiunge test del contratto e del report, incluso exit code CLI, più test con SQLite reale per idempotenza, upgrade/downgrade, rollback transazionale, fallback, publication gate e conservazione di salvataggio, nota, stato e raccolta. Il pacchetto valido e quello intenzionalmente invalido devono essere entrambi eseguiti nei gate.
 
-Lo Step 9B applica inoltre gate deterministici al catalogo distribuito: almeno 30 pubblicati, sette locali completi, corpi tra 180 e 1400 caratteri, 2–4 tag per contenuto, almeno 8 elementi per ciascun tipo principale e per i livelli principiante/intermedio, ID e tag normalizzati, nessun placeholder, titolo/corpo duplicato o tag orfano. Test con SQLite su file verificano bootstrap, seconda apertura, conservazione personale, FTS multilingua, filtri, paginazione, fallback e bozza esclusa.
 
 Le verifiche di localizzazione coprono le sei lingue di lancio (`en`, `it`, `es`, `fr`, `de`, `pt-BR`), con inglese come fallback. Testare l'ordine `locale completo → lingua base compatibile → inglese → indisponibile`, assenza di pagine con frammenti di lingue diverse, pluralizzazione, parametri, formati regionali e semantica accessibile localizzata. I dati test devono verificare che una modifica al contenuto canonico renda obsolete le traduzioni collegate e che solo le traduzioni `published` siano esposte; le traduzioni generate richiedono revisione.
 

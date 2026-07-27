@@ -2,7 +2,7 @@
 
 ## Confine e struttura
 
-La pipeline è uno strumento interno, locale e riproducibile. Non è una CMS, non usa la rete e non modifica la navigazione. Un pacchetto è una directory con `package.json` e file sotto `assets/`; `editorial/catalog/` è l'unica sorgente di produzione, mentre `editorial/example/` e `editorial/invalid/` sono fixture Step 9A.
+
 
 Il contratto JSON `1.0` separa:
 
@@ -21,8 +21,7 @@ Il versionamento ha due livelli: `formatVersion` cambia quando cambia il contrat
 dart run bin/framelab_editorial.dart validate editorial/example/package.json
 dart run bin/framelab_editorial.dart validate editorial/invalid/package.json
 dart run bin/framelab_editorial.dart import editorial/example/package.json /tmp/framelab.sqlite
-dart run bin/framelab_editorial.dart validate editorial/catalog/package.json
-dart run bin/framelab_editorial.dart quality editorial/catalog/package.json
+
 ```
 
 Il report, ordinato deterministicamente, mostra pacchetto, conteggi, severità (`ERROR`, `WARNING`, `INFO`), percorso JSON, spiegazione e correzione. Gli errori restituiscono exit code `1`; uso errato `64`. L'import parte solo dopo una validazione completa.
@@ -44,11 +43,7 @@ Le tabelle `user_profiles`, `collections` e `saved_items` non sono scritte. Poic
 
 ## Limiti correnti
 
-- Il catalogo contiene 31 record: 30 pubblicati (10 `tip`, 10 `curiosity`, 10 `idea`) e una bozza completa usata per il publication gate. Include 211 traduzioni: 210 pubblicate, complete in `en`, `it`, `es`, `fr`, `de`, `pt`, `pt-BR`, più la sola versione inglese della bozza.
-- I primi dieci contenuti mantengono gli ID `seed-*` dello Step 5 e passano da versione 1 a 2; i venti nuovi usano ID `editorial-*`. Il seed Dart è stato rimosso, quindi non esistono copie di produzione da mantenere in parallelo.
-- Le soglie qualità pubbliche sono: minimo 30 contenuti, corpi 180–1400 caratteri, 2–4 tag, almeno 8 elementi per tipo principale e per entrambi i livelli usati. Sono bloccanti copertura locale, placeholder, duplicati esatti, ID/tag malformati e tag orfani; una traduzione sospettosamente uguale all'inglese è un warning.
-- Sei SVG statici originali FrameLab coprono esposizione, luce, composizione, fuoco, movimento e workflow. Hanno checksum, licenza, credito e alt text nei sette locali; non contengono script o risorse remote. Sono nel bundle ma non renderizzati, perché non è stata aggiunta una dipendenza SVG.
-- Al bootstrap `FrameLabApp` attende l'import del pacchetto bundle prima delle query. Una nuova installazione inserisce 31 record; un avvio successivo vede le stesse versioni come no-op. Le installazioni Step 5 aggiornano i dieci ID conservati senza scollegare l'Archivio.
+
 - Non sono elaborati raster, scaricati asset, creati pacchetti remoti o aggiunti nuovi tipi.
 - Il checksum v1 è `fnv1a64`; un algoritmo differente richiede evoluzione esplicita del contratto.
 - La prova legale resta responsabilità editoriale: il validatore verifica coerenza e presenza, non certifica la titolarità.
