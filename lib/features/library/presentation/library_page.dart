@@ -484,60 +484,63 @@ Future<void> _showCollectionManager(
         title: Text(l10n.libraryManageCollections),
         content: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 420),
-          child: controller.collections.isEmpty
-              ? Text(l10n.libraryNoCollections)
-              : ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: controller.collections.length,
-                  itemBuilder: (context, index) {
-                    final value = controller.collections[index];
-                    return ListTile(
-                      title: Text(value.collection.name),
-                      subtitle: Text(
-                        l10n.libraryCollectionCount(value.savedItemCount),
-                      ),
-                      trailing: Wrap(
-                        children: [
-                          IconButton(
-                            tooltip: l10n.libraryRenameCollection,
-                            onPressed: controller.isCollectionBusy
-                                ? null
-                                : () => _collectionNameDialog(
-                                    context,
-                                    initialName: value.collection.name,
-                                    title: l10n.libraryRenameCollection,
-                                    action: (name) =>
-                                        controller.renameCollection(
+          child: SizedBox(
+            width: 420,
+            child: controller.collections.isEmpty
+                ? Text(l10n.libraryNoCollections)
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.collections.length,
+                    itemBuilder: (context, index) {
+                      final value = controller.collections[index];
+                      return ListTile(
+                        title: Text(value.collection.name),
+                        subtitle: Text(
+                          l10n.libraryCollectionCount(value.savedItemCount),
+                        ),
+                        trailing: Wrap(
+                          children: [
+                            IconButton(
+                              tooltip: l10n.libraryRenameCollection,
+                              onPressed: controller.isCollectionBusy
+                                  ? null
+                                  : () => _collectionNameDialog(
+                                      context,
+                                      initialName: value.collection.name,
+                                      title: l10n.libraryRenameCollection,
+                                      action: (name) =>
+                                          controller.renameCollection(
+                                            value.collection.id,
+                                            name,
+                                          ),
+                                    ),
+                              icon: const Icon(Icons.edit_outlined),
+                            ),
+                            IconButton(
+                              tooltip: l10n.libraryDeleteCollection,
+                              onPressed: controller.isCollectionBusy
+                                  ? null
+                                  : () async {
+                                      if (await _confirm(
+                                            context,
+                                            title: l10n.libraryDeleteCollection,
+                                            message: l10n
+                                                .libraryDeleteCollectionMessage,
+                                          ) &&
+                                          context.mounted) {
+                                        await controller.deleteCollection(
                                           value.collection.id,
-                                          name,
-                                        ),
-                                  ),
-                            icon: const Icon(Icons.edit_outlined),
-                          ),
-                          IconButton(
-                            tooltip: l10n.libraryDeleteCollection,
-                            onPressed: controller.isCollectionBusy
-                                ? null
-                                : () async {
-                                    if (await _confirm(
-                                          context,
-                                          title: l10n.libraryDeleteCollection,
-                                          message: l10n
-                                              .libraryDeleteCollectionMessage,
-                                        ) &&
-                                        context.mounted) {
-                                      await controller.deleteCollection(
-                                        value.collection.id,
-                                      );
-                                    }
-                                  },
-                            icon: const Icon(Icons.delete_outline),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                                        );
+                                      }
+                                    },
+                              icon: const Icon(Icons.delete_outline),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+          ),
         ),
         actions: [
           if (controller.isCollectionBusy)

@@ -49,6 +49,10 @@ La selezione della lingua (dispositivo, manuale, ripristino automatico) è una p
 
 Firebase Authentication, Firestore, Storage e Remote Config; RevenueCat; AdMob; servizi meteo/astronomici e analisi AI. Nessuna è richiesta per avviare l'MVP. Ogni SDK risiede dietro un'interfaccia di dominio e viene inizializzato solo con configurazione valida.
 
+## Pipeline editoriale (Step 9A)
+
+La feature `editorial` mantiene il contratto JSON fuori dal database: dominio puro per parsing/report/validazione e data layer per l'import Drift. La CLI condivide gli stessi componenti. Dopo una prevalidazione completa, una transazione aggiorna per ID/versione le sole tabelle catalogo v4; asset e metadati non rappresentabili restano nel pacchetto revisionabile. Non vengono toccate tabelle personali, effettuate chiamate di rete o introdotte migrazioni. La connessione database usa un piccolo export condizionale: Flutter conserva `driftDatabase`, mentre la CLI VM fornisce sempre il proprio executor file-backed.
+
 ## Immagini e rendering
 
 La UI richiede un'astrazione per immagini remota/cache quando arriverà il catalogo sincronizzato. L'implementazione deve richiedere varianti thumbnail e dettaglio dimensionate alla superficie reale, mantenere un aspect ratio noto con placeholder/skeleton, usare lazy loading e paginazione, e annullare richieste fuori viewport se il client scelto lo supporta. La cache disco e memoria deve avere limiti, TTL e invalidazione tramite versione o URL firmato; nessuna immagine originale va richiesta per una miniatura. Questi requisiti sono dettagliati in `VISUAL_DIRECTION.md` e non giustificano l'aggiunta anticipata di package.

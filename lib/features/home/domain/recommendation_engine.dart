@@ -14,8 +14,9 @@ class RecommendationEngine {
     final unique = <String, Recommendation>{};
     for (final content in contents) {
       if (content.item.editorialStatus != EditorialStatus.published ||
-          !content.translation.isPublishable)
+          !content.translation.isPublishable) {
         continue;
+      }
       final tags = content.tags.map((tag) => tag.code.toLowerCase()).toSet();
       final category = content.item.primaryCategory.toLowerCase();
       final reasons = <RecommendationReason>[];
