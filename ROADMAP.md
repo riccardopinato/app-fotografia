@@ -24,7 +24,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 ## Step 7C — Gestione completa dell’Archivio personale
 
 **Step 7C.** Completato l’Archivio locale con ricerca su contenuti e note, filtri combinabili per stato e raccolta, modifica di nota/stato/raccolta, rimozione con conferma e creazione, rinomina ed eliminazione delle raccolte. Le mutazioni attendono l’esito del repository e mostrano errori recuperabili; l’eliminazione di una raccolta conserva i salvataggi senza raccolta. Interfaccia e semantica sono localizzate nelle lingue di lancio. Lo schema Drift resta alla versione 4; hardening generale e test d’integrazione end-to-end restano allo Step 8.
-| 8 | Hardening MVP | test integrazione, accessibilità e screenshot | in corso — implementazione 8B e verifiche host completate, validazione Android residua |
+
 | 9 | Pipeline editoriale | importazione/revisione separata e tracciabile | da fare |
 | 10 | Account e sync | auth opzionale, Firestore e conflitti gestiti | da fare |
 | 11 | Monetizzazione | entitlement, paywall, acquisti e annunci con consenso | da fare |
@@ -64,6 +64,3 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 
 **Step 8A.** Verificato il percorso locale dal profilo al catalogo localizzato e all'Archivio con un test d'integrazione su database Drift persistente, inclusi modifica atomica, ricerca e filtri, ricostruzione dei repository e cambio lingua senza perdita dei dati personali. Rafforzate la semantica delle card, la robustezza del layout compatto con testo scalato e la protezione da mutazioni concorrenti delle raccolte. Lo schema Drift resta alla versione 4. Le verifiche manuali su dispositivi rappresentativi e gli altri interventi di hardening restano nello Step 8.
 
-## Step 8B — Test UI del percorso critico e preparazione Android
-
-**Step 8B.** Implementazione e verifiche host completate: il percorso UI avvia `FrameLabApp`, completa l'onboarding, attraversa router e scope reali, consulta e salva un dettaglio locale, gestisce raccolta, nota, stato, ricerca e filtri, ricostruisce l'intera app riaprendo il database SQLite su file e cambia lingua dall'interfaccia senza perdere dati. Il test nativo Android è pronto ma non eseguito per assenza di emulatori o dispositivi Android. Lo Step 8 resta in corso: la validazione Android e le verifiche manuali di accessibilità e screenshot sono gate residui espliciti.

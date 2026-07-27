@@ -4,7 +4,6 @@ FrameLab è un'app mobile offline-first per fotografi aspiranti, intermedi e ava
 
 ## Stato del progetto
 
-Il repository ha completato gli Step 1–7, lo Step 8A e l'implementazione dello Step 8B con verifiche host: il percorso MVP critico attraversa l'app reale con un database Drift persistente, conserva profilo e Archivio dopo la ricostruzione e il cambio lingua, e resta interamente offline. Lo Step 8 è ancora in corso: validazione Android e verifiche manuali restano gate residui. Non sono configurati servizi esterni.
 
 ## Obiettivo dell'MVP
 
