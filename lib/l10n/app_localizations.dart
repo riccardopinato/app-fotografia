@@ -1288,6 +1288,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm'**
   String get libraryConfirm;
+
+  /// No description provided for @libraryNoNote.
+  ///
+  /// In en, this message translates to:
+  /// **'No note'**
+  String get libraryNoNote;
 }
 
 class _AppLocalizationsDelegate
