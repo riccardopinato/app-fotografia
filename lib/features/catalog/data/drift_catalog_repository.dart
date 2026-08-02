@@ -82,7 +82,7 @@ class DriftCatalogRepository implements CatalogRepository {
       ..add(Variable.withInt(limit + 1))
       ..add(Variable.withInt(offset));
     final sql =
-        '''WITH resolved AS (SELECT ct.*, row_number() OVER (PARTITION BY ct.content_id ORDER BY CASE ct.locale ${List.generate(candidates.length, (i) => 'WHEN ? THEN $i').join(' ')} ELSE 99 END) rank FROM content_translations ct WHERE ct.locale IN ($placeholders)) SELECT c.id FROM content_items c JOIN resolved t ON t.content_id=c.id AND t.rank=1 ${hasQuery ? 'JOIN content_search ON content_search.content_id=c.id' : ''} WHERE ${where.join(' AND ')} ORDER BY ${hasQuery ? 'bm25(content_search), ' : ''}lower(t.title), c.id LIMIT ? OFFSET ?''';
+        '''WITH resolved AS (SELECT ct.*, row_number() OVER (PARTITION BY ct.content_id ORDER BY CASE ct.locale ${List.generate(candidates.length, (i) => 'WHEN ? THEN $i').join(' ')} ELSE 99 END) rank FROM content_translations ct JOIN content_items ci ON ci.id=ct.content_id AND ct.source_version=ci.version WHERE ct.locale IN ($placeholders)) SELECT c.id FROM content_items c JOIN resolved t ON t.content_id=c.id AND t.rank=1 ${hasQuery ? 'JOIN content_search ON content_search.content_id=c.id' : ''} WHERE ${where.join(' AND ')} ORDER BY ${hasQuery ? 'bm25(content_search), ' : ''}lower(t.title), c.id LIMIT ? OFFSET ?''';
     // Candidate values appear in the CASE before the IN predicate.
     final rows = await _database
         .customSelect(
@@ -107,6 +107,9 @@ class DriftCatalogRepository implements CatalogRepository {
     LocaleCode locale,
   ) async {
     if (ids.isEmpty) return const [];
+    final localeCandidates = LocaleCode.fallbackChain(
+      locale,
+    ).map((candidate) => candidate.value).toList();
     final items = await (_database.select(
       _database.contentItems,
     )..where((t) => t.id.isIn(ids))).get();
@@ -114,17 +117,23 @@ class DriftCatalogRepository implements CatalogRepository {
         await (_database.select(_database.contentTranslations)..where(
               (t) =>
                   t.contentId.isIn(ids) &
-                  t.translationStatus.equals('published'),
+                  t.translationStatus.equals('published') &
+                  t.locale.isIn(localeCandidates),
             ))
             .get();
     final byItem = {for (final i in items) i.id: contentItemFromRow(i)};
+    final translationsByContent =
+        <String, Map<String, db.ContentTranslation>>{};
+    for (final translation in translations) {
+      (translationsByContent[translation.contentId] ??=
+              {})[translation.locale] =
+          translation;
+    }
     final resolved = <String, ContentTranslation>{};
     for (final id in ids) {
       for (final candidate in LocaleCode.fallbackChain(locale)) {
-        final row = translations
-            .where((t) => t.contentId == id && t.locale == candidate.value)
-            .firstOrNull;
-        if (row != null) {
+        final row = translationsByContent[id]?[candidate.value];
+        if (row != null && row.sourceVersion == byItem[id]?.version) {
           resolved[id] = contentTranslationFromRow(row);
           break;
         }
@@ -238,6 +247,7 @@ class DriftCatalogRepository implements CatalogRepository {
           WHERE c.id = ?
             AND c.editorial_status = 'published'
             AND t.translation_status = 'published'
+            AND t.source_version = c.version
             AND t.title <> '' AND t.body <> ''
             AND t.locale IN (${List.filled(LocaleCode.fallbackChain(locale).length, '?').join(',')})
             AND EXISTS (

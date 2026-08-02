@@ -12,6 +12,8 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 | 5 | Catalogo e dettaglio | seed revisionati, ricerca, filtri e lettura offline | completato |
 | 6 | Home e idee a regole | proposte personalizzate spiegabili | completato |
 | 7 | Archivio personale | salvataggi, cartelle, note e stati | completato (7A–7C) |
+| 8 | Hardening e validazione MVP | percorso critico, avvio APK Android, polish visuale, matrice manuale e test Android | in corso (8A–8D) |
+| 9 | Pipeline e catalogo editoriale | import offline, catalogo multilingua, archivio sorgenti privato, gate di pubblicazione ed espansione contenuti | in corso: 9A–9B, 9D e 9E implementati, 9C pianificato |
 
 ## Step 7A — Fondamenta tecniche Archivio personale
 
@@ -23,7 +25,7 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 
 ## Step 7C — Gestione completa dell’Archivio personale
 
-**Step 7C.** Completato l’Archivio locale con ricerca su contenuti e note, filtri combinabili per stato e raccolta, modifica di nota/stato/raccolta, rimozione con conferma e creazione, rinomina ed eliminazione delle raccolte. Le mutazioni attendono l’esito del repository e mostrano errori recuperabili; l’eliminazione di una raccolta conserva i salvataggi senza raccolta. Interfaccia e semantica sono localizzate nelle lingue di lancio. Lo schema Drift resta alla versione 4; hardening generale e test d’integrazione end-to-end restano allo Step 8.
+**Step 7C.** Completato l’Archivio locale con ricerca su contenuti e note, filtri combinabili per stato e raccolta, modifica di nota/stato/raccolta, rimozione con conferma e creazione, rinomina ed eliminazione delle raccolte. Le mutazioni attendono l’esito del repository e mostrano errori recuperabili; l’eliminazione di una raccolta conserva i salvataggi senza raccolta. Interfaccia e semantica sono localizzate nelle lingue di lancio. Lo schema Drift era alla versione 4; hardening generale e test d’integrazione end-to-end restano allo Step 8.
 
 
 | 10 | Account e sync | auth opzionale, Firestore e conflitti gestiti | da fare |
@@ -62,9 +64,36 @@ Ogni step produce un risultato verificabile e non include lavoro degli step succ
 
 ## Step 8A — Hardening del percorso MVP critico
 
-**Step 8A.** Verificato il percorso locale dal profilo al catalogo localizzato e all'Archivio con un test d'integrazione su database Drift persistente, inclusi modifica atomica, ricerca e filtri, ricostruzione dei repository e cambio lingua senza perdita dei dati personali. Rafforzate la semantica delle card, la robustezza del layout compatto con testo scalato e la protezione da mutazioni concorrenti delle raccolte. Lo schema Drift resta alla versione 4. Le verifiche manuali su dispositivi rappresentativi e gli altri interventi di hardening restano nello Step 8.
+**Step 8A.** Verificato il percorso locale dal profilo al catalogo localizzato e all'Archivio con un test d'integrazione su database Drift persistente, inclusi modifica atomica, ricerca e filtri, ricostruzione dei repository e cambio lingua senza perdita dei dati personali. Rafforzate la semantica delle card, la robustezza del layout compatto con testo scalato e la protezione da mutazioni concorrenti delle raccolte. Lo schema Drift era alla versione 4. Le verifiche manuali su dispositivi rappresentativi e gli altri interventi di hardening restano nello Step 8.
+
+## Step 8B — Percorso UI critico su host
+
+**Step 8B.** Il percorso UI critico attraversa onboarding/profilo, catalogo, dettaglio e Archivio su SQLite persistente, ricostruisce completamente l'app, riapre il database e cambia lingua senza perdere i dati personali. Il test host `test/step_8b_app_ui_host_test.dart` è stato riconfermato il 30 luglio 2026. L'entry point equivalente in `integration_test/` resta il gate automatico da eseguire su Android.
+
+## Step 8C — Validazione Android e matrice manuale
+
+**Step 8C.** L'installazione e l'avvio dell'APK su Android sono stati confermati dall'utente il 30 luglio 2026. Questa evidenza sblocca il problema di boot/build osservato sul runner precedente, ma non sostituisce l'esecuzione dell'entry point d'integrazione su Android. Restano inoltre aperti la matrice manuale Android/iOS, accessibilità, temi, testo scalato, locali/fallback, form factor rappresentativi e screenshot. Step 8 non è ancora dichiarato completato.
+
+## Step 8D — Gerarchia visuale editoriale
+
+**Step 8D.** Rafforzata l'identità visiva senza dipendenze o asset esterni: copertine editoriali deterministiche differenziate per argomento, hero Home con titolo, sintesi e motivo della raccomandazione, card Esplora più leggibili, testata visuale nel dettaglio e temi Material 3 personalizzati per campi, chip, pulsanti, pannelli e navigazione. Le copertine sono decorative, non contengono testo e si adattano a tema chiaro/scuro. Nei viewport bassi il dettaglio riduce la testata per mantenere l'azione Salva sopra la piega. Le future fotografie revisionate potranno sostituire queste copertine tramite il contratto asset senza modificare la gerarchia.
 
 ## Step 9A — Contratto, validazione e importazione editoriale offline
 
-**Step 9A.** Implementati contratto JSON v1 revisionabile, validatore/report CLI deterministico e importer Drift atomico/idempotente con controllo di downgrade. Fonti, diritti, traduzioni e asset sono validati offline; le sole strutture catalogo v4 compatibili vengono importate, conservando integralmente profilo e Archivio. Il seed esistente resta compatibile e lo schema rimane v4. Cheat Sheet, Percorsi, CMS, rete e persistenza degli asset restano fuori scope. Lo Step 8 rimane in corso per le validazioni Android e manuali residue.
+**Step 9A.** Implementati contratto JSON v1 revisionabile, validatore/report CLI deterministico e importer Drift atomico/idempotente con controllo di downgrade. Fonti, diritti, traduzioni e asset sono validati offline; le sole strutture catalogo v4 compatibili vengono importate, conservando integralmente profilo e Archivio. Il seed esistente resta compatibile; lo schema era alla versione 4. Cheat Sheet, Percorsi, CMS, rete e persistenza degli asset restano fuori scope. Lo Step 8 rimane in corso per le validazioni Android e manuali residue.
 
+## Step 9B — Catalogo multilingua e gate di pubblicazione
+
+**Step 9B.** Consegnato un catalogo offline di 30 contenuti pubblicabili, bilanciato fra consigli, curiosità e idee, con sette locali completi (`en`, `it`, `es`, `fr`, `de`, `pt`, `pt-BR`), ricerca localizzata, asset locali e bootstrap SQLite atomico e idempotente. Il validatore di qualità e i nove test dedicati sono stati riconfermati il 30 luglio 2026; il record `needsReview` resta escluso da catalogo, ricerca e Home. La chiusura formale dello Step 9 richiede ancora l'approvazione umana documentata di titolarità/licenze, traduzioni e terminologia fotografica.
+
+## Step 9C — Espansione della biblioteca fotografica
+
+**Step 9C — pianificato.** Portare il catalogo da 30 ad almeno 90 contenuti pubblicabili senza ricorrere a varianti generiche. L'espansione deve riequilibrare paesaggio, macro, ritratto, notturna, urban e focus, introdurre tecniche, errori comuni, guide, checklist, sfide, glossario e storia fotografica e includere un livello avanzato reale. Ogni contenuto segue lo stesso gate multilingua e legale dello Step 9B; i record non revisionati restano `needsReview` e invisibili nell'app.
+
+## Step 9D — Workspace editoriale incrementale
+
+**Step 9D.** Implementato un archivio SQLite locale e separato dall'app per fonti, documenti, testo estratto, frammenti deduplicati e ricercabili full-text, bozze e revisioni. La CLI importa output manuali, `pdftotext` o OCR, mantiene versioni stabili, riapre tutti i gate dopo ogni aggiornamento e produce snapshot JSON compatibili con lo Step 9A. L'export include solo schede approvate per accuratezza, originalità, diritti, terminologia e lingua, collegate a fonti verificate e pubblicabili; testo estratto, evidenze private e file originali non escono dal workspace. OCR, scraping, cloud, CMS e generazione automatica restano fuori scope. Lo Step 9 resta aperto per l'espansione 9C e per i sign-off umani residui.
+
+## Step 9E — Bootstrap incrementale e coerenza delle traduzioni
+
+**Step 9E.** Il database Drift passa alla versione 5 con un registro locale del catalogo bundle installato. A parità di ID e versione del pacchetto l'avvio successivo evita di leggere, validare e reimportare JSON e asset; una modifica del pacchetto richiede quindi l'aumento di `packageVersion`. L'importer invalida atomically tutte le traduzioni precedenti quando sale la versione di un contenuto e il repository pubblica soltanto traduzioni con `sourceVersion` coerente, applicando il fallback alla lingua valida successiva. Il registro non contiene dati utente e profilo, Archivio e salvataggi restano invariati.

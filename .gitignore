@@ -50,3 +50,10 @@ app.*.map.json
 /ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png
 /ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png
 /ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png
+
+# Step 9D private editorial workspace
+/editorial/workspace/private/
+/editorial/workspace/exports/
+/editorial/workspace/*.sqlite
+/editorial/workspace/*.sqlite-shm
+/editorial/workspace/*.sqlite-wal

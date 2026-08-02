@@ -1,4 +1,4 @@
-
+import 'dart:convert';
 
 import 'editorial_package.dart';
 
@@ -88,6 +88,8 @@ class EditorialValidator {
     'CC-BY-4.0',
     'CC-BY-SA-4.0',
     'FrameLab-Proprietary',
+    'Licensed-Agreement',
+    'Public-Domain',
   };
 
   Future<EditorialReport> validate(EditorialPackage package) async {
@@ -227,7 +229,7 @@ class EditorialValidator {
         );
         continue;
       }
-
+      if (!await package.assetExists(relative)) {
         error(
           'asset.missing',
           '\$.assets[$i].path',
@@ -236,7 +238,44 @@ class EditorialValidator {
         );
         continue;
       }
-
+      final bytes = await package.readAsset(relative);
+      final mimeType = asset['mimeType'];
+      if (mimeType == 'image/svg+xml') {
+        if (!relative.toLowerCase().endsWith('.svg')) {
+          error(
+            'asset.mime',
+            '\$.assets[$i].mimeType',
+            'SVG MIME type does not match the file extension.',
+            'Use a .svg file or correct the declared MIME type.',
+          );
+        }
+        final markup = utf8.decode(bytes, allowMalformed: true).toLowerCase();
+        final resources = markup.replaceAll(
+          'xmlns="http://www.w3.org/2000/svg"',
+          '',
+        );
+        if (!markup.trimLeft().startsWith('<svg') ||
+            markup.contains('<script') ||
+            resources.contains('http://') ||
+            resources.contains('https://') ||
+            markup.contains('xlink:href')) {
+          error(
+            'asset.svgUnsafe',
+            '\$.assets[$i].path',
+            'SVG is not static and self-contained.',
+            'Remove scripts, external links and remote resources.',
+          );
+        }
+      }
+      if ((asset['width'] is! int || (asset['width'] as int) <= 0) ||
+          (asset['height'] is! int || (asset['height'] as int) <= 0)) {
+        error(
+          'asset.dimensions',
+          '\$.assets[$i]',
+          'Asset dimensions must be positive integers.',
+          'Declare the intrinsic pixel dimensions.',
+        );
+      }
       if (asset['byteSize'] != bytes.length) {
         error(
           'asset.size',
@@ -420,6 +459,23 @@ class EditorialValidator {
             '\$.contents[$i].translations[$t].status',
             'Invalid translation status.',
             'Use a supported translation status.',
+          );
+        }
+        final sourceVersion = tr['sourceVersion'];
+        if (sourceVersion is! int || sourceVersion < 1) {
+          error(
+            'translation.version',
+            '\$.contents[$i].translations[$t].sourceVersion',
+            'Translation source version must be a positive integer.',
+            'Use the version of the containing content.',
+          );
+        } else if (content['version'] is int &&
+            sourceVersion != content['version']) {
+          error(
+            'translation.outdated',
+            '\$.contents[$i].translations[$t].sourceVersion',
+            'Translation targets content v$sourceVersion, not v${content['version']}.',
+            'Review the translation and set sourceVersion to ${content['version']}.',
           );
         }
         final partial = [

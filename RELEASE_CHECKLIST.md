@@ -5,9 +5,17 @@
 ### Evidenze automatiche di hardening
 
 - [x] Catalogo bundle validato offline: 30 contenuti pubblicabili, sette locali completi, asset/checksum/diritti e bootstrap SQLite atomico e idempotente verificati sul runner host.
+- [x] Riavvio a catalogo invariato: il registro SQLite del bundle evita lettura, validazione e reimport di JSON/asset; le traduzioni di versione precedente non sono pubblicate.
 - [x] Percorso UI critico verificato sul runner widget host con SQLite su file, ricostruzione completa dell'app, riapertura del database e cambio lingua senza perdita dei dati personali.
+- [x] Gerarchia visuale editoriale applicata a Home, Esplora e dettaglio senza dipendenze esterne; temi e azione Salva verificati sui test host.
 - [ ] Lo stesso percorso UI critico è stato eseguito su Android tramite l'entry point in `integration_test/`.
 - [ ] Verifiche manuali e screenshot completati su dispositivi Android/iOS rappresentativi.
+
+### Evidenze manuali parziali
+
+- [x] Installazione e avvio dell'APK su un target Android confermati dall'utente il 30 luglio 2026.
+- [ ] Percorso MVP Android completato e documentato oltre il semplice avvio dell'APK.
+- [ ] Matrice Android/iOS completata con dispositivo, versione OS, locale, tema, scala testo, connettività, risultato e screenshot.
 
 - [ ] Flussi MVP verificati offline e dopo riavvio.
 - [ ] Nessun contenuto non approvato è esposto.
@@ -20,6 +28,7 @@
 ## Sicurezza e legale
 
 - [ ] Privacy policy, termini e contatti di supporto pubblicati.
+- [x] Coerenza automatica di fonte, licenza, attribuzione, diritti dichiarati e publication gate verificata sul catalogo bundle.
 - [ ] Licenze e attribuzioni editoriali verificate.
 - [ ] Ogni traduzione pubblicata conserva lingua originale, versione fonte, metodo/data di traduzione, revisione e terminologia fotografica approvata; le traduzioni obsolete o non approvate non sono esposte.
 - [ ] Nessun segreto nel repository o nel bundle.

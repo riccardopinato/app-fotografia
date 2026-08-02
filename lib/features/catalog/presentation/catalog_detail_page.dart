@@ -10,6 +10,7 @@ import '../../library/presentation/saved_item_controller.dart';
 import '../domain/catalog_models.dart';
 import 'catalog_detail_controller.dart';
 import 'catalog_scope.dart';
+import 'content_visual.dart';
 
 class CatalogDetailPage extends StatefulWidget {
   const CatalogDetailPage({required this.contentId, super.key});
@@ -145,6 +146,16 @@ class _DetailContent extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                ContentVisual(
+                  item: content.item,
+                  height: constraints.maxHeight < 700
+                      ? 128
+                      : constraints.maxWidth < 480
+                      ? 184
+                      : 256,
+                  borderRadius: BorderRadius.circular(FrameLabRadii.container),
+                ),
+                const SizedBox(height: FrameLabSpacing.large),
                 Semantics(
                   header: true,
                   child: SelectableText(

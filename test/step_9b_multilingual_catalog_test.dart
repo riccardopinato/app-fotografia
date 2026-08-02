@@ -161,6 +161,54 @@ void main() {
   );
 
   test(
+    'bootstrap cache skips package and asset I/O after a verified install',
+    () async {
+      final database = AppDatabase(
+        NativeDatabase(File('${temporaryDirectory.path}/cached.sqlite')),
+      );
+      addTearDown(database.close);
+      var packageLoads = 0;
+      var assetLoads = 0;
+      final cachedBootstrap = BundledCatalogBootstrap(
+        database,
+        textLoader: (_) async {
+          packageLoads++;
+          return source;
+        },
+        bytesLoader: (key) async {
+          assetLoads++;
+          return File(key).readAsBytes();
+        },
+        useInstallCache: true,
+      );
+
+      final first = await cachedBootstrap.install();
+      final packageLoadsAfterFirst = packageLoads;
+      final assetLoadsAfterFirst = assetLoads;
+      final second = await cachedBootstrap.install();
+
+      expect((first.inserted, second.unchanged), (31, 31));
+      expect(packageLoadsAfterFirst, 1);
+      expect(assetLoadsAfterFirst, greaterThan(0));
+      expect(packageLoads, packageLoadsAfterFirst);
+      expect(assetLoads, assetLoadsAfterFirst);
+      final installation = await database
+          .customSelect(
+            'SELECT package_version, content_count '
+            'FROM bundled_catalog_installations',
+          )
+          .getSingle();
+      expect(
+        (
+          installation.read<int>('package_version'),
+          installation.read<int>('content_count'),
+        ),
+        (bundledCatalogPackageVersion, 31),
+      );
+    },
+  );
+
+  test(
     'bootstrap upgrades legacy IDs, rejects downgrade and rolls invalid input back',
     () async {
       final database = AppDatabase(

@@ -7,6 +7,7 @@ import '../../../l10n/app_localizations.dart';
 import '../domain/catalog_models.dart';
 import 'catalog_controller.dart';
 import 'catalog_scope.dart';
+import 'content_visual.dart';
 
 class CatalogPage extends StatefulWidget {
   const CatalogPage({super.key});
@@ -294,7 +295,7 @@ class _CatalogGrid extends StatelessWidget {
               crossAxisCount: columns,
               mainAxisSpacing: FrameLabSpacing.medium,
               crossAxisSpacing: FrameLabSpacing.medium,
-              childAspectRatio: columns == 1 ? 1.25 : 1.1,
+              childAspectRatio: columns == 1 ? 0.94 : 0.82,
             ),
             itemCount: controller.items.length,
             itemBuilder: (context, index) =>
@@ -324,51 +325,65 @@ class _CatalogCard extends StatelessWidget {
             AppRoutes.exploreContentName,
             pathParameters: {'contentId': content.item.id},
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(FrameLabSpacing.medium),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ContentVisual(item: item, height: 128),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(FrameLabSpacing.medium),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Text(
-                          content.translation.title,
-                          style: Theme.of(context).textTheme.titleMedium,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              content.translation.title,
+                              style: Theme.of(context).textTheme.titleMedium,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          if (item.premium)
+                            const SizedBox(width: FrameLabSpacing.xSmall),
+                          if (item.premium)
+                            Chip(label: Text(l10n.catalogPremium)),
+                        ],
+                      ),
+                      const SizedBox(height: FrameLabSpacing.small),
+                      Text(
+                        content.translation.summary,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
-                      if (item.premium)
-                        const SizedBox(width: FrameLabSpacing.xSmall),
-                      if (item.premium) Chip(label: Text(l10n.catalogPremium)),
-                    ],
-                  ),
-                  const SizedBox(height: FrameLabSpacing.xSmall),
-                  Text(
-                    content.translation.summary,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: FrameLabSpacing.small),
-                  Wrap(
-                    spacing: FrameLabSpacing.xSmall,
-                    runSpacing: FrameLabSpacing.xSmall,
-                    children: [
-                      _meta(context, _contentTypeLabel(l10n, item.type)),
-                      _meta(
-                        context,
-                        _categoryLabel(l10n, item.primaryCategory),
+                      const SizedBox(height: FrameLabSpacing.medium),
+                      Wrap(
+                        spacing: FrameLabSpacing.xSmall,
+                        runSpacing: FrameLabSpacing.xSmall,
+                        children: [
+                          _meta(context, _contentTypeLabel(l10n, item.type)),
+                          _meta(
+                            context,
+                            _categoryLabel(l10n, item.primaryCategory),
+                          ),
+                          _meta(
+                            context,
+                            _difficultyLabel(l10n, item.difficulty),
+                          ),
+                          for (final tag in content.tags.take(2))
+                            _meta(context, _tagLabel(l10n, tag.code)),
+                        ],
                       ),
-                      _meta(context, _difficultyLabel(l10n, item.difficulty)),
-                      for (final tag in content.tags.take(2))
-                        _meta(context, _tagLabel(l10n, tag.code)),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

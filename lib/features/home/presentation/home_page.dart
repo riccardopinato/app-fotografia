@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../app/router/app_routes.dart';
 import '../../../features/catalog/domain/catalog_models.dart';
+import '../../../features/catalog/presentation/content_visual.dart';
 import '../../../features/catalog/presentation/catalog_scope.dart';
 import '../../../features/profile/domain/user_profile.dart';
 import '../../../features/profile/presentation/profile_scope.dart';
@@ -75,8 +76,8 @@ class HomePage extends StatelessWidget {
                 const SizedBox(height: 8),
                 SizedBox(
                   height:
-                      204 +
-                      100 *
+                      304 +
+                      120 *
                           (MediaQuery.textScalerOf(context).scale(1) - 1).clamp(
                             0,
                             1,
@@ -159,29 +160,68 @@ class _Card extends StatelessWidget {
       button: true,
       label: recommendation.content.translation.title,
       child: Card(
+        clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: () =>
               context.go('/explore/content/${recommendation.content.item.id}'),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  hero
-                      ? Icons.auto_awesome_outlined
-                      : Icons.camera_alt_outlined,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ContentVisual(
+                item: recommendation.content.item,
+                height: hero ? 208 : 116,
+              ),
+              Padding(
+                padding: EdgeInsets.all(hero ? 20 : 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      recommendation.content.translation.title,
+                      style: hero
+                          ? Theme.of(context).textTheme.titleLarge
+                          : Theme.of(context).textTheme.titleMedium,
+                      maxLines: hero ? 3 : 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      recommendation.content.translation.summary,
+                      maxLines: hero ? 3 : 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Icon(
+                          hero
+                              ? Icons.auto_awesome_outlined
+                              : Icons.adjust_rounded,
+                          size: 17,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            reason,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurfaceVariant,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  recommendation.content.translation.title,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 4),
-                Text(reason),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

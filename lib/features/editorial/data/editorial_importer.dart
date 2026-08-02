@@ -38,13 +38,19 @@ class EditorialImporter {
         .map(objectAt)
         .whereType<Map<String, Object?>>()
         .toList();
+    final installedRows = contents.isEmpty
+        ? const <ContentItem>[]
+        : await (database.select(database.contentItems)..where(
+                (row) => row.id.isIn(
+                  contents.map((content) => content['id']! as String),
+                ),
+              ))
+              .get();
+    final installedById = {for (final row in installedRows) row.id: row};
     final versionIssues = <EditorialIssue>[];
     var inserted = 0, updated = 0, unchanged = 0;
     for (var i = 0; i < contents.length; i++) {
-      final row =
-          await (database.select(database.contentItems)
-                ..where((t) => t.id.equals(contents[i]['id']! as String)))
-              .getSingleOrNull();
+      final row = installedById[contents[i]['id']! as String];
       if (row == null) {
         inserted++;
         continue;
@@ -132,9 +138,7 @@ class EditorialImporter {
       }
       for (final content in contents) {
         final id = content['id']! as String;
-        final existing = await (database.select(
-          database.contentItems,
-        )..where((t) => t.id.equals(id))).getSingleOrNull();
+        final existing = installedById[id];
         final version = content['version']! as int;
         if (existing != null && existing.version == version) continue;
         await database
@@ -156,6 +160,16 @@ class EditorialImporter {
                 ),
               ),
             );
+        if (existing != null && version > existing.version) {
+          await (database.update(
+            database.contentTranslations,
+          )..where((row) => row.contentId.equals(id))).write(
+            ContentTranslationsCompanion(
+              translationStatus: const Value('outdated'),
+              updatedAtUtcMs: Value(now),
+            ),
+          );
+        }
         await (database.delete(
           database.contentItemSources,
         )..where((t) => t.contentId.equals(id))).go();

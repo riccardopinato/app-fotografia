@@ -145,7 +145,7 @@ void registerStep8bAppUiJourney() {
       ))?.selectedLocale?.value,
       'de',
     );
-    expect(database.schemaVersion, 4);
+    expect(database.schemaVersion, 5);
 
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pump();

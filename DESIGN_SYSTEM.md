@@ -14,7 +14,7 @@ L'interfaccia deve evocare uno strumento creativo affidabile: gerarchia chiara, 
 
 ## Componenti iniziali
 
-App scaffold, barra di navigazione, card contenuto, chip filtro/tag, stato vuoto, skeleton/loading, badge Premium, pulsante salva, selettore stato archivio e banner informativo. Ogni componente deve prevedere stato disabled, errore, offline e focus dove applicabile. Le card riservano lo spazio dell'immagine con ratio costante e non causano layout shift.
+App scaffold, barra di navigazione, copertina editoriale per argomento, card contenuto, hero di raccomandazione, chip filtro/tag, stato vuoto, skeleton/loading, badge Premium, pulsante salva, selettore stato archivio e banner informativo. Ogni componente deve prevedere stato disabled, errore, offline e focus dove applicabile. Le card riservano lo spazio della copertina con ratio costante e non causano layout shift. La copertina corrente è un pattern Flutter locale, decorativo e senza testo: mantiene gerarchia e identità finché il contratto asset non rende disponibili fotografie revisionate.
 
 ## Accessibilità e localizzazione
 

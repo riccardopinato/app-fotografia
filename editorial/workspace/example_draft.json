@@ -1,0 +1,47 @@
+{
+  "formatVersion": "1.0",
+  "id": "editorial-workspace-metering-check",
+  "version": 1,
+  "type": "technique",
+  "category": "exposure",
+  "difficulty": "intermediate",
+  "canonicalLocale": "en",
+  "premium": false,
+  "tags": [
+    "exposure",
+    "metering"
+  ],
+  "sourceIds": [
+    "source-workspace-original"
+  ],
+  "fragmentIds": [
+    "document-workspace-exposure#0001",
+    "document-workspace-exposure#0002"
+  ],
+  "translations": [
+    {
+      "locale": "en",
+      "title": "Check what the meter is measuring",
+      "summary": "Treat the meter reading as evidence, not as a finished exposure decision.",
+      "body": "A reflective meter reacts to the light returned by the framed scene. Identify the tone under the active metering area, decide which highlight or shadow must be protected, and compare that intention with the suggested exposure. In an automatic or semi-automatic mode, apply exposure compensation only after this check.",
+      "method": "original",
+      "searchTerms": [
+        "exposure meter",
+        "metering",
+        "exposure compensation"
+      ]
+    },
+    {
+      "locale": "it",
+      "title": "Controlla cosa sta misurando l'esposimetro",
+      "summary": "Usa la lettura esposimetrica come indizio, non come decisione finale.",
+      "body": "L'esposimetro a luce riflessa reagisce alla luce restituita dalla scena inquadrata. Individua il tono sotto l'area di misurazione, decidi quali alte luci o ombre proteggere e confronta questa intenzione con l'esposizione proposta. In una modalità automatica o semiautomatica, applica la compensazione solo dopo questa verifica.",
+      "method": "human",
+      "searchTerms": [
+        "esposimetro",
+        "misurazione esposimetrica",
+        "compensazione esposizione"
+      ]
+    }
+  ]
+}

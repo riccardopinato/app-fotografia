@@ -1,4 +1,4 @@
-import 'package:drift/drift.dart';
+import 'package:drift/drift.dart' hide isNotNull;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:framelab/core/database/app_database.dart'
@@ -167,7 +167,7 @@ void main() {
       'creates current schema with foreign keys enabled and can reopen data',
       () async {
         final db = memoryDb();
-        expect(db.schemaVersion, 4);
+        expect(db.schemaVersion, 5);
         final fk = await db.customSelect('PRAGMA foreign_keys').getSingle();
         expect(fk.data['foreign_keys'], 1);
         final indexes = await db
@@ -186,6 +186,15 @@ void main() {
             'content_item_tags_tag_idx',
             'content_sources_rights_status_idx',
           ]),
+        );
+        expect(
+          await db
+              .customSelect(
+                "SELECT 1 FROM sqlite_master "
+                "WHERE type='table' AND name='bundled_catalog_installations'",
+              )
+              .getSingleOrNull(),
+          isNotNull,
         );
         await db
             .into(db.userProfiles)

@@ -3,16 +3,24 @@ import 'dart:io';
 import 'package:drift/native.dart';
 import 'package:framelab/core/database/app_database.dart';
 import 'package:framelab/features/editorial/data/editorial_importer.dart';
+import 'package:framelab/features/editorial/domain/catalog_quality_validation.dart';
 import 'package:framelab/features/editorial/domain/editorial_package.dart';
 import 'package:framelab/features/editorial/domain/editorial_validation.dart';
 
+Future<void> main(List<String> arguments) async {
+  if (arguments.length < 2 ||
+      !{'validate', 'quality', 'import'}.contains(arguments.first)) {
+    stderr.writeln(
+      'Usage: dart run bin/framelab_editorial.dart <validate|quality|import> <package.json> [database.sqlite]',
     );
     exitCode = 64;
     return;
   }
   try {
     final package = await EditorialPackage.load(File(arguments[1]));
-
+    final report = arguments.first == 'quality'
+        ? await CatalogQualityValidator().validate(package)
+        : await EditorialValidator().validate(package);
     stdout.write(report.render());
     if (!report.isValid) {
       exitCode = 1;

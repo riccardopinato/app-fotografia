@@ -1,0 +1,24 @@
+{
+  "formatVersion": "1.0",
+  "source": {
+    "id": "source-workspace-original",
+    "title": "FrameLab original training notes",
+    "author": "FrameLab editorial team",
+    "publisher": "FrameLab",
+    "publicationDate": "2026-07-30",
+    "originalLocale": "en",
+    "sourceType": "original",
+    "licenseType": "FrameLab-Proprietary",
+    "rightsStatus": "publishable",
+    "verificationStatus": "verified",
+    "attributionRequired": false,
+    "rightsEvidence": "Original material tracked in the private editorial workspace.",
+    "tdmReserved": false
+  },
+  "document": {
+    "id": "document-workspace-exposure",
+    "title": "Exposure and metering notes",
+    "extractedTextPath": "example_extracted.txt",
+    "extractionMethod": "manual"
+  }
+}

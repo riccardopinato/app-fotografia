@@ -116,7 +116,7 @@ void main() {
         'Provare al tramonto',
       );
       expect((await profiles.get())?.selectedLocale, const LocaleCode('de'));
-      expect(database.schemaVersion, 4);
+      expect(database.schemaVersion, 5);
     },
   );
 }

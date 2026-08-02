@@ -6,4 +6,5 @@
 - Le foto utente richiederanno consenso esplicito, limiti di dimensione/formato, retention definita e cancellazione completa.
 - Validare input, identificatori e file sia sul client sia sul backend; il client non è un confine di fiducia.
 - Tracciare licenza, autore e provenienza di ogni fonte editoriale; il processo di revisione è obbligatorio prima della pubblicazione.
+- Conservare riviste, PDF, testo OCR ed evidenze dei diritti soltanto nel workspace editoriale privato, escluso da Git e dall'APK; l'export contiene esclusivamente metadati pubblicabili e testi finali approvati.
 - Definire privacy policy, termini, classificazione età e flussi GDPR prima di raccogliere dati o mostrare annunci.

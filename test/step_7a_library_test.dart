@@ -99,11 +99,11 @@ void main() {
 
   group('Step 7A library repository and schema', () {
     test(
-      'enforces v4 foreign keys, uniqueness, filters, updates and SET NULL',
+      'enforces current foreign keys, uniqueness, filters, updates and SET NULL',
       () async {
         final db = _db(null);
         addTearDown(db.close);
-        expect(db.schemaVersion, 4);
+        expect(db.schemaVersion, 5);
         expect(
           (await db.customSelect('PRAGMA foreign_keys').getSingle()).read<int>(
             'foreign_keys',

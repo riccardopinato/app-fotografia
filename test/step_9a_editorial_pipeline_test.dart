@@ -102,6 +102,19 @@ void main() {
     },
   );
 
+  test('rejects a translation targeting a different content version', () async {
+    final value = await json();
+    final translation =
+        (((value['contents'] as List).first as Map)['translations'] as List)
+                .first
+            as Map;
+    translation['sourceVersion'] = 1;
+    expect(
+      (await validate(value)).issues.map((issue) => issue.code),
+      contains('translation.outdated'),
+    );
+  });
+
   test(
     'reports missing source and insufficient license or attribution',
     () async {
@@ -184,12 +197,36 @@ void main() {
       final value = await json();
       final content = (value['contents'] as List).first as Map;
       content['version'] = 3;
-      final translation = (content['translations'] as List).first as Map;
+      final translations = content['translations'] as List;
+      final translation = translations.cast<Map>().firstWhere(
+        (value) => value['locale'] == 'en',
+      );
+      translations
+        ..clear()
+        ..add(translation);
       translation['sourceVersion'] = 3;
       translation['title'] = 'Updated title';
       await packageFile.writeAsString(jsonEncode(value));
       package = await EditorialPackage.load(packageFile);
       expect((await importer.import(package)).updated, 1);
+      final outdatedItalian =
+          await (database.select(database.contentTranslations)..where(
+                (row) =>
+                    row.contentId.equals('editorial-exposure-practice') &
+                    row.locale.equals('it'),
+              ))
+              .getSingle();
+      expect(
+        (outdatedItalian.translationStatus, outdatedItalian.sourceVersion),
+        ('outdated', 2),
+      );
+      expect(
+        (await DriftCatalogRepository(database).getPublishedById(
+          'editorial-exposure-practice',
+          locale: const LocaleCode('it'),
+        ))?.translation.title,
+        'Updated title',
+      );
       final saved = await database.select(database.savedItems).getSingle();
       expect(
         (saved.note, saved.status, saved.collectionId),
@@ -271,13 +308,26 @@ void main() {
   test(
     'validator CLI returns zero for valid and non-zero for invalid',
     () async {
-      final valid = await Process.run('dart', [
+      final flutterRoot = Platform.environment['FLUTTER_ROOT'];
+      final dartExecutable =
+          Platform.environment['DART_EXECUTABLE'] ??
+          (flutterRoot == null
+              ? 'dart'
+              : [
+                  flutterRoot,
+                  'bin',
+                  'cache',
+                  'dart-sdk',
+                  'bin',
+                  Platform.isWindows ? 'dart.exe' : 'dart',
+                ].join(Platform.pathSeparator));
+      final valid = await Process.run(dartExecutable, [
         'run',
         'bin/framelab_editorial.dart',
         'validate',
         packageFile.path,
       ]);
-      final invalid = await Process.run('dart', [
+      final invalid = await Process.run(dartExecutable, [
         'run',
         'bin/framelab_editorial.dart',
         'validate',

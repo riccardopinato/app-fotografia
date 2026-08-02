@@ -280,9 +280,9 @@ Future<List<String>> _ids(
 
 void main() {
   group('Step 5A SQLite catalog foundation', () {
-    test('creates schema v4 with an operational FTS5 table', () async {
+    test('creates schema v5 with an operational FTS5 table', () async {
       final db = _db();
-      expect(db.schemaVersion, 4);
+      expect(db.schemaVersion, 5);
       final fk = await db.customSelect('PRAGMA foreign_keys').getSingle();
       expect(fk.data['foreign_keys'], 1);
       final tables = await db
