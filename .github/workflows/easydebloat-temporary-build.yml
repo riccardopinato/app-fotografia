@@ -1,0 +1,58 @@
+name: EasyDebloat Temporary Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout EasyDebloat branch
+        uses: actions/checkout@v4
+        with:
+          ref: easydebloat-build
+
+      - name: Rebuild source archive
+        shell: bash
+        run: |
+          cat easydebloat-ci/source.part00 easydebloat-ci/source.part01 easydebloat-ci/source.part02 easydebloat-ci/source.part03 easydebloat-ci/source.part04 > /tmp/easydebloat.b64
+          base64 -d /tmp/easydebloat.b64 > /tmp/easydebloat.tar.gz
+          tar -xzf /tmp/easydebloat.tar.gz
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platform
+        shell: bash
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-37" "build-tools;36.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.3.1'
+
+      - name: Build EasyDebloat
+        working-directory: EasyDebloat_v0.1.0
+        shell: bash
+        run: gradle testDebugUnitTest assembleDebug --stacktrace
+
+      - name: Upload APK
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: EasyDebloat-v0.1.0-debug
+          path: EasyDebloat_v0.1.0/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
