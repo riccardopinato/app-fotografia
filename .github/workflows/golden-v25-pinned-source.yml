@@ -1,0 +1,50 @@
+name: Golden v25 FrameLab pinned-source verification
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/golden-v25-pinned-source.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout EXACT registered donor source
+        uses: actions/checkout@v4
+        with:
+          ref: e7538d7dfc484f81f37a8e4363cd56a5b742e804
+          persist-credentials: false
+
+      - name: Assert tested source SHA
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "e7538d7dfc484f81f37a8e4363cd56a5b742e804"
+          echo "TESTED_SOURCE_SHA=$(git rev-parse HEAD)"
+
+      - name: Flutter project toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.5"
+          channel: stable
+          cache: true
+
+      - name: Resolve pinned-project dependencies
+        run: flutter pub get
+
+      - name: Analyze pinned source
+        run: flutter analyze
+
+      - name: Test targeted editorial validations and workspace
+        run: |
+          flutter test \
+            test/step_9a_editorial_pipeline_test.dart \
+            test/step_9b_multilingual_catalog_test.dart \
+            test/step_9d_editorial_workspace_test.dart \
+            test/step_6_recommendation_engine_test.dart
+
+      - name: Test full pinned source suite
+        run: flutter test
