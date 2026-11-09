@@ -26,3 +26,8 @@ Offrire onboarding, home personalizzata, catalogo consultabile offline, dettagli
 - [Checklist di rilascio](RELEASE_CHECKLIST.md)
 
 Prima di contribuire, leggere [AGENTS.md](AGENTS.md) e [PROJECT_RULES.md](PROJECT_RULES.md).
+
+
+## Template Notion (ricerca)
+
+[Catalogo per FrameLab (repository parallelo)](docs/TEMPLATE_NOTION/README.md): idee e riferimenti classificati; non sono template Notion installati né funzionalità a pagamento.
