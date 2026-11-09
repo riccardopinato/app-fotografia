@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "application": "FrameLab (repository parallelo)",
+  "repository": "riccardopinato/app-fotografia",
+  "catalogue_type": "public_research_index",
+  "updated_at": "2026-11-09",
+  "master_reference": "riccardopinato/Idee-app-Archivi-riferimenti/17-RICERCA-TEMPLATE-UX",
+  "entries": [
+    {
+      "id": "TN-APPFOTOGRAFIA-0001",
+      "master_ref": "TPLUX-REF-0008",
+      "title": "Photography Gear Checklist",
+      "category": "Fotografia",
+      "evidence_level": "E2_EXPORT_STRUCTURE_VERIFIED",
+      "product_status": "RESEARCH_NEEDS_PRODUCT_DECISION",
+      "app_fit": "MIRROR_REFERENCE",
+      "note": "Stesso prodotto FrameLab dell'altro repository; nessun nuovo SKU o seconda certificazione solo perché esistono due repo.",
+      "implementation_status": "NOT_IMPLEMENTED_FROM_THIS_SOURCE",
+      "reuse_mode": "APP_NATIVE_PATTERN_ONLY",
+      "source_audit_url": "https://github.com/riccardopinato/Idee-app-Archivi-riferimenti/blob/main/17-RICERCA-TEMPLATE-UX/LOTTO_NOTION_2026_11_09_12_ZIP.md"
+    },
+    {
+      "id": "TN-APPFOTOGRAFIA-0002",
+      "master_ref": "TPLUX-REF-0013",
+      "title": "Photography Portfolio",
+      "category": "Fotografia",
+      "evidence_level": "E2_EXPORT_STRUCTURE_VERIFIED",
+      "product_status": "RESEARCH_NEEDS_PRODUCT_DECISION",
+      "app_fit": "MIRROR_REFERENCE",
+      "note": "Riferimento al medesimo pattern FrameLab; verificare prima quale repository sia canonico per gli sviluppi.",
+      "implementation_status": "NOT_IMPLEMENTED_FROM_THIS_SOURCE",
+      "reuse_mode": "APP_NATIVE_PATTERN_ONLY",
+      "source_audit_url": "https://github.com/riccardopinato/Idee-app-Archivi-riferimenti/blob/main/17-RICERCA-TEMPLATE-UX/LOTTO_NOTION_2026_11_09_12_ZIP.md"
+    }
+  ]
+}
